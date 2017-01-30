@@ -1,0 +1,91 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/**
+ * https://unixlab.com/rhiokim/markdown-css
+ * solarized-light style
+ * made by rhio.kim
+ * powered by http://ethanschoonover.com/solarized
+ */
+.storm {
+  color: #000000;
+  font-size: 17px;
+  font-family: Arial, Helvetica, FreeSans, "Liberation Sans", "Nimbus Sans L", sans-serif;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  width: 60%;
+  margin: 0 auto; /* centering text */
+  padding-bottom: 6em;
+}
+.storm a {
+  color: #3269a0;
+}
+.storm a:hover {
+  color: #4183c4;
+}
+.storm h2 {
+  border-bottom: 1px solid #e6e6e6;
+}
+.storm h6 {
+  color: #777;
+}
+.storm hr {
+  border: 1px solid #e6e6e6;
+}
+.storm code {
+    font-size: 0.98rem;
+    display: inline-block;
+    background-color: transparent;
+    color: #657b83;
+  }
+.storm pre {
+    line-height: 1.5;
+    margin-bottom: 1em;
+    background-color: #f2f1f1;
+    padding: 0.313em;
+    overflow: auto;
+    border: 1px solid #c2c1c1;
+    border-radius: 5px;
+    }
+.storm pre code {font-size: 0.85rem;}
+.storm blockquote {
+  border-left: 4px solid #e6e6e6;
+  padding: 0 15px;
+  font-style: italic;
+}
+.storm table {
+  width:100%;
+  max-width: 100%;
+  border-collapse:collapse;
+  margin: 2% 0;
+}
+
+.storm th, td {
+  text-align:left;
+  padding:0.313em 0.625em;
+  border:1px solid $border;
+}
+
+.storm dt {
+  color:#444;
+  font-weight:700;
+}
+.storm dd {margin-left: 1em;}
+
+.storm th {
+  color:#444;
+}
+.storm img {
+    display: block;
+    margin: 1em auto;
+    padding: .3em;
+    border: 1px solid #DDD;
+    max-width: 100%;
+    border-radius: 5px;
+  }
+/**
+ * after less
+ */

@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emacs HRS configuration</title>
+<!-- 2016-10-14 Fri 18:00 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Andre van der Heijden" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs HRS configuration</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. UI preferences</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Use fancy lambdas</a></li>
+<li><a href="#sec-1-2">1.2. Hide certain modes from the modeline</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Publishing and task management with Org-mode</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Display preferences</a></li>
+<li><a href="#sec-2-2">2.2. Task and org-capture management</a></li>
+<li><a href="#sec-2-3">2.3. Exporting</a></li>
+<li><a href="#sec-2-4">2.4. TeX configuration</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. <code>dired</code></a></li>
+<li><a href="#sec-4">4. Editing settings</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Always kill current buffer</a></li>
+<li><a href="#sec-4-2">4.2. Look for executables in <code>/usr/local/bin</code>.</a></li>
+<li><a href="#sec-4-3">4.3. Use <code>company-mode</code> everywhere</a></li>
+<li><a href="#sec-4-4">4.4. Always indent with spaces</a></li>
+<li><a href="#sec-4-5">4.5. Configure yasnippet</a></li>
+<li><a href="#sec-4-6">4.6. Configure <code>abbrev-mode</code></a></li>
+<li><a href="#sec-4-7">4.7. Configure <code>ido</code></a></li>
+<li><a href="#sec-4-8">4.8. Use <code>smex</code> to handle <code>M-x</code> with <code>ido</code></a></li>
+<li><a href="#sec-4-9">4.9. Editing with Markdown</a></li>
+<li><a href="#sec-4-10">4.10. Wrap paragraphs automatically</a></li>
+<li><a href="#sec-4-11">4.11. Linting prose</a></li>
+<li><a href="#sec-4-12">4.12. Enable region case modification</a></li>
+<li><a href="#sec-4-13">4.13. Switch windows when splitting</a></li>
+<li><a href="#sec-4-14">4.14. Mass editing of <code>grep</code> results</a></li>
+<li><a href="#sec-4-15">4.15. Configure <code>wrap-region</code></a></li>
+<li><a href="#sec-4-16">4.16. Split horizontally for temporary buffers</a></li>
+<li><a href="#sec-4-17">4.17. Use projectile everywhere</a></li>
+<li><a href="#sec-4-18">4.18. Add a bunch of engines for <code>engine-mode</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Set custom keybindings</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> UI preferences</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Use fancy lambdas</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Why not?
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-prettify-symbols-mode t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Hide certain modes from the modeline</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+I&rsquo;d rather have only a few necessary mode identifiers on my modeline. This
+either hides or &ldquo;renames&rdquo; a variety of major or minor modes using the <code>diminish</code>
+package.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Publishing and task management with Org-mode</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Display preferences</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+I like to see an outline of pretty bullets instead of a list of asterisks.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook
+          (lambda ()
+            (org-bullets-mode t)))
+</pre>
+</div>
+
+<p>
+I like seeing a little downward-pointing arrow instead of the usual ellipsis
+(<code>...</code>) that org displays when there&rsquo;s stuff under a header.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-ellipsis "⤵")
+</pre>
+</div>
+
+<p>
+Use syntax highlighting in source blocks while editing.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-src-fontify-natively t)
+</pre>
+</div>
+
+<p>
+Make TAB act as if it were issued in a buffer of the language&rsquo;s major mode.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-src-tab-acts-natively t)
+</pre>
+</div>
+
+<p>
+When editing a code snippet, use the current window rather than popping open a
+new one (which shows the same information).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-src-window-setup 'current-window)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Task and org-capture management</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Store my org files in <code>~/org</code>, maintain an inbox in Dropbox, define the location
+of an index file (my main todo list), and archive finished tasks in
+<code>~/org/archive.org</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-directory "~/org")
+
+(defun org-file-path (filename)
+  "Return the absolute address of an org file, given its relative name."
+  (concat (file-name-as-directory org-directory) filename))
+
+(setq org-inbox-file "~/Dropbox/inbox.org")
+(setq org-index-file (org-file-path "index.org"))
+(setq org-archive-location
+      (concat (org-file-path "archive.org") "::* From %s"))
+</pre>
+</div>
+
+<p>
+I use <a href="http://agiletortoise.com/drafts/">Drafts</a> to create new tasks, format them according to a template, and
+append them to an &ldquo;inbox.org&rdquo; file in my Dropbox. This function lets me import
+them easily from that inbox file to my index.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun hrs/copy-tasks-from-inbox ()
+  (when (file-exists-p org-inbox-file)
+    (save-excursion
+      (find-file org-index-file)
+      (goto-char (point-max))
+      (insert-file-contents org-inbox-file)
+      (delete-file org-inbox-file))))
+</pre>
+</div>
+
+<p>
+I store all my todos in <code>~/org/index.org</code>, so I&rsquo;d like to derive my agenda from
+there.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-files (list org-index-file))
+</pre>
+</div>
+
+<p>
+Hitting <code>C-c C-x C-s</code> will mark a todo as done and move it to an appropriate
+place in the archive.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun mark-done-and-archive ()
+  "Mark the state of an org-mode item as DONE and archive it."
+  (interactive)
+  (org-todo 'done)
+  (org-archive-subtree))
+
+(define-key global-map "\C-c\C-x\C-s" 'mark-done-and-archive)
+</pre>
+</div>
+
+<p>
+Record the time that a todo was archived.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-log-done 'time)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-2-2-0-1" name="sec-2-2-0-1"></a>Capturing tasks<br  /><div class="outline-text-5" id="text-2-2-0-1">
+<p>
+Define a few common tasks as capture templates. Specifically, I frequently:
+</p>
+
+<ul class="org-ul">
+<li>Record ideas for future blog posts in <code>~/org/blog-ideas.org</code>,
+</li>
+<li>Keep a running grocery list in <code>~/org/groceries.org</code>, and
+</li>
+<li>Maintain a todo list in <code>~/org/index.org</code>.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-capture-templates
+      '(("b" "Blog idea"
+         entry
+         (file (org-file-path "blog-ideas.org"))
+         "* TODO %?\n")
+
+        ("g" "Groceries"
+         checkitem
+         (file (org-file-path "groceries.org")))
+
+        ("l" "Today I Learned..."
+         entry
+         (file+datetree (org-file-path "til.org"))
+         "* %?\n")
+
+        ("r" "Reading"
+         checkitem
+         (file (org-file-path "to-read.org")))
+
+        ("t" "Todo"
+         entry
+         (file org-index-file)
+         "* TODO %?\n")))
+</pre>
+</div>
+
+<p>
+When I&rsquo;m starting an org capture template I&rsquo;d like to begin in insert mode. I&rsquo;m
+opening it up in order to start typing something, so this skips a step.
+</p>
+</div>
+</li>
+
+<li><a id="sec-2-2-0-2" name="sec-2-2-0-2"></a>Keybindings<br  /><div class="outline-text-5" id="text-2-2-0-2">
+<p>
+Bind a few handy keys.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
+</pre>
+</div>
+
+<p>
+Hit <code>C-c i</code> to quickly open up my todo list.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun open-index-file ()
+  "Open the master org TODO list."
+  (interactive)
+  (hrs/copy-tasks-from-inbox)
+  (find-file org-index-file)
+  (flycheck-mode -1)
+  (end-of-buffer))
+
+(global-set-key (kbd "C-c i") 'open-index-file)
+</pre>
+</div>
+
+<p>
+Hit <code>M-n</code> to quickly open up a capture template for a new todo.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun org-capture-todo ()
+  (interactive)
+  (org-capture :keys "t"))
+
+(global-set-key (kbd "M-n") 'org-capture-todo)
+(add-hook 'gfm-mode-hook
+          (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
+(add-hook 'haskell-mode-hook
+          (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Exporting</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Allow export to markdown and beamer (for presentations).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'ox-md)
+(require 'ox-beamer)
+</pre>
+</div>
+
+<p>
+Allow <code>babel</code> to evaluate Emacs lisp, Ruby, dot, or Gnuplot code.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (ruby . t)
+   (dot . t)
+   (gnuplot . t)))
+</pre>
+</div>
+
+<p>
+Don&rsquo;t ask before evaluating code blocks.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-confirm-babel-evaluate nil)
+</pre>
+</div>
+
+<p>
+Associate the &ldquo;dot&rdquo; language with the <code>graphviz-dot</code> major mode.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
+</pre>
+</div>
+
+<p>
+Translate regular ol&rsquo; straight quotes to typographically-correct curly quotes
+when exporting.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-export-with-smart-quotes t)
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="sec-2-3-0-1" name="sec-2-3-0-1"></a>Exporting to HTML<br  /><div class="outline-text-5" id="text-2-3-0-1">
+<p>
+Don&rsquo;t include a footer with my contact and publishing information at the bottom
+of every exported HTML document.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-html-postamble nil)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-3-0-2" name="sec-2-3-0-2"></a>Exporting to PDF<br  /><div class="outline-text-5" id="text-2-3-0-2">
+<p>
+I want to produce PDFs with syntax highlighting in the code. The best way to do
+that seems to be with the <code>minted</code> package, but that package shells out to
+<code>pygments</code> to do the actual work. <code>pdflatex</code> usually disallows shell commands;
+this enables that.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+</pre>
+</div>
+
+<p>
+Include the <code>minted</code> package in all of my LaTeX exports.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-2-3-0-3" name="sec-2-3-0-3"></a>Exporting projects<br  /><div class="outline-text-5" id="text-2-3-0-3">
+<p>
+I have a few Org project definitions that I maintain in a separate elisp file.
+</p>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> TeX configuration</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+I rarely write LaTeX directly any more, but I often export through it with
+org-mode, so I&rsquo;m keeping them together.
+</p>
+
+<p>
+Automatically parse the file after loading it.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq TeX-parse-self t)
+</pre>
+</div>
+
+<p>
+Always use <code>pdflatex</code> when compiling LaTeX documents. I don&rsquo;t really have any
+use for DVIs.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq TeX-PDF-mode t)
+</pre>
+</div>
+
+<p>
+Enable a minor mode for dealing with math (it adds a few useful keybindings),
+and always treat the current file as the &ldquo;main&rdquo; file. That&rsquo;s intentional, since
+I&rsquo;m usually actually in an org document.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (LaTeX-math-mode)
+            (setq TeX-master t)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> <code>dired</code></h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Load up the assorted <code>dired</code> extensions.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'dired-x)
+(require 'dired+)
+(require 'dired-open)
+</pre>
+</div>
+
+<p>
+Open media with the appropriate programs.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq dired-open-extensions
+      '(("pdf" . "evince")
+        ("mkv" . "vlc")
+        ("mp4" . "vlc")
+        ("avi" . "vlc")))
+</pre>
+</div>
+
+<p>
+These are the switches that get passed to <code>ls</code> when <code>dired</code> gets a list of
+files. We&rsquo;re using:
+</p>
+
+<ul class="org-ul">
+<li><code>l</code>: Use the long listing format.
+</li>
+<li><code>h</code>: Use human-readable sizes.
+</li>
+<li><code>v</code>: Sort numbers naturally.
+</li>
+<li><code>A</code>: Almost all. Doesn&rsquo;t include &ldquo;<code>.</code>&rdquo; or &ldquo;<code>..</code>&rdquo;.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default dired-listing-switches "-lhvA")
+</pre>
+</div>
+
+<p>
+Use &ldquo;j&rdquo; and &ldquo;k&rdquo; to move around in <code>dired</code>.
+</p>
+
+<p>
+Kill buffers of files/directories that are deleted in <code>dired</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq dired-clean-up-buffers-too t)
+</pre>
+</div>
+
+<p>
+Always copy directories recursively instead of asking every time.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq dired-recursive-copies 'always)
+</pre>
+</div>
+
+<p>
+Ask before recursively <i>deleting</i> a directory, though.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq dired-recursive-deletes 'top)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Editing settings</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Always kill current buffer</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Assume that I always want to kill the current buffer when hitting <code>C-x k</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Look for executables in <code>/usr/local/bin</code>.</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq exec-path (append exec-path '("/usr/local/bin")))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Use <code>company-mode</code> everywhere</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'after-init-hook 'global-company-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Always indent with spaces</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Never use tabs. Tabs are the devil’s whitespace.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default indent-tabs-mode nil)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Configure yasnippet</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+I keep my snippets in <code>~/.emacs/snippets/text-mode</code>, and I always want <code>yasnippet</code>
+enabled.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
+(yas-global-mode 1)
+</pre>
+</div>
+
+<p>
+I <i>don’t</i> want <code>ido</code> to automatically indent the snippets it inserts. Sometimes
+this looks pretty bad (when indenting org-mode, for example, or trying to guess
+at the correct indentation for Python).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq yas/indent-line nil)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Configure <code>abbrev-mode</code></h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+My email address is too long, so I like to keep some personal information as
+abbreviations.
+</p>
+
+<p>
+I&rsquo;m prefixing them with semicolons to avoid collisions with real words.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(define-abbrev-table 'global-abbrev-table
+  '((";name" "Harry R. Schwartz")
+    (";email" "hello@harryrschwartz.com")
+    (";tb" "harry@thoughtbot.com")
+    (";site" "http://harryrschwartz.com")))
+</pre>
+</div>
+
+<p>
+Always enable <code>abbrev-mode</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default abbrev-mode t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Configure <code>ido</code></h3>
+<div class="outline-text-3" id="text-4-7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+(ido-ubiquitous)
+(flx-ido-mode 1) ; better/faster matching
+(setq ido-create-new-buffer 'always) ; don't confirm to create new buffers
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Use <code>smex</code> to handle <code>M-x</code> with <code>ido</code></h3>
+<div class="outline-text-3" id="text-4-8">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(smex-initialize)
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Editing with Markdown</h3>
+<div class="outline-text-3" id="text-4-9">
+<p>
+Because I can&rsquo;t always use <code>org</code>.
+</p>
+
+<p>
+I&rsquo;d like spell-checking running when editing Markdown.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'gfm-mode-hook 'flyspell-mode)
+</pre>
+</div>
+
+<p>
+Associate <code>.md</code> files with GitHub-flavored Markdown.
+</p>
+
+<p>
+Use <code>pandoc</code> to render the results.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq markdown-command "pandoc --standalone --mathjax --from=markdown")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Wrap paragraphs automatically</h3>
+<div class="outline-text-3" id="text-4-10">
+<p>
+<code>AutoFillMode</code> automatically wraps paragraphs, kinda like hitting <code>M-q</code>. I wrap
+a lot of paragraphs, so this automatically wraps &lsquo;em when I&rsquo;m writing text,
+Markdown, or Org.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'gfm-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+</pre>
+</div>
+
+<p>
+Sometimes, though, I don&rsquo;t wanna wrap text. This toggles wrapping with <code>C-c q</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c q") 'auto-fill-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Linting prose</h3>
+<div class="outline-text-3" id="text-4-11">
+<p>
+I use <a href="http://proselint.com/">proselint</a> to check my prose for common errors. This creates a flycheck
+checker that runs proselint in texty buffers and displays my errors.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'flycheck)
+
+(flycheck-define-checker proselint
+  "A linter for prose."
+  :command ("proselint" source-inplace)
+  :error-patterns
+  ((warning line-start (file-name) ":" line ":" column ": "
+            (id (one-or-more (not (any " "))))
+            (message (one-or-more not-newline)
+                     (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+            line-end))
+  :modes (text-mode markdown-mode gfm-mode org-mode))
+
+(add-to-list 'flycheck-checkers 'proselint)
+</pre>
+</div>
+
+<p>
+Use flycheck in the appropriate buffers:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'markdown-mode-hook #'flycheck-mode)
+(add-hook 'gfm-mode-hook #'flycheck-mode)
+(add-hook 'text-mode-hook #'flycheck-mode)
+(add-hook 'org-mode-hook #'flycheck-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Enable region case modification</h3>
+<div class="outline-text-3" id="text-4-12">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-13" class="outline-3">
+<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Switch windows when splitting</h3>
+<div class="outline-text-3" id="text-4-13">
+<p>
+When splitting a window, I invariably want to switch to the new window. This
+makes that automatic.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-14" class="outline-3">
+<h3 id="sec-4-14"><span class="section-number-3">4.14</span> Mass editing of <code>grep</code> results</h3>
+<div class="outline-text-3" id="text-4-14">
+<p>
+I like the idea of mass editing <code>grep</code> results the same way I can edit filenames
+in <code>dired</code>. These keybindings allow me to use <code>C-x C-q</code> to start editing <code>grep</code>
+results and <code>C-c C-c</code> to stop, just like in <code>dired</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(eval-after-load 'grep
+  '(define-key grep-mode-map
+    (kbd "C-x C-q") 'wgrep-change-to-wgrep-mode))
+
+(eval-after-load 'wgrep
+  '(define-key grep-mode-map
+    (kbd "C-c C-c") 'wgrep-finish-edit))
+
+(setq wgrep-auto-save-buffer t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-15" class="outline-3">
+<h3 id="sec-4-15"><span class="section-number-3">4.15</span> Configure <code>wrap-region</code></h3>
+<div class="outline-text-3" id="text-4-15">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(wrap-region-global-mode t)
+(wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
+(wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-16" class="outline-3">
+<h3 id="sec-4-16"><span class="section-number-3">4.16</span> Split horizontally for temporary buffers</h3>
+<div class="outline-text-3" id="text-4-16">
+<p>
+Horizonal splits are nicer for me, since I usually use a wide monitor. This is
+handy for handling temporary buffers (like compilation or test output).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun hrs/split-horizontally-for-temp-buffers ()
+  (when (one-window-p t)
+    (split-window-horizontally)))
+
+(add-hook 'temp-buffer-window-setup-hook
+          'hrs/split-horizontally-for-temp-buffers)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-17" class="outline-3">
+<h3 id="sec-4-17"><span class="section-number-3">4.17</span> Use projectile everywhere</h3>
+<div class="outline-text-3" id="text-4-17">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(projectile-global-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-18" class="outline-3">
+<h3 id="sec-4-18"><span class="section-number-3">4.18</span> Add a bunch of engines for <code>engine-mode</code></h3>
+<div class="outline-text-3" id="text-4-18">
+<p>
+Enable <a href="https://github.com/hrs/engine-mode">engine-mode</a> and define a few useful engines.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'engine-mode)
+
+(defengine duckduckgo
+  "https://duckduckgo.com/?q=%s"
+  :keybinding "d")
+
+(defengine github
+  "https://github.com/search?ref=simplesearch&amp;q=%s"
+  :keybinding "g")
+
+(defengine google
+  "http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=%s")
+
+(defengine rfcs
+  "http://pretty-rfc.herokuapp.com/search?q=%s")
+
+(defengine stack-overflow
+  "https://stackoverflow.com/search?q=%s"
+  :keybinding "s")
+
+(defengine wikipedia
+  "http://www.wikipedia.org/search-redirect.php?language=en&amp;go=Go&amp;search=%s"
+  :keybinding "w")
+
+(defengine wiktionary
+  "https://www.wikipedia.org/search-redirect.php?family=wiktionary&amp;language=en&amp;go=Go&amp;search=%s")
+
+(engine-mode t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Set custom keybindings</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Just a few handy functions.
+</p>
+
+<p>
+Remap when working in terminal Emacs.
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
