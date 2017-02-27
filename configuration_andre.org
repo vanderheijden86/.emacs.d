@@ -366,7 +366,11 @@ Bind a few handy keys.
   (define-key global-map "\C-cl" 'org-store-link)
   (define-key global-map "\C-ca" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-ct" 'org-deadline)
 #+END_SRC
+
+
+
 
 Hit =C-c i= to quickly open up my todo list.
 
@@ -869,4 +873,7 @@ Hit F10 to toggle between =fullscreen= and back.
 
 #+BEGIN_SRC emacs-lisp
 (define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
+(define-key global-map (kbd "<end>") 'org-end-of-line)
+(define-key global-map (kbd "<home>") 'org-beginning-of-line)
+
 #+END_SRC

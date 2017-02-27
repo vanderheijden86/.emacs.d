@@ -217,6 +217,7 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-ct" 'org-deadline)
 
 (defun open-index-file ()
   "Open the master org TODO list."
@@ -428,3 +429,5 @@ same directory as the org-buffer and insert a link to this file."
 (setq mouse-autoselect-window nil)
 
 (define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
+(define-key global-map (kbd "<end>") 'org-end-of-line)
+(define-key global-map (kbd "<home>") 'org-beginning-of-line)

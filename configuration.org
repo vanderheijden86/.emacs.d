@@ -288,6 +288,7 @@ opening it up in order to start typing something, so this skips a step.
 # #+END_SRC
 
 ** Keybindings
+** TODO asdff
 
 Bind a few handy keys.
 
@@ -295,6 +296,7 @@ Bind a few handy keys.
   (define-key global-map "\C-cl" 'org-store-link)
   (define-key global-map "\C-ca" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-ct" 'org-deadline)
 #+END_SRC
 
 Hit =C-c i= to quickly open up my todo list.
