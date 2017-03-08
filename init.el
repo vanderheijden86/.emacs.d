@@ -1,5 +1,14 @@
 ;;; .emacs - Pascal van Kooten <kootenpv@gmail.com>
 
+;; Benchmarking.
+
+;;(add-to-list 'load-path "packages/benchmark-init-20150905.238/")
+;;(package-initialize 'benchmark-init)
+;;(require 'benchmark-init)
+;;(benchmark-init/activate)
+
+
+
 ;; DEFAULT-DIRECTORY SHOULD BE ONLY ONE NECCESSARY
 (setq default-directory user-emacs-directory)
 

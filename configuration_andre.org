@@ -193,6 +193,12 @@ Hide emphasis markers because I view my org text mostly in Emacs itself.
 
 ** Task and org-capture management
 
+Hide done items from the agenda view.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-skip-scheduled-if-done t)
+#+END_SRC
+
 Store my org files in =~/org=, maintain an inbox in Dropbox, define the location
 of an index file (my main todo list), and archive finished tasks in
 =~/org/archive.org=.
@@ -367,7 +373,7 @@ Bind a few handy keys.
   (define-key global-map "\C-ca" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-ct" 'org-deadline)
-#+END_SRC
+q#+END_SRC
 
 
 
@@ -400,14 +406,15 @@ Hit =M-n= to quickly open up a capture template for a new todo.
             (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
 #+END_SRC
 
-Remap some handy keybindings defined in emp-keybindins because
+Remap some handy keybindings defined in emp-keybindings because
 org-mode overwrites them.
 
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load "org" (define-key org-mode-map (kbd "C-k") nil)
  (define-key org-mode-map [backspace] nil)
  (define-key org-mode-map (kbd "C-'") nil)
- (define-key org-mode-map (kbd "C-,") nil))
+ (define-key org-mode-map (kbd "C-,") nil)
+ (define-key org-mode-map (kbd "<M-RET>") nil))
 #+END_SRC
 
 ** Exporting

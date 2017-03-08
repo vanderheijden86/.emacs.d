@@ -111,6 +111,8 @@
 
 (setq org-hide-emphasis-markers t)
 
+(setq org-agenda-skip-scheduled-if-done t)
+
 (setq org-directory "~/org")
 
 (defun org-file-path (filename)
@@ -242,7 +244,8 @@ same directory as the org-buffer and insert a link to this file."
 (with-eval-after-load "org" (define-key org-mode-map (kbd "C-k") nil)
  (define-key org-mode-map [backspace] nil)
  (define-key org-mode-map (kbd "C-'") nil)
- (define-key org-mode-map (kbd "C-,") nil))
+ (define-key org-mode-map (kbd "C-,") nil)
+ (define-key org-mode-map (kbd "<M-return>") nil))
 
 (require 'ox-md)
 (require 'ox-beamer)

@@ -22,7 +22,9 @@
      (utf-16be . base64)
      (utf-16le . base64)
      (utf-8 . 8bit))))
- '(org-agenda-files nil)
+ '(org-agenda-files
+   (quote
+    ("~/Google Drive/Projects/Flipside/flipside.org" "~/Google Drive/Documentation/planning.org")))
  '(org-file-apps
    (quote
     ((auto-mode . emacs)
