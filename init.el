@@ -2,12 +2,9 @@
 
 ;; Benchmarking.
 
-;;(add-to-list 'load-path "packages/benchmark-init-20150905.238/")
-;;(package-initialize 'benchmark-init)
-;;(require 'benchmark-init)
+;;(add-to-list 'load-path "packages/benchmark-init/")
+;;(require 'benchmark-init-loaddefs)
 ;;(benchmark-init/activate)
-
-
 
 ;; DEFAULT-DIRECTORY SHOULD BE ONLY ONE NECCESSARY
 (setq default-directory user-emacs-directory)
