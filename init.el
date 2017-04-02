@@ -1,10 +1,13 @@
+
 ;;; .emacs - Pascal van Kooten <kootenpv@gmail.com>
 
-;; Benchmarking.
-
-;;(add-to-list 'load-path "packages/benchmark-init/")
-;;(require 'benchmark-init-loaddefs)
+;;Benchmarking
+;;(add-to-list 'load-path "~/emp-24.5/.emacs.d/packages/benchmark-init-el/")
+;;(require 'benchmark-init)
 ;;(benchmark-init/activate)
+
+;;(load-file "~/emp-24.5/.emacs.d/packages/benchmark-init-el/benchmark-init-loaddefs.el")
+
 
 ;; DEFAULT-DIRECTORY SHOULD BE ONLY ONE NECCESSARY
 (setq default-directory user-emacs-directory)
@@ -70,6 +73,7 @@
 ;; (setq explicit-bash-args '("--noediting" "--login" "-i"))
 
 
+
 (require 'emp-external-plugins)
 
 (require 'emp-display)
@@ -86,9 +90,7 @@
 
 (require 'emp-dired)
 
-(require 'my-notmuch)
-
-(require 'nodejs-repl-eval)
+;; (require 'nodejs-repl-eval)
 ;; (setq ns-auto-hide-menu-bar t)
 ;; (set-frame-position nil 0 -21)
 ;; (tool-bar-mode 0)

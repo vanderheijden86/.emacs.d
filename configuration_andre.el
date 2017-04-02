@@ -119,7 +119,7 @@
   "Return the absolute address of an org file, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
 
-(setq org-inbox-file "~/Dropbox/inbox.org")
+(setq org-inbox-file "~/org/inbox.org")
 (setq org-index-file (org-file-path "index.org"))
 (setq org-archive-location
       (concat (org-file-path "archive.org") "::* From %s"))
@@ -245,7 +245,7 @@ same directory as the org-buffer and insert a link to this file."
  (define-key org-mode-map [backspace] nil)
  (define-key org-mode-map (kbd "C-'") nil)
  (define-key org-mode-map (kbd "C-,") nil)
- (define-key org-mode-map (kbd "<M-return>") nil))
+ (define-key org-mode-map (kbd "<M-RET>") nil))
 
 (require 'ox-md)
 (require 'ox-beamer)
@@ -434,3 +434,36 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
+
+(add-hook 'go-mode-hook #'gorepl-mode)
+
+(setq company-tooltip-limit 20)                      ; bigger popup window
+  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+  (setq company-echo-delay 0)                          ; remove annoying blinking
+  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+;;  (add-to-list 'company-backends 'company-go)          ; add company-go to the backends.
+
+(add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
+   (require 'go-flymake)
+
+(add-to-list 'load-path "~/gocode/src/github.com/dougm/goflymake")
+   (require 'go-flycheck)
+
+;;(add-hook 'before-save-hook 'gofmt-before-save)
+
+(with-eval-after-load "gorepl-mode"
+ (define-key gorepl-mode-map (kbd "C-<return>") 'gorepl-eval-line)
+)
+
+;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
+
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))

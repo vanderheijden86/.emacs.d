@@ -53,6 +53,8 @@
     typescript
     flymake-solidity
     go-mode
+    gorepl-mode
+    company-go
     perspective
     projectile
     persp-projectile
@@ -73,6 +75,10 @@
     ido-vertical-mode
     wrap-region
     htmlize
+    tide
+    exec-path-from-shell
+    docker-tramp
+    use-package
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

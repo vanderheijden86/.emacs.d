@@ -176,8 +176,8 @@
     (delete-char -1))
   )
 
-(defadvice forward-paragraph (after smart-center activate)
-  (recenter))
+;; (defadvice forward-paragraph (after smart-center activate)
+;;   (recenter))
 
 
 (provide 'smart)

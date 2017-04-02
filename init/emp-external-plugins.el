@@ -1,3 +1,9 @@
+;; Benchmarking
+;; (add-to-list 'load-path "~/emp-24.5/.emacs.d/packages/benchmark-init-el/")
+;; (require 'benchmark-init)
+;; (benchmark-init/activate)
+;; (load-file "~/emp-24.5/.emacs.d/packages/benchmark-init-el/benchmark-init-loaddefs.el")
+
 ;; suppress warnings introduced in recent emacs versions
 (setq ad-redefinition-action 'accept)
 
@@ -7,7 +13,7 @@
 ;;(elscreen-separate-buffer-list-mode)
 
 (require 'ffap)
-(require 'realgud)
+;;(require 'realgud)
 
 (electric-pair-mode)
 (require 'yasnippet)
@@ -21,13 +27,14 @@
 (key-chord-mode 1)
 
 ;; load js2-mode for javascript files
-(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (require 'js2-mode)
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-(require 'org)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
+;; (require 'org)
+;; (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+;; (global-set-key "\C-cl" 'org-store-link)
+;; (global-set-key "\C-ca" 'org-agenda)
+
 ;;(define-key org-mode-map (kbd "C-c a") 'org-agenda)
 
 ;; load markdown-mode for .md files.
@@ -70,6 +77,8 @@
 (setq dabbrev-abbrev-char-regexp "\\sw\\|\\s_\\|s.")
 (setq dabbrev-case-fold-search t)
 
+
+
 ;; Represent undo-history as an actual tree (visualize with C-x u)
 (setq undo-tree-mode-lighter "")
 (require 'undo-tree)
@@ -77,7 +86,11 @@
 
 (require 'next-at-point) ;increment number or letter at point ,bound to C-+
 
+;;-----------------------------
+
 (require 'smart)
+
+;;-----------------------------
 
 (require 'switch-window)
 
@@ -267,4 +280,4 @@
 (provide 'emp-external-plugins)
 
 (with-eval-after-load 'company
-  (add-to-list 'company-backends 'company-ghc))
+  (add-to-list 'company-backends 'company-ghc) 'company-go 'company-jedi)

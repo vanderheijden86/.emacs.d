@@ -373,7 +373,7 @@ Bind a few handy keys.
   (define-key global-map "\C-ca" 'org-agenda)
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-ct" 'org-deadline)
-q#+END_SRC
+#+END_SRC
 
 
 
@@ -875,7 +875,6 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 #+END_SRC
 
 * Set custom keybindings
-
 Hit F10 to toggle between =fullscreen= and back.
 
 #+BEGIN_SRC emacs-lisp
@@ -883,4 +882,93 @@ Hit F10 to toggle between =fullscreen= and back.
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 
+#+END_SRC
+
+* Programming Languag Tools
+** GO
+*** Enable gorepl-mode in go-mode
+
+Enable gorepl-mode in go-mode buffers:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'go-mode-hook 'gorepl-mode)
+(add-hook 'go-mode-hook 'gitgutter-mode)
+#+END_SRC
+
+*** Settings for company-go
+
+
+#+BEGIN_SRC emacs-lisp
+  (setq company-tooltip-limit 20)                      ; bigger popup window
+  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+  (setq company-echo-delay 0)                          ; remove annoying blinking
+  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+;;  (add-to-list 'company-backends 'company-go)          ; add company-go to the backends.
+#+END_SRC
+
+*** Settings for goflymake
+
+Flycheck settings:
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
+   (require 'go-flymake)
+#+END_SRC
+
+Flycheck settings:
+
+#+BEGIN_SRC emacs-lisp
+ (add-to-list 'load-path "~/gocode/src/github.com/dougm/goflymake")
+    (require 'go-flycheck)
+#+END_SRC
+
+*** gofmt to format go when saving
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'gofmt-before-save)
+#+END_SRC
+*** Keybindings
+
+Keybindings for gorepl
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "gorepl-mode"
+ (define-key gorepl-mode-map (kbd "C-<return>") 'gorepl-eval-line)
+)
+#+END_SRC
+
+*** Links on how to customize
+- http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scrat
+** Python
+*** Settings for company autocompletion.
+
+Add company-jedi to company backends.
+
+#+BEGIN_SRC emacs-lisp
+;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
+#+END_SRC
+** Global Flycheck
+
+# #+BEGIN_SRC emacs-lisp
+# (use-package flycheck
+#   :ensure t
+#   :init
+# (global-flycheck-mode))
+# #+END_SRC
+
+** PATH Settings
+
+#+BEGIN_SRC emacs-lisp
+(exec-path-from-shell-copy-env "GOPATH")
+#+END_SRC
+
+** Gitgutter
+
+#+BEGIN_SRC emacs-lisp
+(global-git-gutter-mode t)
+#+END_SRC
+
+
+;add GOPATH to emacs
 #+END_SRC
