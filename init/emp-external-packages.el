@@ -78,6 +78,7 @@
     tide
     exec-path-from-shell
     docker-tramp
+    vagrant-tramp
     use-package
     ) "a list of packages to ensure are installed at launch.")
 

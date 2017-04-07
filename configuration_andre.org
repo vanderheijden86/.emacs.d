@@ -886,13 +886,21 @@ Hit F10 to toggle between =fullscreen= and back.
 
 * Programming Languag Tools
 ** GO
-*** Enable gorepl-mode in go-mode
-
+*** go-mode-hook
 Enable gorepl-mode in go-mode buffers:
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'go-mode-hook 'gorepl-mode)
-(add-hook 'go-mode-hook 'gitgutter-mode)
+;;(add-hook 'go-mode-hook 'gorepl-mode)
+(add-hook 'go-mode-hook 'flymake-mode)
+(add-hook 'go-mode-hook 'git-gutter-mode)
+;;(remove-hook 'go-mode-hook 'gorepl-mode)
+#+END_SRC
+
+
+Exammple of hook with lambda function.
+#+BEGIN_SRC emacs-lisp
+;  (add-hook 'go-mode-hook
+;            (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
 #+END_SRC
 
 *** Settings for company-go
@@ -967,8 +975,4 @@ Add company-jedi to company backends.
 
 #+BEGIN_SRC emacs-lisp
 (global-git-gutter-mode t)
-#+END_SRC
-
-
-;add GOPATH to emacs
 #+END_SRC
