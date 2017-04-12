@@ -817,15 +817,16 @@ results and =C-c C-c= to stop, just like in =dired=.
 
 Horizonal splits are nicer for me, since I usually use a wide monitor. This is
 handy for handling temporary buffers (like compilation or test output).
+--> Removed for now as this messes up temporary buffers.
 
-#+BEGIN_SRC emacs-lisp
-  (defun hrs/split-horizontally-for-temp-buffers ()
-    (when (one-window-p t)
-      (split-window-horizontally)))
+# #+BEGIN_SRC emacs-lisp
+#   (defun hrs/split-horizontally-for-temp-buffers ()
+#     (when (one-window-p t)
+#       (split-window-horizontally)))
 
-  (add-hook 'temp-buffer-window-setup-hook
-            'hrs/split-horizontally-for-temp-buffers)
-#+END_SRC
+#   (add-hook 'temp-buffer-window-setup-hook
+#             'hrs/split-horizontally-for-temp-buffers)
+# #+END_SRC
 
 ** Use projectile everywhere
 
@@ -934,6 +935,8 @@ Flycheck settings:
 *** gofmt to format go when saving
 
 #+BEGIN_SRC emacs-lisp
+; Use goimports instead of go-fmt
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 #+END_SRC
 *** Keybindings
@@ -949,14 +952,16 @@ Keybindings for gorepl
 #+BEGIN_SRC emacs-lisp
 (defun my-go-mode-hook ()
   (define-key global-map (kbd "M-.") nil)
+  (define-key global-map (kbd "M-,") nil)
   (local-set-key (kbd "M-.") 'godef-jump)
-  (local-set-key (kbd "M-*") 'pop-tag-mark)
+  (local-set-key (kbd "M-,") 'pop-tag-mark)
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 #+END_SRC
 
 *** Links on how to customize
 - http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scrat
+
 ** Python
 *** Settings for company autocompletion.
 
