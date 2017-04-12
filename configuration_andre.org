@@ -633,10 +633,10 @@ Never use tabs. Tabs are the devil’s whitespace.
 ** Configure yasnippet
 
 I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippet=
-enabled. Disabled this now .emacs.d folder is not yet symlinked.
+enabled.
 
 #+BEGIN_SRC emacs-lisp
-;;  (setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
+(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
   (yas-global-mode 1)
 #+END_SRC
 
@@ -944,6 +944,15 @@ Keybindings for gorepl
 (with-eval-after-load "gorepl-mode"
  (define-key gorepl-mode-map (kbd "C-<return>") 'gorepl-eval-line)
 )
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun my-go-mode-hook ()
+  (define-key global-map (kbd "M-.") nil)
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+)
+(add-hook 'go-mode-hook 'my-go-mode-hook)
 #+END_SRC
 
 *** Links on how to customize
