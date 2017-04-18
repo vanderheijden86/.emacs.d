@@ -735,6 +735,15 @@ Sometimes, though, I don't wanna wrap text. This toggles wrapping with =C-c q=:
   (setq-default fill-column 100)
 #+END_SRC
 
+** Always switch to temp-buffer after opening.
+
+I want to always move the focus to the just opened temp-buffer (help buffer).
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
+;;(remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
+;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
+#+END_SRC
 
 
 ** Linting prose
@@ -885,7 +894,7 @@ Hit F10 to toggle between =fullscreen= and back.
 
 #+END_SRC
 
-* Programming Languag Tools
+* Programming Language Tools
 ** GO
 *** go-mode-hook
 Enable gorepl-mode in go-mode buffers:
@@ -989,4 +998,13 @@ Add company-jedi to company backends.
 
 #+BEGIN_SRC emacs-lisp
 (global-git-gutter-mode t)
+#+END_SRC
+
+** Node-js
+*** Node REPL
+
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load "nodejs-repl-mode"
+    (require 'nodejs-repl-eval)
+  )
 #+END_SRC
