@@ -601,6 +601,15 @@ Ask before recursively /deleting/ a directory, though.
   (setq dired-recursive-deletes 'top)
 #+END_SRC
 
+* =magit=
+
+Magit custom settings for References buffer.
+
+#+BEGIN_SRC emacs-lisp
+(setq magit-refs-show-commit-count t)
+;(setq magit-refs-margin nil)
+#+END_SRC
+
 * Editing settings
 
 ** Always kill current buffer
@@ -624,11 +633,31 @@ Assume that I always want to kill the current buffer when hitting =C-x k=.
 
 ** Always indent with spaces
 
-Never use tabs. Tabs are the devil’s whitespace.
+Never use tabs. Tabs are the devil’s whitespace. (Commented out for now)
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default indent-tabs-mode nil)
+;  (setq-default indent-tabs-mode nil)
 #+END_SRC
+
+** Cleanup buffer tabs to whitespace
+
+Function to run before safe to replace tabs with whitespaces. (Commented out for now)
+
+# #+BEGIN_SRC emacs-lisp
+# (defun cleanup-buffer-safe ()
+#   "Perform a bunch of safe operations on the whitespace content of a buffer.
+# Does not indent buffer, because it is used for a before-save-hook, and that
+# might be bad."
+#   (interactive)
+#   (when (not (string-match-p (regexp-quote "akefile") (buffer-file-name)))
+#     (untabify (point-min) (point-max))
+#     (delete-trailing-whitespace)
+#     (set-buffer-file-coding-system 'utf-8)))
+
+# ;; Various superfluous white-space. Just say no.
+# (add-hook 'before-save-hook 'cleanup-buffer-safe)
+
+# #+END_SRC
 
 ** Configure yasnippet
 
@@ -1001,10 +1030,31 @@ Add company-jedi to company backends.
 #+END_SRC
 
 ** Node-js
+
+*** js2-mode
+
+Load js2-mode for javascript files
+
+#+BEGIN_SRC emacs-lisp
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+#+END_SRC
+
 *** Node REPL
 
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load "nodejs-repl-mode"
     (require 'nodejs-repl-eval)
   )
+#+END_SRC
+*** Keybindings
+
+Keybindings for node REPL.
+
+#+BEGIN_SRC emacs-lisp
+(defun my-js2-mode-hook ()
+  (local-set-key (kbd "C-<return>") 'nodejs-repl-eval-dwim)
+)
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
 #+END_SRC
