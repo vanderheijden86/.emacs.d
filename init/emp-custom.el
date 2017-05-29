@@ -43,7 +43,7 @@
  '(org-mobile-directory "~/Dropbox/org-share")
  '(package-selected-packages
    (quote
-    (markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl multiple-cursors markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+    (discover yafolding flycheck-pos-tip json-mode markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl multiple-cursors markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
  '(py-ipython-command "~/bin/ipython")
  '(py-ipython-command-args "--automagic --pylab")
  '(python-check-command "pyflymake.py")
@@ -52,6 +52,7 @@
  '(python-shell-interpreter-interactive-arg "--simple-prompt -i")
  '(realgud:ipdb-command-name "~/bin/ipdb" t)
  '(realgud:pdb-command-name "python2 -m pdb")
+ '(recentf-arrange-rules (quote (("Go files (%d)" ".\\.go'"))))
  '(solidity-solc-path "/Users/pascal/projects/solcpy")
  '(tabbar-separator (quote (0.5))))
 (custom-set-faces

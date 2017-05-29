@@ -306,13 +306,16 @@ same directory as the org-buffer and insert a link to this file."
 
 (setq dired-recursive-deletes 'top)
 
+(setq magit-refs-show-commit-count nil)
+;(setq magit-refs-margin nil)
+
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-(setq-default indent-tabs-mode nil)
+;  (setq-default indent-tabs-mode nil)
 
-;;  (setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
+(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
   (yas-global-mode 1)
 
 (setq yas/indent-line nil)
@@ -350,6 +353,10 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 
 (setq-default fill-column 100)
+
+(add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
+;;(remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
+;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
 
 (require 'flycheck)
 
@@ -390,13 +397,6 @@ same directory as the org-buffer and insert a link to this file."
 (wrap-region-global-mode t)
 (wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
 (wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
-
-(defun hrs/split-horizontally-for-temp-buffers ()
-  (when (one-window-p t)
-    (split-window-horizontally)))
-
-(add-hook 'temp-buffer-window-setup-hook
-          'hrs/split-horizontally-for-temp-buffers)
 
 (projectile-global-mode)
 
@@ -456,14 +456,36 @@ same directory as the org-buffer and insert a link to this file."
 (add-to-list 'load-path "~/gocode/src/github.com/dougm/goflymake")
    (require 'go-flycheck)
 
+; Use goimports instead of go-fmt
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (with-eval-after-load "gorepl-mode"
  (define-key gorepl-mode-map (kbd "C-<return>") 'gorepl-eval-line)
 )
 
+(defun my-go-mode-hook ()
+  (define-key global-map (kbd "M-.") nil)
+  (define-key global-map (kbd "M-,") nil)
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-,") 'pop-tag-mark)
+)
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
 ;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
 
 (exec-path-from-shell-copy-env "GOPATH")
 
 (global-git-gutter-mode t)
+
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(with-eval-after-load "nodejs-repl-mode"
+  (require 'nodejs-repl-eval)
+)
+
+(defun my-js2-mode-hook ()
+  (local-set-key (kbd "C-<return>") 'nodejs-repl-eval-dwim)
+)
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)

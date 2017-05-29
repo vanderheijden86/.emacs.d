@@ -80,6 +80,8 @@
     docker-tramp
     vagrant-tramp
     use-package
+    yafolding
+    discover
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

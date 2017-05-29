@@ -606,7 +606,7 @@ Ask before recursively /deleting/ a directory, though.
 Magit custom settings for References buffer.
 
 #+BEGIN_SRC emacs-lisp
-(setq magit-refs-show-commit-count t)
+(setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
 #+END_SRC
 
@@ -913,6 +913,30 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 (setq mouse-autoselect-window nil)
 #+END_SRC
 
+** Use Discover to get more info from other modules.
+
+#+BEGIN_SRC emacs-lisp
+(discover-add-context-menu
+ :context-menu '(isearch
+              (description "Isearch, occur and highlighting")
+              (lisp-switches
+               ("-cf" "Case should fold search" case-fold-search t nil))
+              (lisp-arguments
+               ("=l" "context lines to show (occur)"
+                "list-matching-lines-default-context-lines"
+                (lambda (dummy) (interactive) (read-number "Number of context lines to show: "))))
+              (actions
+               ("Isearch"
+                ("_" "isearch forward symbol" isearch-forward-symbol)
+                ("w" "isearch forward word" isearch-forward-word))
+               ("Occur"
+                ("o" "occur" occur))
+               ("More"
+                ("h" "highlighters ..." makey-key-mode-popup-isearch-highlight))))
+ :bind "M-s d")
+#+END_SRC
+
+
 * Set custom keybindings
 Hit F10 to toggle between =fullscreen= and back.
 
@@ -930,9 +954,10 @@ Enable gorepl-mode in go-mode buffers:
 
 #+BEGIN_SRC emacs-lisp
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
-(add-hook 'go-mode-hook 'flymake-mode)
+;;(add-hook 'go-mode-hook 'flymake-mode)
+(add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook 'git-gutter-mode)
-;;(remove-hook 'go-mode-hook 'gorepl-mode)
+;;(remove-hook 'go-mode-hook 'flymake-mode)
 #+END_SRC
 
 
