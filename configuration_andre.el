@@ -97,6 +97,128 @@
 
 (global-prettify-symbols-mode t)
 
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+;  (setq-default indent-tabs-mode nil)
+
+(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
+  (yas-global-mode 1)
+
+(setq yas/indent-line nil)
+
+(define-abbrev-table 'global-abbrev-table
+  '((";name" "Harry R. Schwartz")
+    (";email" "hello@harryrschwartz.com")
+    (";tb" "harry@thoughtbot.com")
+    (";site" "http://harryrschwartz.com")))
+
+(setq-default abbrev-mode t)
+
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+(ido-ubiquitous)
+(flx-ido-mode 1) ; better/faster matching
+(setq ido-create-new-buffer 'always) ; don't confirm to create new buffers
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
+(smex-initialize)
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+(add-hook 'gfm-mode-hook 'flyspell-mode)
+
+(setq markdown-command "pandoc --standalone --mathjax --from=markdown")
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'gfm-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
+
+(setq-default fill-column 100)
+
+(add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
+;;(remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
+;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
+
+(require 'flycheck)
+
+(flycheck-define-checker proselint
+  "A linter for prose."
+  :command ("proselint" source-inplace)
+  :error-patterns
+  ((warning line-start (file-name) ":" line ":" column ": "
+            (id (one-or-more (not (any " "))))
+            (message (one-or-more not-newline)
+                     (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+            line-end))
+  :modes (text-mode markdown-mode gfm-mode org-mode))
+
+(add-to-list 'flycheck-checkers 'proselint)
+
+(add-hook 'markdown-mode-hook #'flycheck-mode)
+(add-hook 'gfm-mode-hook #'flycheck-mode)
+(add-hook 'text-mode-hook #'flycheck-mode)
+(add-hook 'org-mode-hook #'flycheck-mode)
+
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(global-set-key (kbd "C-x 2") 'hrs/split-window-below-and-switch)
+(global-set-key (kbd "C-x 3") 'hrs/split-window-right-and-switch)
+
+(eval-after-load 'grep
+  '(define-key grep-mode-map
+    (kbd "C-x C-q") 'wgrep-change-to-wgrep-mode))
+
+(eval-after-load 'wgrep
+  '(define-key grep-mode-map
+    (kbd "C-c C-c") 'wgrep-finish-edit))
+
+(setq wgrep-auto-save-buffer t)
+
+(wrap-region-global-mode t)
+(wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
+(wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
+
+(projectile-global-mode)
+
+(require 'engine-mode)
+
+(defengine duckduckgo
+  "https://duckduckgo.com/?q=%s"
+  :keybinding "d")
+
+(defengine github
+  "https://github.com/search?ref=simplesearch&q=%s"
+  :keybinding "g")
+
+(defengine google
+  "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s")
+
+(defengine rfcs
+  "http://pretty-rfc.herokuapp.com/search?q=%s")
+
+(defengine stack-overflow
+  "https://stackoverflow.com/search?q=%s"
+  :keybinding "s")
+
+(defengine wikipedia
+  "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+  :keybinding "w")
+
+(defengine wiktionary
+  "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s")
+
+(engine-mode t)
+
+(setq mouse-autoselect-window nil)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (org-bullets-mode t)))
@@ -257,6 +379,7 @@ same directory as the org-buffer and insert a link to this file."
    (dot . t)
    (gnuplot . t)
    (js . t)
+   (go . t)
    (python . t)))
 
 (setq org-confirm-babel-evaluate nil)
@@ -306,149 +429,15 @@ same directory as the org-buffer and insert a link to this file."
 
 (setq dired-recursive-deletes 'top)
 
-(setq magit-refs-show-commit-count nil)
-;(setq magit-refs-margin nil)
-
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-;  (setq-default indent-tabs-mode nil)
-
-(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
-  (yas-global-mode 1)
-
-(setq yas/indent-line nil)
-
-(define-abbrev-table 'global-abbrev-table
-  '((";name" "Harry R. Schwartz")
-    (";email" "hello@harryrschwartz.com")
-    (";tb" "harry@thoughtbot.com")
-    (";site" "http://harryrschwartz.com")))
-
-(setq-default abbrev-mode t)
-
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-(ido-ubiquitous)
-(flx-ido-mode 1) ; better/faster matching
-(setq ido-create-new-buffer 'always) ; don't confirm to create new buffers
-(ido-vertical-mode 1)
-(setq ido-vertical-define-keys 'C-n-and-C-p-only)
-
-(smex-initialize)
-
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-(add-hook 'gfm-mode-hook 'flyspell-mode)
-
-(setq markdown-command "pandoc --standalone --mathjax --from=markdown")
-
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'gfm-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-
-(global-set-key (kbd "C-c q") 'auto-fill-mode)
-
-(setq-default fill-column 100)
-
-(add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
-;;(remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
-;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
-
-(require 'flycheck)
-
-(flycheck-define-checker proselint
-  "A linter for prose."
-  :command ("proselint" source-inplace)
-  :error-patterns
-  ((warning line-start (file-name) ":" line ":" column ": "
-            (id (one-or-more (not (any " "))))
-            (message (one-or-more not-newline)
-                     (zero-or-more "\n" (any " ") (one-or-more not-newline)))
-            line-end))
-  :modes (text-mode markdown-mode gfm-mode org-mode))
-
-(add-to-list 'flycheck-checkers 'proselint)
-
-(add-hook 'markdown-mode-hook #'flycheck-mode)
-(add-hook 'gfm-mode-hook #'flycheck-mode)
-(add-hook 'text-mode-hook #'flycheck-mode)
-(add-hook 'org-mode-hook #'flycheck-mode)
-
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-(global-set-key (kbd "C-x 2") 'hrs/split-window-below-and-switch)
-(global-set-key (kbd "C-x 3") 'hrs/split-window-right-and-switch)
-
-(eval-after-load 'grep
-  '(define-key grep-mode-map
-    (kbd "C-x C-q") 'wgrep-change-to-wgrep-mode))
-
-(eval-after-load 'wgrep
-  '(define-key grep-mode-map
-    (kbd "C-c C-c") 'wgrep-finish-edit))
-
-(setq wgrep-auto-save-buffer t)
-
-(wrap-region-global-mode t)
-(wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
-(wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
-
-(projectile-global-mode)
-
-(require 'engine-mode)
-
-(defengine duckduckgo
-  "https://duckduckgo.com/?q=%s"
-  :keybinding "d")
-
-(defengine github
-  "https://github.com/search?ref=simplesearch&q=%s"
-  :keybinding "g")
-
-(defengine google
-  "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s")
-
-(defengine rfcs
-  "http://pretty-rfc.herokuapp.com/search?q=%s")
-
-(defengine stack-overflow
-  "https://stackoverflow.com/search?q=%s"
-  :keybinding "s")
-
-(defengine wikipedia
-  "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
-  :keybinding "w")
-
-(defengine wiktionary
-  "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s")
-
-(engine-mode t)
-
-(setq mouse-autoselect-window nil)
-
-(define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
-(define-key global-map (kbd "<end>") 'org-end-of-line)
-(define-key global-map (kbd "<home>") 'org-beginning-of-line)
-
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
-(add-hook 'go-mode-hook 'flymake-mode)
+;;(add-hook 'go-mode-hook 'flymake-mode)
+(add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook 'git-gutter-mode)
-;;(remove-hook 'go-mode-hook 'gorepl-mode)
+;; (add-hook 'go-mode-hook 'flycheck-gometalinter-setup)
+(remove-hook 'go-mode-hook 'flymake-mode)
 
 ;  (add-hook 'go-mode-hook
 ;            (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
-
-(setq company-tooltip-limit 20)                      ; bigger popup window
-  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-  (setq company-echo-delay 0)                          ; remove annoying blinking
-  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-
-;;  (add-to-list 'company-backends 'company-go)          ; add company-go to the backends.
 
 (add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
    (require 'go-flymake)
@@ -472,11 +461,9 @@ same directory as the org-buffer and insert a link to this file."
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
-
 (exec-path-from-shell-copy-env "GOPATH")
 
-(global-git-gutter-mode t)
+;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -489,3 +476,47 @@ same directory as the org-buffer and insert a link to this file."
   (local-set-key (kbd "C-<return>") 'nodejs-repl-eval-dwim)
 )
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+(add-hook 'json-mode-hook 'yafolding-mode)
+
+(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode 'robe-mode)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-inf-ruby 'company-robe))
+
+(define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
+(define-key global-map (kbd "<end>") 'org-end-of-line)
+(define-key global-map (kbd "<home>") 'org-beginning-of-line)
+
+(setq magit-refs-show-commit-count nil)
+;(setq magit-refs-margin nil)
+
+(global-git-gutter-mode t)
+
+(global-discover-mode nil)
+
+(discover-add-context-menu
+ :context-menu '(isearch
+              (description "Isearch, occur and highlighting")
+              (lisp-switches
+               ("-cf" "Case should fold search" case-fold-search t nil))
+              (lisp-arguments
+               ("=l" "context lines to show (occur)"
+                "list-matching-lines-default-context-lines"
+                (lambda (dummy) (interactive) (read-number "Number of context lines to show: "))))
+              (actions
+               ("Isearch"
+                ("_" "isearch forward symbol" isearch-forward-symbol)
+                ("w" "isearch forward word" isearch-forward-word))
+               ("Occur"
+                ("o" "occur" occur))
+               ("More"
+                ("h" "highlighters ..." makey-key-mode-popup-isearch-highlight))))
+ :bind "M-s d")
+
+(setq company-tooltip-limit 20)                      ; bigger popup window
+  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+  (setq company-echo-delay 0)                          ; remove annoying blinking
+  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(add-to-list 'company-backends 'company-go)          ; add company-go to the backends.

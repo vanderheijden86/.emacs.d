@@ -82,6 +82,10 @@
     use-package
     yafolding
     discover
+    flycheck-gometalinter
+    ob-go
+    inf-ruby
+    company-inf-ruby
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)
