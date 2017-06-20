@@ -307,7 +307,7 @@ I want to always move the focus to the just opened temp-buffer (help buffer).
 
 #+BEGIN_SRC emacs-lisp
 (add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
-;;(remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
+;;remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
 ;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
 #+END_SRC
 
@@ -1016,24 +1016,38 @@ Keybindings for node REPL.
 #+END_SRC
 ** JSON
 
+json mode for json files.
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+#+END_SRC
+
+
+Enable yafolding mode and jq mode in json files by default.
+
 #+BEGIN_SRC emacs-lisp
 (add-hook 'json-mode-hook 'yafolding-mode)
 #+END_SRC
 
+Hook to put in custom keybindings for JSON.
 
-jq mode (to be set.)
+#+BEGIN_SRC emacs-lisp
 
+(defun my-json-mode-hook ()
+  (local-set-key (kbd "C-c C-j") 'jq-interactively))
+(add-hook 'json-mode-hook 'my-json-mode-hook)
+#+END_SRC
+
+
+
+
+jq mode for jquery files.
 # #+BEGIN_SRC emacs-lisp
-# (add-to-list 'load-path "/path/to/jq-mode-dir")
-# (autoload 'jq-mode "jq-mode.el"
-#     "Major mode for editing jq files" t)
-# (add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
-# #+END_SRC
+(autoload 'jq-mode "jq-mode.el"
+    "Major mode for editing jq files" t)
+(add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
+#+END_SRC
 
-# #+BEGIN_SRC emacs-lisp
-# (with-eval-after-load "json-mode"
-#   (define-key json-mode-map (kbd "C-c C-j") 'jq-interactively))
-# #+END_SRC
 ** Ruby
 Set custom keybindings for inf-ruby.
 
@@ -1057,13 +1071,14 @@ Load company backend for ruby.
 #+END_SRC
 
 
-* Custom Keybindings
+* General Custom Keybindings
 Hit F10 to toggle between =fullscreen= and back.
 
 #+BEGIN_SRC emacs-lisp
 (define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
+(define-key global-map (kbd "M-d") nil)
 
 #+END_SRC
 * Misc Tools
@@ -1094,6 +1109,10 @@ Magit custom settings for References buffer.
 ** Discover (for context menus)
 Use Discover to get more info from other modules.
 
+#+BEGIN_SRC emacs-lisp
+(discover-mode)
+#+END_SRC
+
 Add a context menu per module:
 
 *** Isearch
@@ -1116,7 +1135,7 @@ Add a context menu per module:
                 ("o" "occur" occur))
                ("More"
                 ("h" "highlighters ..." makey-key-mode-popup-isearch-highlight))))
- :bind "M-s d")
+ :bind "M-d s")
 #+END_SRC
 
 
@@ -1125,13 +1144,31 @@ Add a context menu per module:
 
 *** Yafolding
 Still to be set correctly.
-# #+BEGIN_SRC emacs-lisp
-# (define-key global-map (kbd "M-s y") 'yafolding-discover)
-# (add-hook 'json-mode-hook 'yafolding-mode)
 
-# #+END_SRC
+#+BEGIN_SRC emacs-lisp 
+(discover-add-context-menu
+ :context-menu '(yafolding
+              (description "Isearch, occur and highlighting")
+              (lisp-switches)
+              (lisp-arguments)
+              (actions
+               ("yafolding"
+                ("h" "hide element" yafolding-hide-element)
+                ("s" "show element" yafolding-show-element)
+                ("t" "toggle element" yafolding-toggle-element)
+                ("H" "hide all" yafolding-hide-all)
+                ("S" "show all" yafolding-show-all)
+                ("T" "toggle all" yafolding-toggle-all)
+                ("p" "go parent element" yafolding-go-parent-element)
+                ("P" "hide parent element" yafolding-hide-parent-element)))) 
+ :bind "M-d y"
+ :mode 'yafolding
+ :mode-hook 'yafolding-mode-hook 
+)
+#+END_SRC
 
 ** Company
+
 #+BEGIN_SRC emacs-lisp
   (setq company-tooltip-limit 20)                      ; bigger popup window
   (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
@@ -1141,4 +1178,16 @@ Still to be set correctly.
 (add-to-list 'company-backends 'company-go)          ; add company-go to the backends.
 #+END_SRC
 
+Set company-yasnippet global keybinding.
+
+#+BEGIN_SRC emacs-lisp
+(define-key global-map (kbd "M-e") 'company-yasnippet)
+#+END_SRC
+
+
+** helm-descbinds
+
+#+BEGIN_SRC emacs-lisp
+(define-key global-map (kbd "C-h b") 'helm-descbinds)
+#+END_SRC
 
