@@ -202,7 +202,7 @@ I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippe
 enabled.
 
 #+BEGIN_SRC emacs-lisp
-(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
+(setq yas-snippet-dirs '("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))
   (yas-global-mode 1)
 #+END_SRC
 
@@ -974,9 +974,20 @@ Keybindings for gorepl
 (exec-path-from-shell-copy-env "GOPATH")
 #+END_SRC
 
+*** Company
+
+Load company backend for go.
+#+BEGIN_SRC emacs-lisp
+'(eval-after-load 'company
+  (add-to-list 'company-backends 'company-go)
+ (add-to-list 'company-backends 'company-elisp))
+#+END_SRC
+
+
+
 *** Links on how to customize
 - http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scrat
-  
+ 
 ** Python
 *** Settings for company autocompletion.
 
@@ -1008,11 +1019,17 @@ Load js2-mode for javascript files
 
 Keybindings for node REPL.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp 
 (defun my-js2-mode-hook ()
+  (require 'nodejs-repl-eval)
   (local-set-key (kbd "C-<return>") 'nodejs-repl-eval-dwim)
+  (define-key js2-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
+  (define-key js2-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+  (define-key js2-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
+  (define-key js2-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)
 )
-(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+  (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 #+END_SRC
 ** JSON
 
@@ -1034,7 +1051,8 @@ Hook to put in custom keybindings for JSON.
 #+BEGIN_SRC emacs-lisp
 
 (defun my-json-mode-hook ()
-  (local-set-key (kbd "C-c C-j") 'jq-interactively))
+  (local-set-key (kbd "C-c C-j") 'jq-interactively)
+  (flycheck-mode))
 (add-hook 'json-mode-hook 'my-json-mode-hook)
 #+END_SRC
 
@@ -1079,8 +1097,8 @@ Hit F10 to toggle between =fullscreen= and back.
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
-
 #+END_SRC
+
 * Misc Tools
 ** =magit=
 
@@ -1110,7 +1128,7 @@ Magit custom settings for References buffer.
 Use Discover to get more info from other modules.
 
 #+BEGIN_SRC emacs-lisp
-(discover-mode)
+'(discover-mode)
 #+END_SRC
 
 Add a context menu per module:
@@ -1170,12 +1188,10 @@ Still to be set correctly.
 ** Company
 
 #+BEGIN_SRC emacs-lisp
-  (setq company-tooltip-limit 20)                      ; bigger popup window
-  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-  (setq company-echo-delay 0)                          ; remove annoying blinking
-  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-
-(add-to-list 'company-backends 'company-go)          ; add company-go to the backends.
+    (setq company-tooltip-limit 20)                      ; bigger popup window
+    (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+    (setq company-echo-delay 0)                          ; remove annoying blinking
+    (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
 #+END_SRC
 
 Set company-yasnippet global keybinding.
@@ -1183,6 +1199,13 @@ Set company-yasnippet global keybinding.
 #+BEGIN_SRC emacs-lisp
 (define-key global-map (kbd "M-e") 'company-yasnippet)
 #+END_SRC
+
+** Yasnippets.
+# Load company backend for yasnippets.
+# #+BEGIN_SRC emacs-lisp
+# (eval-after-load 'company
+#   '(add-to-list 'company-backends 'company-yasnippet))
+# #+END_SRC
 
 
 ** helm-descbinds

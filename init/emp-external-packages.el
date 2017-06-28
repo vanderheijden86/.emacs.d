@@ -86,7 +86,6 @@
     ob-go
     inf-ruby
     company-inf-ruby
-    jq
     helm-descbinds
     ) "a list of packages to ensure are installed at launch.")
 

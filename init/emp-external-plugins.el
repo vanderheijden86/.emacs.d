@@ -216,8 +216,8 @@
 
 (require 'flymake-easy)
 (require 'flymake-jslint)
-(add-hook 'javascript-mode-hook
-          (lambda () (flymake-mode t)))
+;; (add-hook 'javascript-mode-hook
+;;           (lambda () (flymake-mode t)))
 
 (require 'flycheck)
 (require 'solidity-mode)

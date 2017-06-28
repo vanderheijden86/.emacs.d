@@ -103,7 +103,7 @@
 
 ;  (setq-default indent-tabs-mode nil)
 
-(setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
+(setq yas-snippet-dirs '("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))
   (yas-global-mode 1)
 
 (setq yas/indent-line nil)
@@ -143,7 +143,7 @@
 (setq-default fill-column 100)
 
 (add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
-;;(remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
+;;remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
 ;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
 
 (require 'flycheck)
@@ -463,6 +463,9 @@ same directory as the org-buffer and insert a link to this file."
 
 (exec-path-from-shell-copy-env "GOPATH")
 
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-go))
+
 ;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
 
 (require 'js2-mode)
@@ -473,11 +476,23 @@ same directory as the org-buffer and insert a link to this file."
 )
 
 (defun my-js2-mode-hook ()
+  (require 'nodejs-repl-eval)
   (local-set-key (kbd "C-<return>") 'nodejs-repl-eval-dwim)
+  (define-key js2-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
+  (define-key js2-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+  (define-key js2-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
+  (define-key js2-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)
 )
-(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+  (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 
 (add-hook 'json-mode-hook 'yafolding-mode)
+
+(defun my-json-mode-hook ()
+  (local-set-key (kbd "C-c C-j") 'jq-interactively))
+(add-hook 'json-mode-hook 'my-json-mode-hook)
 
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode 'robe-mode)
 
@@ -487,13 +502,14 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
+(define-key global-map (kbd "M-d") nil)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
 
 (global-git-gutter-mode t)
 
-(global-discover-mode nil)
+'(discover-mode)
 
 (discover-add-context-menu
  :context-menu '(isearch
@@ -512,11 +528,33 @@ same directory as the org-buffer and insert a link to this file."
                 ("o" "occur" occur))
                ("More"
                 ("h" "highlighters ..." makey-key-mode-popup-isearch-highlight))))
- :bind "M-s d")
+ :bind "M-d s")
+
+(discover-add-context-menu
+ :context-menu '(yafolding
+              (description "Isearch, occur and highlighting")
+              (lisp-switches)
+              (lisp-arguments)
+              (actions
+               ("yafolding"
+                ("h" "hide element" yafolding-hide-element)
+                ("s" "show element" yafolding-show-element)
+                ("t" "toggle element" yafolding-toggle-element)
+                ("H" "hide all" yafolding-hide-all)
+                ("S" "show all" yafolding-show-all)
+                ("T" "toggle all" yafolding-toggle-all)
+                ("p" "go parent element" yafolding-go-parent-element)
+                ("P" "hide parent element" yafolding-hide-parent-element)))) 
+ :bind "M-d y"
+ :mode 'yafolding
+ :mode-hook 'yafolding-mode-hook 
+)
 
 (setq company-tooltip-limit 20)                      ; bigger popup window
-  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-  (setq company-echo-delay 0)                          ; remove annoying blinking
-  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
 
-(add-to-list 'company-backends 'company-go)          ; add company-go to the backends.
+(define-key global-map (kbd "M-e") 'company-yasnippet)
+
+(define-key global-map (kbd "C-h b") 'helm-descbinds)
