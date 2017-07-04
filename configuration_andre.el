@@ -103,7 +103,10 @@
 
 ;  (setq-default indent-tabs-mode nil)
 
-(setq yas-snippet-dirs '("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))
+(setq yas-snippet-dirs '(
+"~/emp-24.5/.emacs.d/snippets/text-mode/" 
+"/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets"
+))
   (yas-global-mode 1)
 
 (setq yas/indent-line nil)
@@ -131,8 +134,6 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (add-hook 'gfm-mode-hook 'flyspell-mode)
-
-(setq markdown-command "pandoc --standalone --mathjax --from=markdown")
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'gfm-mode-hook 'turn-on-auto-fill)
@@ -430,20 +431,18 @@ same directory as the org-buffer and insert a link to this file."
 (setq dired-recursive-deletes 'top)
 
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
-;;(add-hook 'go-mode-hook 'flymake-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
+;;(add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook 'git-gutter-mode)
+(add-hook 'go-mode-hook 'go-eldoc-setup)
+
 ;; (add-hook 'go-mode-hook 'flycheck-gometalinter-setup)
-(remove-hook 'go-mode-hook 'flymake-mode)
+;;(remove-hook 'go-mode-hook 'flymake-mode)
 
 ;  (add-hook 'go-mode-hook
 ;            (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
 
-(add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
-   (require 'go-flymake)
-
-(add-to-list 'load-path "~/gocode/src/github.com/dougm/goflymake")
-   (require 'go-flycheck)
+(require 'go-flycheck)
 
 ; Use goimports instead of go-fmt
 (setq gofmt-command "goimports")
@@ -458,13 +457,15 @@ same directory as the org-buffer and insert a link to this file."
   (define-key global-map (kbd "M-,") nil)
   (local-set-key (kbd "M-.") 'godef-jump)
   (local-set-key (kbd "M-,") 'pop-tag-mark)
+  (go-guru-hl-identifier-mode)
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
 (exec-path-from-shell-copy-env "GOPATH")
 
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-go))
+'(eval-after-load 'company
+  (add-to-list 'company-backends 'company-go)
+ (add-to-list 'company-backends 'company-elisp))
 
 ;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
 
@@ -491,7 +492,8 @@ same directory as the org-buffer and insert a link to this file."
 (add-hook 'json-mode-hook 'yafolding-mode)
 
 (defun my-json-mode-hook ()
-  (local-set-key (kbd "C-c C-j") 'jq-interactively))
+  (local-set-key (kbd "C-c C-j") 'jq-interactively)
+  (flycheck-mode))
 (add-hook 'json-mode-hook 'my-json-mode-hook)
 
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode 'robe-mode)
@@ -503,13 +505,18 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
+(key-chord-define-global "xj" 'ido-switch-buffer) 
+(global-set-key (kbd "<f5>") 'hrs/split-window-below-and-switch)
+(global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
+(global-set-key (kbd "<f7>") 'other-window)
+(global-set-key (kbd "<f8>") 'delete-window)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
 
 (global-git-gutter-mode t)
 
-'(discover-mode)
+(global-discover-mode)
 
 (discover-add-context-menu
  :context-menu '(isearch
@@ -558,3 +565,9 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map (kbd "M-e") 'company-yasnippet)
 
 (define-key global-map (kbd "C-h b") 'helm-descbinds)
+
+(define-key global-map (kbd "M-s h") 'helm-ag)
+
+    (eval-after-load 'helm-ag
+      (custom-set-variables
+       '(helm-follow-mode-persistent t)))

@@ -202,7 +202,10 @@ I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippe
 enabled.
 
 #+BEGIN_SRC emacs-lisp
-(setq yas-snippet-dirs '("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))
+(setq yas-snippet-dirs '(
+"~/emp-24.5/.emacs.d/snippets/text-mode/" 
+"/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets"
+))
   (yas-global-mode 1)
 #+END_SRC
 
@@ -269,16 +272,7 @@ I'd like spell-checking running when editing Markdown.
 
 Associate =.md= files with GitHub-flavored Markdown.
 
-# #+BEGIN_SRC emacs-lisp
-#   (hrs/add-auto-mode 'gfm-mode "\\.md$")
-# #+END_SRC
-
-Use =pandoc= to render the results.
-
-#+BEGIN_SRC emacs-lisp
-  (setq markdown-command "pandoc --standalone --mathjax --from=markdown")
-#+END_SRC
-
+#
 ** Wrap paragraphs automatically
 
 =AutoFillMode= automatically wraps paragraphs, kinda like hitting =M-q=. I wrap
@@ -363,6 +357,7 @@ makes that automatic.
 #+END_SRC
 
 ** Mass editing of =grep= results
+
 
 I like the idea of mass editing =grep= results the same way I can edit filenames
 in =dired=. These keybindings allow me to use =C-x C-q= to start editing =grep=
@@ -910,11 +905,13 @@ Enable gorepl-mode in go-mode buffers:
 
 #+BEGIN_SRC emacs-lisp
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
-;;(add-hook 'go-mode-hook 'flymake-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
+;;(add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook 'git-gutter-mode)
+(add-hook 'go-mode-hook 'go-eldoc-setup)
+
 ;; (add-hook 'go-mode-hook 'flycheck-gometalinter-setup)
-(remove-hook 'go-mode-hook 'flymake-mode)
+;;(remove-hook 'go-mode-hook 'flymake-mode)
 #+END_SRC
 
 
@@ -926,18 +923,16 @@ Exammple of hook with lambda function.
 
 *** goflymake and goflycheck
 
+Flymake settings (not needed because flycheck is used):
+
+# #+BEGIN_SRC emacs-lisp
+#   (require 'go-flymake)
+# #+END_SRC
+
 Flycheck settings:
 
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.go/src/github.com/dougm/goflymake")
-   (require 'go-flymake)
-#+END_SRC
-
-Flycheck settings:
-
-#+BEGIN_SRC emacs-lisp
- (add-to-list 'load-path "~/gocode/src/github.com/dougm/goflymake")
-    (require 'go-flycheck)
+  (require 'go-flycheck)
 #+END_SRC
 
 *** gofmt to format go when saving
@@ -959,14 +954,17 @@ Keybindings for gorepl
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(defun my-go-mode-hook ()
-  (define-key global-map (kbd "M-.") nil)
-  (define-key global-map (kbd "M-,") nil)
-  (local-set-key (kbd "M-.") 'godef-jump)
-  (local-set-key (kbd "M-,") 'pop-tag-mark)
-)
-(add-hook 'go-mode-hook 'my-go-mode-hook)
+  (defun my-go-mode-hook ()
+    (define-key global-map (kbd "M-.") nil)
+    (define-key global-map (kbd "M-,") nil)
+    (local-set-key (kbd "M-.") 'godef-jump)
+    (local-set-key (kbd "M-,") 'pop-tag-mark)
+    (go-guru-hl-identifier-mode)
+  )
+  (add-hook 'go-mode-hook 'my-go-mode-hook)
 #+END_SRC
+
+
 
 *** PATH Settings
 
@@ -1097,6 +1095,14 @@ Hit F10 to toggle between =fullscreen= and back.
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
+(key-chord-define-global "xj" 'ido-switch-buffer) 
+(global-set-key (kbd "<f5>") 'hrs/split-window-below-and-switch)
+(global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
+(global-set-key (kbd "<f7>") 'other-window)
+(global-set-key (kbd "<f8>") 'delete-window)
+(global-set-key (kbd "<f11>") 'helm-semantic-or-imenu)
+(global-set-key (kbd "<f12>") 'helm-all-mark-rings)
+
 #+END_SRC
 
 * Misc Tools
@@ -1128,7 +1134,7 @@ Magit custom settings for References buffer.
 Use Discover to get more info from other modules.
 
 #+BEGIN_SRC emacs-lisp
-'(discover-mode)
+(global-discover-mode)
 #+END_SRC
 
 Add a context menu per module:
@@ -1214,3 +1220,21 @@ Set company-yasnippet global keybinding.
 (define-key global-map (kbd "C-h b") 'helm-descbinds)
 #+END_SRC
 
+
+** helm-ag for searching.
+
+#+BEGIN_SRC emacs-lisp 
+(define-key global-map (kbd "M-s h") 'helm-ag)
+
+    (eval-after-load 'helm-ag
+      (custom-set-variables
+       '(helm-follow-mode-persistent t)))
+#+END_SRC
+
+** helm-imenu for navigating in buffer.
+
+#+BEGIN_SRC emacs-lisp 
+    (eval-after-load 'helm-semantic-or-imenu
+      (custom-set-variables
+       '(helm-follow-mode-persistent t)))
+#+END_SRC

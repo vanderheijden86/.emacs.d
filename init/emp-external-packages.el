@@ -87,6 +87,9 @@
     inf-ruby
     company-inf-ruby
     helm-descbinds
+    go-guru
+    wgrep
+    helm-ag
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

@@ -18,6 +18,10 @@
  '(global-discover-mode nil)
  '(go-mode-hook (quote (my-go-mode-hook git-gutter-mode flycheck-mode)))
  '(goflymake-debug t)
+ '(helm-follow-mode-persistent t)
+ '(helm-source-names-using-follow
+   (quote
+    ("Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
  '(magit-bury-buffer-function (quote magit-restore-window-configuration))
  '(magit-commit-arguments nil)
  '(markdown-preview-style
@@ -45,7 +49,7 @@
  '(org-mobile-directory "~/Dropbox/org-share")
  '(package-selected-packages
    (quote
-    (indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl multiple-cursors markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+    (multiple-cursors helm-ag wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
  '(py-ipython-command "~/bin/ipython")
  '(py-ipython-command-args "--automagic --pylab")
  '(python-check-command "pyflymake.py")
@@ -55,8 +59,18 @@
  '(realgud:ipdb-command-name "~/bin/ipdb" t)
  '(realgud:pdb-command-name "python2 -m pdb")
  '(recentf-arrange-rules (quote (("Go files (%d)" ".\\.go'"))))
+ '(set-mark-command-repeat-pop t)
  '(solidity-solc-path "/Users/pascal/projects/solcpy")
  '(tabbar-separator (quote (0.5)))
+ '(typescript-mode-hook
+   (quote
+    ((lambda nil
+       (flycheck-mode 1)
+       (setq flycheck-check-syntax-automatically
+             (quote
+              (save mode-enabled)))
+       (eldoc-mode 1)
+       (company-mode-on)))) t)
  '(yas-snippet-dirs
    (quote
     ("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/elpy-20170303.621/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))))
