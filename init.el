@@ -10,9 +10,17 @@
 
 
 ;; DEFAULT-DIRECTORY SHOULD BE ONLY ONE NECCESSARY
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq default-directory user-emacs-directory)
 
-(setq emacsd (concat user-emacs-directory ".emacs.d/"))
+(setq emacsd (concat user-emacs-directory ""))
+
 
                 (setq empinit (concat emacsd "init/"))
 
@@ -96,4 +104,4 @@
 ;; (tool-bar-mode 0)
 ;; (set-frame-size nil 206 54)
 
-(org-babel-load-file "~/emp-24.5/.emacs.d/configuration_andre.org")
+(org-babel-load-file "configuration_andre.org")

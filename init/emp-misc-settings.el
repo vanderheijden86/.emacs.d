@@ -89,6 +89,7 @@
 (setenv "LANG" "en_US.UTF-8")
 
 ;; tramp use sudo: /sudo:mediqt:<enter>
+(require 'tramp)
 (add-to-list 'tramp-default-proxies-alist '(".*" "\`root\'" "/ssh:%h:"))
 
 (setq compilation-always-kill t)

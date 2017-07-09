@@ -122,7 +122,7 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
-(ido-ubiquitous)
+(ido-ubiquitous-mode 1)
 (flx-ido-mode 1) ; better/faster matching
 (setq ido-create-new-buffer 'always) ; don't confirm to create new buffers
 (ido-vertical-mode 1)
@@ -510,6 +510,8 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
 (global-set-key (kbd "<f7>") 'other-window)
 (global-set-key (kbd "<f8>") 'delete-window)
+(global-set-key (kbd "<f11>") 'helm-semantic-or-imenu)
+(global-set-key (kbd "<f12>") 'helm-all-mark-rings)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
@@ -571,3 +573,7 @@ same directory as the org-buffer and insert a link to this file."
     (eval-after-load 'helm-ag
       (custom-set-variables
        '(helm-follow-mode-persistent t)))
+
+(eval-after-load 'helm-semantic-or-imenu
+  (custom-set-variables
+   '(helm-follow-mode-persistent t)))

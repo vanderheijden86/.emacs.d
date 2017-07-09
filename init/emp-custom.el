@@ -70,7 +70,7 @@
              (quote
               (save mode-enabled)))
        (eldoc-mode 1)
-       (company-mode-on)))) t)
+       (company-mode-on)))))
  '(yas-snippet-dirs
    (quote
     ("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/elpy-20170303.621/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))))

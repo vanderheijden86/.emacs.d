@@ -244,7 +244,7 @@ Always enable =abbrev-mode=:
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
   (ido-mode 1)
-  (ido-ubiquitous)
+  (ido-ubiquitous-mode 1)
   (flx-ido-mode 1) ; better/faster matching
   (setq ido-create-new-buffer 'always) ; don't confirm to create new buffers
   (ido-vertical-mode 1)
@@ -1102,7 +1102,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (global-set-key (kbd "<f8>") 'delete-window)
 (global-set-key (kbd "<f11>") 'helm-semantic-or-imenu)
 (global-set-key (kbd "<f12>") 'helm-all-mark-rings)
-
+(global-set-key (kbd "C-c r") 'helm-recentf)
 #+END_SRC
 
 * Misc Tools
