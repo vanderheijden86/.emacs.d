@@ -90,6 +90,12 @@
     go-guru
     wgrep
     helm-ag
+    helm-themes
+    monokai-theme
+    ample-theme
+    json-mode
+    go-eldoc
+    jq-mode
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

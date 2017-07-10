@@ -128,9 +128,14 @@
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys 'C-n-and-C-p-only)
 
-(smex-initialize)
+(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-echo-input-in-header-line t)
 
-(global-set-key (kbd "M-x") 'smex)
+(smex-initialize)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (add-hook 'gfm-mode-hook 'flyspell-mode)
@@ -505,13 +510,18 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
-(key-chord-define-global "xj" 'ido-switch-buffer) 
+(key-chord-define-global "xj" 'helm-mini)
 (global-set-key (kbd "<f5>") 'hrs/split-window-below-and-switch)
 (global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
 (global-set-key (kbd "<f7>") 'other-window)
 (global-set-key (kbd "<f8>") 'delete-window)
 (global-set-key (kbd "<f11>") 'helm-semantic-or-imenu)
 (global-set-key (kbd "<f12>") 'helm-all-mark-rings)
+(global-set-key (kbd "C-c r") 'helm-recentf)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)

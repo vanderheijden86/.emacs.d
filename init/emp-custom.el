@@ -3,27 +3,63 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(auto-save-interval 5)
+ '(available-screen-pixel-bounds nil)
  '(company-backends
    (quote
     (company-go company-ghc company-bbdb company-nxml company-css company-eclim company-semantic company-clang company-xcode company-cmake company-capf company-files company-abbrev
                 (company-dabbrev-code company-gtags company-etags company-keywords)
                 company-oddmuse company-dabbrev)))
+ '(company-idle-delay 0.1)
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("b51c2dda65e8e7e66ab1b06bc10b59e61c153b0cf928f296efab5a7574779fb6" "7a6059160b29bffb886dfaddaa4b351588090bcb74946c30a6782f50288c9892" "9ab634dcc9131f79016c96c4955298409649f6538908c743a8a9d2c6bc8321ef" "614d92e2a3af6a08bfe6ff68a59875f987271415c3bda7bec1216b80f5db741d" "c3d843722b3bf87f037a6d54cdf0042ce4b2150bd24af4e32eb7342f782bdd44" default)))
+    ("938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "b51c2dda65e8e7e66ab1b06bc10b59e61c153b0cf928f296efab5a7574779fb6" "7a6059160b29bffb886dfaddaa4b351588090bcb74946c30a6782f50288c9892" "9ab634dcc9131f79016c96c4955298409649f6538908c743a8a9d2c6bc8321ef" "614d92e2a3af6a08bfe6ff68a59875f987271415c3bda7bec1216b80f5db741d" "c3d843722b3bf87f037a6d54cdf0042ce4b2150bd24af4e32eb7342f782bdd44" default)))
  '(dired-use-ls-dired nil)
  '(elpy-rpc-python-command "python3")
  '(elpy-syntax-check-command "/Users/avdh/emp-24.5/.emacs.d/pyflymake.py")
+ '(fci-rule-color "#14151E")
  '(global-discover-mode nil)
  '(go-mode-hook (quote (my-go-mode-hook git-gutter-mode flycheck-mode)))
  '(goflymake-debug t)
  '(helm-follow-mode-persistent t)
+ '(helm-mode t)
  '(helm-source-names-using-follow
    (quote
     ("Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
+ '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#3C3D37" . 0)
+     ("#679A01" . 20)
+     ("#4BBEAE" . 30)
+     ("#1DB4D0" . 50)
+     ("#9A8F21" . 60)
+     ("#A75B00" . 70)
+     ("#F309DF" . 85)
+     ("#3C3D37" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+ '(hl-fg-colors
+   (quote
+    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(ivy-mode t)
  '(magit-bury-buffer-function (quote magit-restore-window-configuration))
  '(magit-commit-arguments nil)
+ '(magit-diff-use-overlays nil)
  '(markdown-preview-style
    "https://sindresorhus.com/github-markdown-css/github-markdown.css")
  '(mm-body-charset-encoding-alist
@@ -34,6 +70,9 @@
      (utf-16be . base64)
      (utf-16le . base64)
      (utf-8 . 8bit))))
+ '(nrepl-message-colors
+   (quote
+    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(org-agenda-files
    (quote
     ("~/Google Drive/Projects/Flipside/flipside.org" "~/Google Drive/Documentation/planning.org")))
@@ -49,7 +88,9 @@
  '(org-mobile-directory "~/Dropbox/org-share")
  '(package-selected-packages
    (quote
-    (helm-themes multiple-cursors helm-ag wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+    (maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+ '(pos-tip-background-color "#A6E22E")
+ '(pos-tip-foreground-color "#272822")
  '(py-ipython-command "~/bin/ipython")
  '(py-ipython-command-args "--automagic --pylab")
  '(python-check-command "pyflymake.py")
@@ -60,8 +101,11 @@
  '(realgud:pdb-command-name "python2 -m pdb")
  '(recentf-arrange-rules (quote (("Go files (%d)" ".\\.go'"))))
  '(set-mark-command-repeat-pop t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(solidity-solc-path "/Users/pascal/projects/solcpy")
  '(tabbar-separator (quote (0.5)))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
  '(typescript-mode-hook
    (quote
     ((lambda nil
@@ -71,6 +115,35 @@
               (save mode-enabled)))
        (eldoc-mode 1)
        (company-mode-on)))) t)
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#d54e53")
+     (40 . "goldenrod")
+     (60 . "#e7c547")
+     (80 . "mediumspringgreen")
+     (100 . "#70c0b1")
+     (120 . "DeepSkyBlue1")
+     (140 . "goldenrod")
+     (160 . "#d54e53")
+     (180 . "goldenrod")
+     (200 . "#e7c547")
+     (220 . "mediumspringgreen")
+     (240 . "#70c0b1")
+     (260 . "DeepSkyBlue1")
+     (280 . "goldenrod")
+     (300 . "#d54e53")
+     (320 . "goldenrod")
+     (340 . "#e7c547")
+     (360 . "mediumspringgreen"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0"))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"])
  '(yas-snippet-dirs
    (quote
     ("~/emp-24.5/.emacs.d/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/elpy-20170303.621/snippets/" "/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets/"))))
