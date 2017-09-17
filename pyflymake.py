@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 
@@ -164,6 +164,7 @@ class DefaultConfig(object):
         self.IGNORE_CODES = ()
         self.USE_SANE_DEFAULTS = True
 
+
 DEFAULT_CONFIG = dict(
     VIRTUALENV=None,
     ENV={},
@@ -210,6 +211,7 @@ def main():
     run(PylintRunner)
 
     sys.exit()
+
 
 if __name__ == '__main__':
     main()

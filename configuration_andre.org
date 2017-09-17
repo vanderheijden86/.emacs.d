@@ -848,7 +848,7 @@ Do not hide dired details. (mode of dired+)
 
 Reuse the current dired-buffer, stops opening dozens of windows.
 #+BEGIN_SRC emacs-lisp
-(diredp-toggle-find-file-reuse-dir 1)
+(toggle-diredp-find-file-reuse-dir nil)
 #+END_SRC
 
 
@@ -968,6 +968,7 @@ Keybindings for gorepl
     (define-key global-map (kbd "M-.") nil)
     (define-key global-map (kbd "M-,") nil)
     (local-set-key (kbd "M-.") 'godef-jump)
+    (local-set-key (kbd "C-M-.") 'godef-jump-other-window)
     (local-set-key (kbd "M-,") 'pop-tag-mark)
     (go-guru-hl-identifier-mode)
   )
@@ -1004,6 +1005,8 @@ Add company-jedi to company backends.
 #+BEGIN_SRC emacs-lisp
 ;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
 #+END_SRC
+*** Keybindings
+(define-key python-mode-map (kbd "<tab>") 'py-indent-line)
 ** Node-js
 
 *** js2-mode
@@ -1109,13 +1112,15 @@ Hit F10 to toggle between =fullscreen= and back.
 (global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
 (global-set-key (kbd "<f7>") 'other-window)
 (global-set-key (kbd "<f8>") 'delete-window)
-(global-set-key (kbd "<f11>") 'helm-semantic-or-imenu)
-(global-set-key (kbd "<f12>") 'helm-all-mark-rings)
+(global-set-key (kbd "<f11>") 'helm-all-mark-rings)
+(global-set-key (kbd "<f12>") 'helm-semantic-or-imenu)
+(global-set-key (kbd "<f13>") 'helm-ag)
 (global-set-key (kbd "C-c r") 'helm-recentf)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-f") 'find-file)
+
 #+END_SRC
 
 * Misc Tools

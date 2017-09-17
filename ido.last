@@ -1,0 +1,317 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/avdh/Google Drive/Personal/" . "Recepten/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/elasticsearch/" . "config/")
+ ("/ssh:b3i_ek_vm:/home/elk/" . "elk_es+kib_vm/")
+ ("/ssh:b3i_ek_vm:/home/" . "elk/")
+ ("/ssh:b3i_ek_vm:/" . "home/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/logstash/" . "pipeline/")
+ ("/Users/avdh/Documents/PriceScraper/" . "other_scraping_jobs/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elasticsearch/" . "config/")
+ ("/ssh:b3i_testserver:elk_logspout+logstash_on_server/logstash/" . "pipeline/")
+ ("/ssh:b3i_testserver:elk_logspout+logstash_on_server/" . "logstash/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/" . "elasticsearch/")
+ ("/ssh:b3icodex1:elk_es+kib_vm/" . "curator/")
+ ("/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/extensions/" . "logspout/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/extensions/" . "logspout/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/" . "pipeline/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/" . "logstash/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/" . "logstash/")
+ ("/ssh:b3icodex1:" . "elk_es+kib_vm/")
+ ("/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/logstash/" . "pipeline/")
+ ("/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/" . "extensions/")
+ ("/ssh:b3i_testserver:/home/mvp/" . "elk_logspout+logstash_on_server/")
+ ("/ssh:b3i_testserver:/home/" . "mvp/")
+ ("/ssh:b3i_testserver:/" . "home/")
+ ("/ssh:b3i_testserver:" . "elk_logspout+logstash_on_server/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/extensions/" . "logspout/")
+ ("/vagrant:fabric_on_ubuntu:/var/lib/docker/" . "containers/")
+ ("/vagrant:fabric_on_ubuntu:/var/lib/" . "docker/")
+ ("/vagrant:fabric_on_ubuntu:/var/" . "lib/")
+ ("/vagrant:fabric_on_ubuntu:/" . "var/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/machines/default/" . "virtualbox/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/machines/" . "default/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/" . "machines/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/" . "docker-elk/")
+ ("/Users/avdh/Documents/codex1_mvp/doc/architecture/" . "contractLifecycle/")
+ ("/Users/avdh/Documents/codex1_mvp/doc/" . "architecture/")
+ ("/Users/avdh/Google Drive/Reference/org-html-themes/" . "setup/")
+ ("/Users/avdh/Google Drive/Reference/" . "org-html-themes/")
+ ("/Users/avdh/Documents/org-html-themes/" . "styles/")
+ ("/Users/avdh/Documents/codex1_mvp/scripts/" . "docker_setup/")
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/" . "models/")
+ ("/Users/avdh/Documents/codex1_mvp/web/" . "server/")
+ ("/Users/avdh/Documents/codex1_mvp/web/server/dist/models/" . "acord/")
+ ("/Users/avdh/Documents/codex1_mvp/web/server/dist/" . "models/")
+ ("/Users/avdh/Documents/codex1_mvp/web/server/" . "src/")
+ ("/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/" . "statemachine/")
+ ("/Users/avdh/Documents/codex1_mvp/go/src/" . "b3iCodex1/")
+ ("/Users/avdh/Documents/codex1_mvp/go/" . "src/")
+ ("/Users/avdh/Documents/codex1_mvp/" . "scripts/")
+ ("/Users/avdh/Documents/" . "codex1_mvp/")
+ ("/Users/avdh/Google Drive/" . "ORG-Documents/")
+ ("/Users/avdh/.emacs.d/packages/" . "solarized-theme-20170430.800/")
+ ("/usr/local/etc/" . "bash_completion.d/")
+ ("/usr/local/" . "bin/")
+ ("/usr/" . "local/")
+ ("/" . "usr/")
+ ("/Users/avdh/.emacs.d/" . "init/")
+ ("/Users/avdh/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/logstash/pipeline/"
+ "/Users/avdh/.emacs.d/init/"
+ "/Users/avdh/.emacs.d/"
+ "/Users/avdh/Documents/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elasticsearch/config/"
+ "/Users/avdh/Google Drive/Projects/Blockchain/"
+ "/Users/avdh/Google Drive/ORG-Documents/"
+ "/Users/avdh/Documents/codex1_mvp/doc/whitepaper/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/elasticsearch/config/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/curator/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/"
+ "/ssh:b3i_ek_vm:/home/elk/elk_es+kib_vm/"
+ "/ssh:b3i_ek_vm:"
+ "/Users/avdh/Documents/PriceScraper/other_scraping_jobs/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/b3i-setup/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/pipeline/"
+ "/ssh:b3i_testserver:elk_logspout+logstash_on_server/logstash/pipeline/"
+ "/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/statemachine/"
+ "/Users/avdh/Documents/codex1_mvp/ignorant/"
+ "/ssh:b3i_testserver:elk_logspout+logstash_on_server/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/"
+ "/ssh:b3i_testserver:"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/extensions/logspout/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/curator/"
+ "/ssh:b3icodex1:/home/b3icodex1/elk_es+kib_vm/curator/"
+ "/ssh:b3icodex1:elk_es+kib_vm/curator/"
+ "/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/extensions/logspout/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/extensions/logspout/"
+ "/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/logstash/pipeline/"
+ "/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/"
+ "/ssh:b3icodex1:/home/b3icodex1/elk_es+kib_vm/"
+ "/ssh:b3icodex1:elk_es+kib_vm/"
+ "/ssh:b3i_testserver:/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/logstash/pipeline/"
+ "/ssh:b3i_testserver:/home/mvp/elk_logspout+logstash_on_server/logstash/config/"
+ "/ssh:b3icodex1:"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/extensions/curator/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elasticsearch/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/logstash/debug_config/"
+ "/"
+ "/vagrant:fabric_on_ubuntu:/etc/filebeat/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/docker-elk/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/docker-elk/logstash/config/"
+ "/vagrant:fabric_on_ubuntu:/var/lib/docker/containers/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/b3i-setup/logs/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/machines/default/virtualbox/"
+ "/Users/avdh/.vagrant.d/"
+ "/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "logstash.conf"
+ "emp-python.el"
+ "req.txt"
+ "last_error_timestamp.py"
+ "blockchain_tech.org"
+ "boodschappen_recepten.org"
+ "b3icodex1.tex"
+ "action.yml"
+ "docker-compose.yml"
+ "cluster_state.json"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/logstash/pipeline/" (22971 51901 0 0) "logstash.conf" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/logstash/" (22971 51901 0 0) "pipeline/" "Dockerfile" "debug_config/" "config/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elasticsearch/config/" (22973 3449 0 0) "query.sh" "last_error_timestamp_flymake.py" "last_error_timestamp.py" "elasticsearch.yml" "../" "./")
+
+ ("/Users/avdh/.emacs.d/init/" (22973 3285 0 0) "nodejs-repl-eval.el" "navi.el" "emp-r.el" "emp-python.el" "emp-misc-settings.el" "emp-misc-functions.el" "emp-keybindings.el" "emp-external-plugins.el" "emp-external-packages.el" "emp-display.el" "emp-dired.el" "emp-custom.el" "emp-c++.el" ".#emp-python.el" "../" "./")
+
+ ("/Users/avdh/.emacs.d/" (22973 3212 0 0) "xml-parse.el" "web-mode.el" "uniquify.el" "tempbuf.el" "tabbar-tweak.el" "snippets/" "smex-items" "smart.el" "recentf" "README.md" "pyflymake.py" "projectile-bookmarks.eld" "packages/" "package-loader.el" "nodejs-repl-eval.el" "next-at-point.el" "network-security.data" "navi.el" "Navi-empty/" "markdown-css/" "init.el~" "init.el" "init/" "ido.last" "go-flymake.el" "go-flycheck.el" "eashy.el" "dired-fixups.el" "configuration_andre.org" "configuration_andre.el" "configuration.html" "backups/" "auto-save-list/" ".python-environments/" ".org-id-locations" ".gitignore" ".git/" ".#configuration_andre.org" "#initel#" "#init.el#" "#configuration_andre.org#" "#!Users!avdh!Documents!PriceScraper!data_preparation.py#" "#!Users!avdh!Documents!codex1_mvp!scripts!docker_setup!elk_logspout+logstash_on_test_server!logstash!pipeline!logstash.conf#" "#!Users!avdh!Documents!codex1_mvp!scripts!docker_setup!elk_es+kib_vm!docker-compose.yml#" "#!Users!avdh!Documents!codex1_mvp!scripts!docker_setup!elasticsearch!config!last_error_timestamp.py#" "#!Users!avdh!Documents!codex1_mvp!scripts!b3i-setup!logs!dev-democedent-b3icodex1pvt-1.log#" "#!Users!avdh!Documents!codex1_mvp!scripts!b3i-setup!logs!dev-demobroker-messenger-0.log#" "#!Users!avdh!Documents!codex1_mvp!go!src!b3iCodex1!b3iCodex1.go#" "#!Users!avdh!.emacs.d!configuration_andre.org#" "#!Users!avdh!.emacs.d!configuration_andre.el#" "#!ssh:b3i_ek_vm:!home!elk!elk_es+kib_vm!docker-compose.yml#" "#!Applications!Emacs.app!Contents!Resources!lisp!international!mule.el.gz#" "../" "./")
+
+ ("/Users/avdh/" (22973 3068 0 0) "VirtualBox VMs/" "Tools/" "Public/" "Pictures/" "org/" "Music/" "Movies/" "Library/" "lib/" "Google Drive/" "go/" "Envs/" "emacs/" "Downloads/" "Documents/" "Desktop/" "bin/" "Applications/" ".yarnrc" ".Xauthority" ".viminfo" ".vagrant.d/" ".v8flags.5.1.281.103.avdh.json" ".v8flags.5.1.281.101.avdh.json" ".Trash/" ".ssh/" ".serverauth.36811" ".rnd" ".python_history" ".pylint.d/" ".password-store/" ".nvm/" ".npm/" ".node-gyp/" ".matplotlib/" ".local/" ".iterm2_shell_integration.bash" ".iterm2/" ".ipython/" ".inputrc" ".hfc-key-store/" ".gnupg/" ".gitmessage" ".gitignore" ".gitconfig" ".git" ".fontconfig/" ".emacs.d/" ".DS_Store" ".dotfiles/" ".docker/" ".dia-etc/" ".dia/" ".config/" ".CFUserTextEncoding" ".cache/" ".bashrc.d/" ".bashrc" ".bash_profile" ".bash_history" ".azure/" "#.emacs#" "../" "./")
+
+ ("/Users/avdh/Documents/" (22973 2825 0 0) "req.txt" "PriceScraper/" "codex1_mvp/" "AVCHD/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/" (22971 51901 0 0) "start-elk.sh" "setup_fabric_1.0.sh" "report.xml" "README.md" "query_chaincode.sh" "pull_images.sh" "peer.yml" "marbles_query.sh" "marbles_instantiate.sh" "marbles_chaincode.go" "logstash/" "kibana/" "extensions/" "elk_logspout+logstash_on_test_server/" "elk_logspout+logstash_on_demo_server/" "elk_es+kib_vm/" "elk/" "elasticsearch/" "docker-compose.yml" "deploy_chaincode_marbles.sh" "deploy_chaincode.sh" "curator/" "copy_chaincode_to_docker.sh" "codex_cedent_query.sh" "codex_cedent_instantiate.sh" "codex_cedent_deploy.sh" "codex_cedent.go" "../" "./")
+
+ ("/Users/avdh/Documents/AVCHD/" (22958 21268 0 0) "BDMV/" "../" "./")
+
+ ("/Users/avdh/Downloads/" (22970 28548 0 0) "~$Monte Carlo Script Show 1 and 2_v3.0_07092017.xlsx" "~$B3i-Alpha_Market_Beta-Tests-Deployment-v2.pptx" "witch410.dmg" "witch399.dmg" "vlc-2.2.6.dmg" "URLLink.acsm" "Uden_Lesrooster_ZOMER.pdf" "Uden_Lesrooster.pdf" "Uden_Lesrooster (1).pdf" "SquidMan3.8.dmg" "Sprint 6_Calculation Engine.xlsx" "Sprint 5_Calculation Engine (1).xlsx" "SpotifyInstaller.zip" "Slack.app/" "Slack-2.6.3-macOS.zip" "SkypeMeetingsApp.dmg" "SkypeForBusinessInstaller-16.8.0.196.pkg" "Skype_7.56.776.dmg" "R3_ChainThat.png" "Products_by_Benefit_Level.xlsx" "Products_by_Benefit_Level (1).xlsx" "Photos.zip" "Photos (1).zip" "Photos (1)/" "Pasted image at 2017_09_05 04_27 PM.png" "ORG_DSC00253.JPG" "order54824251.pdf" "order54824251 (1).pdf" "Monte Carlo Script Show 1 and 2_v3.0_07092017.xlsx" "Monte Carlo Event Prep update Aug28.pptx" "mbadolato-iTerm2-Color-Schemes-d6098c7.tar.gz" "machu_pichu.jpg" "lossevent.html" "lossevent (3).html" "lossevent (2).html" "lossevent (1).html" "LFP074.mp3" "kobosetup.dmg" "iTerm2-3_0_15.zip" "iTerm.app/" "introduction to reinsurance - Mapfre Re.pdf" "installgoogledrive.dmg" "Install Spotify.app/" "Image uploaded from iOS.jpg" "Image uploaded from iOS (2).jpg" "Image uploaded from iOS (1).jpg" "HSBN_architecture_nonConfindential.pptx" "HSBN_architecture_nonConfindential (2).pptx" "HSBN_architecture_nonConfindential (1).pptx" "googlechrome.dmg" "gnupg-2.1.21.tar.bz2" "get-pip.py" "Firefox 55.0.3.dmg" "export.json" "export (1).json" "Emacs-25.2-universal.dmg" "elk_stack/" "elasticsearch-curator-5.2.0.tar.gz" "elasticsearch-curator-5.2.0/" "Draft version B3i Architecture Document.docx" "draaiboek workshop blockchain 13-15 september tb Andre van der Heijden.docx" "Docker.dmg" "Dia-0.97.2-7.dmg" "Critic.gdoc" "crawlera-ca.crt" "Compas 2017.pdf" "code.gs" "chromedriver_mac64.zip" "chromedriver" "Calendar_023.ics" "broker-demo2-logs.zip" "broker-demo2-logs/" "Boeking_00544983.pdf" "boarding-pass.pdf" "boarding-pass (1).pdf" "Blockchain Tech_files/" "Blockchain Tech.htm" "Blockchain expert Opleidingsplan.docx" "Blockchain expert Opleidingsplan (1).docx" "bigchaindb-whitepaper.pdf" "b3iMC_demo-2017-09-07_16.19.09.mkv" "B3i_MC_Technical_FAQ.xlsx" "B3i_MC_Technical_FAQ (1).xlsx" "B3i_MC_FAQs_Combined.xlsx" "B3i_MC Panel Q&A draft 20180816.xlsx" "B3i_MC FAQs v02 20170821 ACHMEA SPECIFIC.xlsx" "B3i_MC FAQs v0.1.xlsx" "B3i_MC FAQs v0.1 (1).xlsx" "B3i_MC FAQs v0 (versie achmea draft) 20170817.xlsx" "b3i_market_Testing_technicalTeam_summary.docx" "B3i_Bootcamp_Notes/" "b3i_Arch_workshop_discussion_base.pdf" "B3i.png" "B3i-Alpha_Market_Beta-Tests-Deployment-v2.pptx" "B3i-Alpha_Market_Beta-Tests-Deployment-v2 (1).pptx" "B3i Workshop Questionnaire - Responses 210113-3-17658 v1.1-B3i review.pptx" "B3i keyFAQs_ Version Monte Carlo.pdf" "B3i Documentary_Status on 01.09.2017_Shared with MCOC.xlsx" "B3i Documentary_Status on 01.09.2017_Shared with MCOC (1).xlsx" "B3i 2017 Testing Standup Call 22082017.pptx" "azure-cli-0.10.15.dmg" "Andre van der Heijden.witchlicense" "Andre van der Heijden (1).witchlicense" "Agenda_B3i_Bootcamp final.pptx" "Agenda Architecture Workshop.pdf" "Agenda Architecture Workshop (1).pdf" "achmea-reinsurance-company-nv-2016-def-ongetekend.pdf" "A3_BOOKLET_BLOCKCHAIN_1stDraft.pptx" "A3_BOOKLET_BLOCKCHAIN_1stDraft (1).pptx" "9789000344680_fragm.pdf" "656654.pdf" "20203.pdf" "20170913_213906.jpg" "20170913_121225.jpg" "20170913_121225 (1).jpg" "20170828 CC IP Audit Sheet 210113-3-17671 v0.4 (3) Achmea.xlsx" "20170809 jtb B3i-TestingAgreement-for final distribution.pdf" "20170724_172829.jpg" "20170720_164608.jpg" "20170720_162912.jpg" "20141202_085403.jpg" "1504689307080_TDPublish.vcs" "1499327142_00001-factuur_u_familie.pdf" ".localized" ".DS_Store" "-demo-demo2cedent- docker.name.keyword- Descending.csv" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/extensions/logspout/" (22967 60563 0 0) "modules.go" "logspout-compose.yml" "Dockerfile" "build.sh" "../" "./")
+
+ ("/Users/avdh/Google Drive/ORG-Documents/" (22967 61951 0 0) "travel.org_imgs/" "travel.org" "travel.html" "theme-readtheorg.setup" "theme-bigblow.setup" "settingup_4th_reinsurer.org_imgs/" "settingup_4th_reinsurer.org" "settingup_4th_reinsurer.html" "roadtrip_usa.org_imgs/" "roadtrip_usa.org" "roadtrip_usa.html" "planning_december.org_imgs/" "planning_december.org" "planning_december.html" "planning.org" "piano_songs.org" "orgcard.txt" "kerstgedicht.org" "kerstgedicht.html" "huizen_kijken.org_imgs/" "huizen_kijken.org" "huizen_kijken.html" "eur.org" "eur/" "boodschappen_recepten.tex" "boodschappen_recepten.org_imgs/" "boodschappen_recepten.org" "boodschappen_recepten.log" "boodschappen_recepten.html.gdoc" "boodschappen_recepten.html" "achmea_projects.org_imgs/" "achmea_projects.org" "achmea_projects.html" "../" "./")
+
+ ("/Users/avdh/Google Drive/Projects/Blockchain/" (22970 26095 0 0) "~$ockchain_use_case_matrix.docx" "~$e_cases_eportfolio_blockchain.docx" "zurich_congress_presentations/" "use_cases_eportfolio_blockchain.docx" "use_case_trusted_diplomas_pitch.mov" "use_case_trusted_diplomas.pptx" "theme-readtheorg.setup" "theme-bigblow.setup" "the_office_permissioned_blockchain.jpg" "Synechron Blockchain Accelerators.pdf" "Swiss Re-IGR Blockchain-Handout-preRead-2016-09-15.pdf" "SecureServiceContainer-formerzACI" "resultaten_blockhainpilot_overheid.pdf" "Quorum HLP TSC presentation.mp4" "pow_vs_pos.jpg" "notes_crop_insurance.docx" "MO.BlockChain2.zip" "Legal-tech-law.png" "kpmg-blockchain-paper.pdf" "kpmg-blockchain-consensus-mechanism.pdf" "JPM_Hyperledger_QuorumIntro_20160922.pdf" "Iteratie_4_ToDo.docx" "inside_bitcon.jpg" "img/" "HSBN_SecureServiceContainer-formerzACI.pdf" "HSBN_architecture_nonConfindential.pptx" "Gavin Wood - Polkadot -  Vision For A Heterogeneous Multi-chain Framework.pdf" "FT - Insurers team up to study benefits of blockchain.pdf" "flight_delay.sol" "Financieel supplement Achmea HY2016_Final version.xlsx" "eportfolios_blockchain.org" "ePortfolio_blockchain_23_05_2017.pptx" "ePortfolio_blockchain.pptx" "ePortfolio_and_Blockchain_23_05_2017.pdf" "dutch_blockchain_whitepaper.pdf" "demo_p2pollder.mov" "Definitief Halfjaarverslag 2016 Achmea.pdf" "Data Scienstist Opleidingsplan.gdoc" "data/" "cryptography.py" "corda-technical-whitepaper.pdf" "corda-introductory-whitepaper-final.pdf" "consensus_game.docx" "coindesk_json/" "Casper_Protoclol.pdf" "blogpost_coindesk_analysis.docx" "blog_posts/" "blockchain_use_cases.org_imgs/" "blockchain_use_cases.org" "blockchain_use_case_matrix.docx" "blockchain_types_and_hybrids.pptx" "blockchain_tech.tex" "blockchain_tech.org_imgs/" "blockchain_tech.org" "blockchain_tech.md" "blockchain_tech.html" "blockchain_reinforcement.docx" "blockchain_node/" "blockchain_hackathon/" "blockchain_for_business.pptx" "blockchain_for_business.pdf" "blockchain_crop_insurance.org" "blockchain_benefits_and_use_cases.pptx" "blockchain_basics_achmea.pptx" "Blockchain-Usecases-and-Startups.png" "Blockchain expert Opleidingsplan.gdoc" "Blockchain Architectuur - Iteratie II.vsd" "bitcon_payment.jpg" "b3i_update_mt.pptx" "b3i_update_kodw_juni.pptx" "b3i_promo_sheet_avdh.pptx" "b3i_promo_sheet_avdh.pdf" "b3i_feedback.docx" "B3i_Bootcamp_Schedule.pptx" "b3i.org_imgs/" "b3i.org" "b3i.html" "B3i RfP technical questions.xlsx" "B3i RfP FINAL.docx" "archictecture_workshop.org_imgs/" "20170127 B3i Key Dates.xlsx" "20170106 - Statusupdate B3i.pptx" "20170106 - Statusupdate B3i (1).pptx" "20161201 - Innovatie update.pptx" "20161128 - Demo Blockchain Social Insurance Iteratie 4 goede template.pptx" "20161111 - B3i - Smart Contract Templates roadmap.pdf" "20160907 - Demo iteratie 3.pptx" "20160907 - Blockchain Agile TV.pptx" "20160105 Blockchain Demo.pptx" "160915 Blockchain insurance Business Plan Summary v0.7.docx" "../" "./")
+
+ ("/Users/avdh/Google Drive/Personal/Recepten/" (22951 63511 0 0) "Wijn.xlsx" "Wijn.gsheet" "Wijn (9).gsheet" "Wijn (8).gsheet" "Wijn (7).gsheet" "Wijn (6).gsheet" "Wijn (5).gsheet" "Wijn (4).gsheet" "Wijn (3).gsheet" "Wijn (2).gsheet" "Wijn (1).gsheet" "Paleo Spaghetti.gdoc" "Paleo Spaghetti.docx" "Paleo Spaghetti (9).gdoc" "Paleo Spaghetti (8).gdoc" "Paleo Spaghetti (7).gdoc" "Paleo Spaghetti (6).gdoc" "Paleo Spaghetti (5).gdoc" "Paleo Spaghetti (4).gdoc" "Paleo Spaghetti (3).gdoc" "Paleo Spaghetti (2).gdoc" "Paleo Spaghetti (1).gdoc" "Makreelsalade.gdoc" "Makreelsalade.docx" "Makreelsalade (9).gdoc" "Makreelsalade (8).gdoc" "Makreelsalade (7).gdoc" "Makreelsalade (6).gdoc" "Makreelsalade (5).gdoc" "Makreelsalade (4).gdoc" "Makreelsalade (3).gdoc" "Makreelsalade (2).gdoc" "Makreelsalade (1).gdoc" "Boodschappen.gdoc" "../" "./")
+
+ ("/Users/avdh/Google Drive/Personal/" (22948 8141 0 0) "Zerha/" "Travel & Events/" "Sport/" "Shopping/" "SAP BW + HANA/" "Recepten/" "Prive/" "org-html-themes/" "Music Production/" "maps/" "Ergonomics/" "config/" "Carreer/" "Administratie/" "3D Printing/" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Google Drive/" (22967 37515 0 0) "Projects/" "Personal/" "ORG-Documents/" "Icon
+" "Downloads/" "Backup/" "B3i Architecture Workshop.gform" "B3i Architecture Workshop (Responses).gsheet" ".tmp.drivedownload/" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/doc/whitepaper/" (22967 60563 0 0) "styles/" "stateMachine.tex" "paperB3iCodex1clean.tex.latexmain" "paperB3iCodex1clean.tex" "listings-golang.sty" "introBlochainFabric.tex" "b3icodex1.tex" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/elasticsearch/config/" (22962 45068 0 0) "last_error_timestamp.py" "elasticsearch.yml" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/elasticsearch/" (22959 53528 0 0) "Dockerfile" "config/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/curator/" (22966 53027 0 0) "start_curator.sh" "Dockerfile" "curator.yml" "action.yml" ".#action.yml" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/" (22966 40389 0 0) "start-elk.sh" "kibana/" "elasticsearch/" "docker-compose.yml" "curator/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_es+kib_vm/curator/" (22966 53099 0 0) "start_curator.sh" "Dockerfile" "curator.yml" "action.yml" "../" "./")
+
+ ("/Users/avdh/.vagrant.d/" (22966 40103 0 0) "tmp/" "setup_version" "rgloader/" "insecure_private_key.pub" "insecure_private_key" "gems/" "data/" "boxes/" "../" "./")
+
+ ("/Users/avdh/Documents/PriceScraper/other_scraping_jobs/" (22961 23521 0 0) "vgz_to_excel.py" "vgz_tariffs.pkl" "vgz_locations.pkl" "vgz_hospitals.pkl" "vgz_api.py" "scrape_vgz.py" "scrape_unive.py" "run_get_html_menzis.py" "proxy_https_research.py" "proxy_desired_cap_test.py" "menzis_to_excel.py" "menzis_api.py" "html_hdn.html" "hdn_test_hypotheek_scraper.py" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/" (22959 53528 0 0) "vendor/" "utils/" "testutils.go" "statemachine/" "models/" "modelHelpers/" "metadata_test.go" "main.test" "invokeClauses_test.go" "invoke/" "events_test.go" "cover.out" "contracts_test.go" "cedentEvent_test.go" "calculations_test.go" "calculations/" "b3iCodex1_test.go" "b3iCodex1.go" "b3iCodex1" "activeState_test.go" ".gitignore" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/logstash/debug_config/" (22959 53528 0 0) "logstash.yml" "debug_pipeline_ruby.conf" "debug_pipeline.conf" "debug_log.json" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/logstash/pipeline/" (22959 53528 0 0) "logstash.conf" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/extensions/logspout/" (22959 53528 0 0) "modules.go" "logspout-compose.yml" "Dockerfile" "build.sh" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/ignorant/" (22959 51615 0 0) "test_logstash_output.json" "print_mockstub.go" "lossevent.pdf" "lossevent.org" "lossevent.html" "check_brokerage_0.json" "broker-demo2-logs/" "archictecture_workshop.org_imgs/" "archictecture_workshop.org" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/statemachine/" (22959 53528 0 0) "statemachine.test" "finiteStateMachineClaim_test.go" "finiteStateMachineClaim.go" "finiteStateMachine_test.go" "finiteStateMachine.go" "callbacksSENDClaim.go" "callbacksSEND.go" "callbacksRECV.go" "callbackHelpersClaim.go" "callbackHelpers.go" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/pipeline/" (22959 55232 0 0) "logstash.conf" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/config/" (22959 53528 0 0) "logstash.yml" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/logstash/" (22959 53528 0 0) "pipeline/" "logstash/" "Dockerfile" "debug_config/" "config/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/" (22959 53528 0 0) "start-elk.sh" "logstash/" "extensions/" "docker-compose.yml" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/calculations/" (22959 50871 0 0) "calculations_events.go" "calculations.go" ".#calculations.go" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/" (22959 49930 0 0) "yarn.lock" "typings.json" "tsoa.json" "tsoa-generate-go.json" "tsconfig.json" "swagger.json" "swagger-ui/" "start_server.sh" "src/" "SpecRunner.html" "server.js" "readme.md" "package.json" "noenv" "node_modules/" "gulpfile.js" "gulp.config.js" "generate-go/" "envDemoReinsurer2" "envDemoReinsurer" "envDemoCedent" "envDemoBroker" "dist/" "deploy.sh" ".vscode/" ".nvmrc" ".gitignore" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/" (22959 49930 0 0) "utils/" "test/" "stub-data/" "setup/" "service-agents/" "routes.ts" "models/" "controllers/" "config/" "app.ts" "app-generate-go.ts" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/" (22958 47470 0 0) "temp_backup/" "run_bash_on_docker.sh" "remove_chaincode.sh" "multinode-setup/" "load_single_test_contract.sh" "load_and_ctr_lifecycle.rb" "lifecycle_log.log" "initial_load_with_data.sh" "initial_load_demo2.sh" "initial_load_clauses.sh" "init_fabric_and_deploy.sh" "fabric_on_ubuntu/" "docker_setup/" "data/" "contract_lossevent.sh" "contract_lifecycle_multinode.sh" "contract_lifecycle.sh" "contract_cedent_cancel.sh" "codex_cedent_upgrade.sh" "codex_cedent_invoke.sh" "b3i-setup/" ".gitignore" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/" (22940 7739 0 0) "web/" "test/" "secrets/" "scripts/" "README.md" "ignorant/" "go/" "doc/" "config/" "ci/" "build.sh" ".gitmodules" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/" (22883 8977 0 0) "src/" "pkg/" "bin/" ".cache/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/extensions/" (22958 44142 0 0) "README.md" "logspout/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/github.com/hyperledger/fabric/core/" (22887 22502 0 0) "testutil/" "scc/" "policyprovider/" "policy/" "peer/" "mocks/" "ledger/" "fsm_test.go" "fsm.go" "endorser/" "deliverservice/" "container/" "config/" "common/" "committer/" "comm/" "chaincode/" "admin_test.go" "admin.go" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/github.com/hyperledger/fabric/core/chaincode/" (22956 63312 0 0) "upgrade_test.go" "testdata/" "systemchaincode_test.go" "shim/" "platforms/" "multichains_test.go" "handler.go" "exectransaction_test.go" "exectransaction.go" "concurrency_test.go" "chaincodetest.yaml" "chaincodeexec.go" "chaincode_support_test.go" "chaincode_support.go" "chaincode.test" "ccproviderimpl.go" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/github.com/hyperledger/fabric/core/chaincode/shim/" (22959 42209 0 0) "shim_test.go" "shim.test" "response.go" "mockstub_test.go" "mockstub.go" "java/" "interfaces.go" "inprocstream.go" "handler.go" "chaincode.go" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elk_logspout+logstash_on_server/extensions/" (22958 39932 0 0) "README.md" "logspout/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/elasticsearch/" (22958 39685 0 0) "Dockerfile" "config/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/docker_setup/extensions/curator/" (22958 35466 0 0) "../" "./")
+
+ ("/Users/avdh/Google Drive/Backup/" (22948 8208 0 0) "WhatsApp Images t:m 16-04-2017/" "Camera t:m 16-04-2017/" "Andre van der Heijden.witchlicense" ".DS_Store" ".bash_history" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/invoke/" (22957 15654 0 0) "worldState_test.go" "worldState.go" "invokeOrganizations.go" "invokeMetadata.go" "invokeContractSectionClaim.go" "invokeClauses.go" "invokeCedentLossEvent.go" "invoke_test.go" "invoke.test" "invoke.go" "eventInvoke.go" "contractSectionInvoke.go" "contractInvoke.go" "bla.org_imgs/" "../" "./")
+
+ ("/Users/avdh/.ssh/" (22953 5256 0 0) "known_hosts" "id_rsa_backup" "id_rsa.pub" "id_rsa" "config" "../" "./")
+
+ ("/usr/local/bin/" (22956 60911 0 0) "yarnpkg" "yarn" "xzmore" "xzless" "xzgrep" "xzfgrep" "xzegrep" "xzdiff" "xzdec" "xzcmp" "xzcat" "xz" "wheel3" "watchgnupg" "vpnkit" "virtualenvwrapper_lazy.sh" "virtualenvwrapper.sh" "virtualenv-clone" "virtualenv" "VirtualBox" "vboxwebsrv" "VBoxVRDP" "VBoxManage" "VBoxHeadless" "VBoxDTrace" "VBoxBugReport" "VBoxBalloonCtrl" "VBoxAutostart" "vbox-img" "vagrant" "unxz" "unlzma" "tree" "symilar" "symcryptrun" "srptool" "sexp-conv" "qrencode" "pyvenv-3.6" "pyvenv" "python3.6m-config" "python3.6m" "python3.6-config" "python3.6" "python3-config" "python3" "pyreverse" "pylint" "pygmentize" "pydoc3.6" "pydoc3" "psktool" "polipo" "pngfix" "png-fix-itxt" "pkcs1-conv" "pip3.6" "pip3" "pinentry-curses" "pinentry" "pep8" "pcretest" "pcregrep" "pcre-config" "pbr" "pass" "p11tool" "p11-kit" "onig-config" "ocsptool" "npth-config" "npm" "notary" "node" "nettle-pbkdf2" "nettle-lfib-stream" "nettle-hash" "mpicalc" "lzmore" "lzmainfo" "lzmadec" "lzma" "lzless" "lzgrep" "lzfgrep" "lzegrep" "lzdiff" "lzcmp" "lzcat" "libpng16-config" "libpng-config" "libgcrypt-config" "libassuan-config" "ksba-config" "kbxutil" "jq" "isort" "ipython3" "ipython" "iptest3" "iptest" "idle3.6" "idle3" "hyperkit" "htop" "hmac256" "gpgv2" "gpgv" "gpgtar" "gpgsm" "gpgscm" "gpgparsemail" "gpgconf" "gpg2" "gpg-error-config" "gpg-error" "gpg-connect-agent" "gpg-agent" "gpg" "gnutls-serv" "gnutls-cli-debug" "gnutls-cli" "gnutls-certtool" "glibtoolize" "glibtool" "gitk" "git-upload-pack" "git-shell" "git-cvsserver" "git-credential-osxkeychain" "git" "gdbmtool" "gdbm_load" "gdbm_dump" "epylint" "easy_install-3.6" "dumpsexp" "docker-machine" "docker-credential-osxkeychain" "docker-compose" "docker" "dirmngr-client" "dirmngr" "chromedriver" "brew" "asn1Parser" "asn1Decoding" "asn1Coding" "applygnupgdefaults" "ag" "adnsresfilter" "adnslogres" "adnshost" "adnsheloex" "addgnupghome" "2to3-3.6" "../" "./")
+
+ ("/Users/avdh/Documents/PriceScraper/" (22950 33671 0 0) "unive_html_to_db.py" "toolkit.py" "tool_select_and_execute.py" "temp/" "scrape_with_driver.py" "README.org" "README.md" "pricescraper.py" "parse_prices_to_db_unive.py" "parse_prices_to_db.py" "other_scraping_jobs/" "misc_methods.py" "list_html_files.py" "GEN_SCRAPER_DB.db" "error_printscreens/" "error_logging.py" "data_preparation.py" "data/" "crawlera-ca.crt" "business/" ".gitignore" ".git/" "../" "./")
+
+ ("/usr/local/squid/etc/" (22950 40328 0 0) "squid.conf.documented" "squid.conf.default" "squid.conf" "mime.conf.default" "mime.conf" "errorpage.css.default" "errorpage.css" "cachemgr.conf.default" "cachemgr.conf" "../" "./")
+
+ ("/Users/avdh/.dotfiles/" (22957 26803 0 0) "Xmodmap" "xbindkeysrc" "wallpaper/" "urlview" "ssh-config" "sbclrc" "rubocop.yml" "rspec" "README.md" "python3_packages_list.txt" "newsbeuter-config" "mutt/" "msmtprc" "mbsyncrc" "install_notmuch_mail.org" "install.sh" "i3status.conf" "i3/" "gitmessage" "gitignore" "gitconfig" "git_template/" "emacs.d_backup/" "emacs.d/" "com.googlecode.iterm2.plist" "Brewfile" "bin/" "bashrc.d/" "bashrc.backup" "bashrc" "backup_package_ls.sh" "authinfo.gpg" ".inputrc" ".gitignore" ".git/" ".emacs.d/" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/models/" (22947 56942 0 0) "worldstate.model.ts" "user.model.ts" "go-role-wrapper.model.ts" "field-payment-direction.model.ts" "exchange-rates.model.ts" "enums/" "acord/" "accounting/" "account.model.ts" "account.client.model.ts" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/dist/models/acord/" (22957 22094 0 0) "reinsurer.model.js.map" "reinsurer.model.js" "program.model.js.map" "program.model.js" "party.model.js.map" "party.model.js" "loss-event.model.js.map" "loss-event.model.js" "loss-event-contract-section-id.model.js.map" "loss-event-contract-section-id.model.js" "insured-object.model.js.map" "insured-object.model.js" "enums/" "custom-transaction-details.model.js.map" "custom-transaction-details.model.js" "custom-financial-details.model.js.map" "custom-financial-details.model.js" "contract.model.js.map" "contract.model.js" "contract-section.model.js.map" "contract-section.model.js" "contract-section-claim.model.js.map" "contract-section-claim.model.js" "contract-reinstatement.model.js.map" "contract-reinstatement.model.js" "contract-premium.model.js.map" "contract-premium.model.js" "contract-market.model.js.map" "contract-market.model.js" "contract-exposure-base-premium.model.js.map" "contract-exposure-base-premium.model.js" "contract-clause.model.js.map" "contract-clause.model.js" "contract-brokerage.model.js.map" "contract-brokerage.model.js" "contact.model.js.map" "contact.model.js" "cedent.model.js.map" "cedent.model.js" "cedent-loss-event.model.js.map" "cedent-loss-event.model.js" "broker.model.js.map" "broker.model.js" "be.loss-event.js.map" "be.loss-event.js" "be.contract-section-claim.model.js.map" "be.contract-section-claim.model.js" "amount.model.js.map" "amount.model.js" "address.model.js.map" "address.model.js" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/generate-go/" (22950 44778 0 0) "swagger.json" "swagger-go-generator/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/models/acord/" (22950 44778 0 0) "reinsurer.model.ts" "README.md" "program.model.ts" "party.model.ts" "loss-event.model.ts" "loss-event-contract-section-id.model.ts" "insured-object.model.ts" "enums/" "custom-transaction-details.model.ts" "custom-financial-details.model.ts" "contract.model.ts" "contract-section.model.ts" "contract-section-claim.model.ts" "contract-reinstatement.model.ts" "contract-premium.model.ts" "contract-market.model.ts" "contract-exposure-base-premium.model.ts" "contract-clause.model.ts" "contract-brokerage.model.ts" "Contract-3d-visualization.jpg" "contact.model.ts" "cedent.model.ts" "cedent-loss-event.model.ts" "broker.model.ts" "be.loss-event.ts" "be.contract-section-claim.model.ts" "amount.model.ts" "address.model.ts" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/go/src/b3iCodex1/models/" (22950 44778 0 0) "sanitizer.go" "reinsurerOrganizationImpl.go" "reinsurer.model.go" "pkgreflect.go" "party.model.go" "organization.go" "lossEventStateKeyImpl.go" "lossEventMessage.go" "loss-event.model.go" "loss-event-contract-section-id.model.go" "legacyLossEventStateKeyImpl.go" "insured-object.model.go" "go-role-wrapper.model.go" "fieldPaymentDirectStateKeyImpl.go" "field-payment-direct.model.go" "exchangeRatesStateKeyImpl.go" "exchange-rates.model.go" "enums.go" "custom-transaction-details.model.go" "custom-financial-details.model.go" "contractStateKeyImpl.go" "contractSectionStateKeyImpl.go" "contractSectionClaimStateKeyImpl.go" "contractSectionClaimMessage.go" "contractMessage.go" "contractClauseStateKeyImpl.go" "contract.model.go" "contract-section.model.go" "contract-section-claim.model.go" "contract-reinstatement.model.go" "contract-premium.model.go" "contract-market.model.go" "contract-exposure-base-premium.model.go" "contract-clause.model.go" "contract-brokerage.model.go" "contact.model.go" "cedentOrganizationImpl.go" "cedentLossEventStateKeyImpl.go" "cedent.model.go" "cedent-loss-event.model.go" "brokerOrganizationImpl.go" "broker.model.go" "be-loss-event.model.go" "be-contract-section-claim.model.go" "amount.model.go" "address.model.go" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/doc/architecture/contractLifecycle/" (22938 56210 0 0) "stateMachine.tex" "stateMachine.svg" "stateMachine.png" "stateMachine.pdf" "README.md" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/" (22950 44774 0 0) "Vagrantfile" "ubuntu-xenial-16.04-cloudimg-console.log" "ssh_key/" "README.md" "provision.sh" "orderer.yaml" "log_prov.txt" "go.sh" "docker_machine_setup_on_host.sh" ".vagrant/" ".bashrc" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/b3i-setup/" (22957 15580 0 0) "test_docker.log" "shared.block" "setupPeers.sh" "setupPeers-tmux.sh" "setup_toolkit.sh" "reinsurere2_messenger_docker.log" "privatedemoreinsurer2.block" "privatedemoreinsurer.block" "privateDemoCedent.block" "privatedemobroker.block" "messaging.block" "mat/" "logs/" "genCertsForOrg.sh" "docker_logs_output.sh" "createDockerComposeFile.sh" "cli_upgrade_mainCC.sh" "cli_instantiate_mainCC_on_messaging.sh" "cli_export_env_variables.sh" "cli_configtxgen.sh" "cli_channels_and_chaincode.sh" "cleanup.sh" "ccinvoke.sh" "broker_messenger_docker.log" "b3icodex1shared.cc" "b3icodex1pvt.cc" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/b3i-setup/logs/" (22938 64247 0 0) "reinsurere2_messenger_docker.log" "dev-demoreinsurer2-messenger-0.log" "dev-demoreinsurer2-b3icodex1shared-1.log" "dev-demoreinsurer2-b3icodex1pvt-1.log" "dev-demoreinsurer-messenger-0.log" "dev-demoreinsurer-b3icodex1shared-1.log" "dev-demoreinsurer-b3icodex1pvt-1.log" "dev-democedent-messenger-0.log" "dev-democedent-b3icodex1shared-1.log" "dev-democedent-b3icodex1pvt-1.log" "dev-demobroker-messenger-0.log" "dev-demobroker-b3icodex1shared-1.log" "dev-demobroker-b3icodex1pvt-1.log" "containers.log" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/docker-elk/" (22915 9337 0 0) "README.md" "logstash/" "LICENSE" "kibana/" "extensions/" "elasticsearch/" "docker-compose.yml" ".gitattributes" ".git/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/docker-elk/logstash/config/" (22916 11290 0 0) "logstash.yml" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/data/" (22913 34709 0 0) "testStandardClauses.json" "testReinsurers.json" "testLossEvents.json" "testContractSingle.json" "testContractsDemo3.json" "testContractsDemo2.json" "testContracts.json" "testContract4Loss.json" "testClauses.json" "testCedents.json" "testCalculationAssertions.json" "testBrokers.json" "testAccounts.json" "lossEventTestContract.json" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/machines/default/virtualbox/" (22913 55631 0 0) "vagrant_cwd" "synced_folders" "private_key" "index_uuid" "id" "creator_uid" "action_set_name" "action_provision" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/machines/default/" (22885 13587 0 0) "virtualbox/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/machines/" (22885 13587 0 0) "default/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/scripts/fabric_on_ubuntu/.vagrant/" (22885 13587 0 0) "machines/" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/client/" (22901 58659 0 0) "yarn.lock" "tslint.json" "tsconfig.json" "src/" "router-tabs.component.ts" "readme.md" "protractor.conf.js" "package.json" "node_modules/" "karma.conf.js" "gulpfile.js" "gulp.config.js" "e2e/" "build/" ".vscode/" ".gitignore" ".editorconfig" ".angular-cli.json" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/service-agents/" (22910 61473 0 0) "fabric.service-worldstate.ts" "fabric.service-transaction.ts" "fabric.service-standard-clauses.ts" "fabric.service-reinsurer.ts" "fabric.service-masterdata-metadata.ts" "fabric.service-lossEvent.ts" "fabric.service-exchange-rate.ts" "fabric.service-contract.ts" "fabric.service-contract-section.ts" "fabric.service-contract-clauses-agent.ts" "fabric.service-cedentLossEvent.ts" "fabric.service-cedent.ts" "fabric.service-broker.ts" "fabric.service-beLossEvent.ts" "fabric.service-beContractSectionClaim.ts" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/dist/" (22888 29736 0 0) "utils/" "test/" "stub-data/" "setup/" "service-agents/" "routes.js.map" "routes.js" "models/" "controllers/" "config/" "app.js.map" "app.js" "app-generate-go.js.map" "app-generate-go.js" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/dist/service-agents/" (22912 25751 0 0) "fabric.service-worldstate.js.map" "fabric.service-worldstate.js" "fabric.service-transaction.js.map" "fabric.service-transaction.js" "fabric.service-standard-clauses.js.map" "fabric.service-standard-clauses.js" "fabric.service-reinsurer.js.map" "fabric.service-reinsurer.js" "fabric.service-masterdata-metadata.js.map" "fabric.service-masterdata-metadata.js" "fabric.service-lossEvent.js.map" "fabric.service-lossEvent.js" "fabric.service-exchange-rate.js.map" "fabric.service-exchange-rate.js" "fabric.service-contract.js.map" "fabric.service-contract.js" "fabric.service-contract-section.js.map" "fabric.service-contract-section.js" "fabric.service-contract-clauses-agent.js.map" "fabric.service-contract-clauses-agent.js" "fabric.service-cedent.js.map" "fabric.service-cedent.js" "fabric.service-broker.js.map" "fabric.service-broker.js" ".#fabric.service-contract-section.js" "../" "./")
+
+ ("/Users/avdh/.emacs.d/Navi-empty/" (22888 45967 0 0) "empty.py" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/doc/architecture/" (22901 58659 0 0) "security.md" "readme.md" "howToStoreAndRetrieveState.md" "fabric.md" "encryption.md" "data_model.dia" "ContractSectionState.png" "ContractSectionState.dia" "contractLifecycleS4.pdf" "contractLifecycle.dot.png" "contractLifecycle.dot.pdf" "contractLifecycle.dot" "contractLifecycle/" "api_and_integration.md" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/doc/" (22912 18788 0 0) "ui/" "REST-APIs/" "readme.md" "qa/" "orga/" "logo_3d/" "guidelines/" "devops/" "demo/" "data/" "b3iLogo_small.png" "b3iLogo.png" "b3i_logo.svg" "architecture/" "Administrate_user_and_passwords.md" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Google Drive/Reference/org-html-themes/setup/" (22888 47628 0 0) "theme-readtheorg.setup" "theme-readtheorg-local.setup" "theme-bigblow.setup" "theme-bigblow-local.setup" "../" "./")
+
+ ("/Users/avdh/Google Drive/Reference/org-html-themes/" (22888 47085 0 0) "styles/" "setup/" "readtheorg.png" "README.org" "README.html" "demo/" "bigblow.png" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/avdh/Google Drive/Reference/" (22888 47510 0 0) "Zerha/" "Travel & Events/" "Sport/" "Shopping/" "SAP BW + HANA/" "Recepten/" "Prive/" "org-html-themes/" "Music Production/" "maps/" "Ergonomics/" "config/" "Carreer/" "Administratie/" "3D Printing/" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Google Drive/Projects/" (22888 45728 0 0) "Web Scraping/" "WarehouseScience/" "Uilen/" "Spaans Leren/" "Schrijven/" "Reizen/" "Potmetnoten.nl/" "P2Politics/" "NewsTrend.nl/" "Image Recognition/" "Flipside/" "EUR/" "Chatbot/" "Blockchain/" "B3i/" "Apps/" "Analytics_Marketplace/" "Achmea/" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Documents/org-html-themes/setup/" (22888 47407 0 0) "theme-readtheorg.setup" "theme-readtheorg-local.setup" "theme-bigblow.setup" "theme-bigblow-local.setup" "../" "./")
+
+ ("/Users/avdh/Documents/org-html-themes/styles/" (22888 47085 0 0) "readtheorg/" "lib/" "bigblow/" "../" "./")
+
+ ("/Users/avdh/Documents/org-html-themes/" (22888 47085 0 0) "styles/" "setup/" "readtheorg.png" "README.org" "README.html" "demo/" "bigblow.png" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/avdh/Google Drive/Documentation/" (22888 47144 0 0) "travel.org_imgs/" "travel.org" "travel.html" "theme-readtheorg.setup" "theme-bigblow.setup" "settingup_4th_reinsurer.org_imgs/" "settingup_4th_reinsurer.org" "settingup_4th_reinsurer.html" "roadtrip_usa.org_imgs/" "roadtrip_usa.org" "roadtrip_usa.html" "planning_december.org_imgs/" "planning_december.org" "planning_december.html" "planning.org" "piano_songs.org" "orgcard.txt" "kerstgedicht.org" "kerstgedicht.html" "huizen_kijken.org_imgs/" "huizen_kijken.org" "huizen_kijken.html" "eur.org" "eur/" "boodschappen_recepten.tex" "boodschappen_recepten.org_imgs/" "boodschappen_recepten.org" "boodschappen_recepten.log" "boodschappen_recepten.html" "achmea_projects.org_imgs/" "achmea_projects.org" "achmea_projects.html" "../" "./")
+
+ ("/Users/avdh/Google Drive/Projects/Flipside/" (22882 29800 0 0) "~$vies_flipside_sitemap.docx" "~$temap_Adviezen_Flipside.docx" "~$ipside_SEO_onderzoek_Singlereizen.docx" "~$ipside_SEO_onderzoek_Deel_II.docx" "~$ipside_SEO_onderzoek.docx" "~$ipside_SEO.docx" "Sitemap_Flipside.docx" "Sitemap_Adviezen_Flipside.docx" "Sitemap, menubalk en feedback André.docx" "SEO_Advies_go-flipside.com.docx" "Overleg_Flipside.docx" "Overleg_Flipsdie.docx" "keyword_analysis.xlsx" "Keyword Planner 2017-03-19 at 22:12:35.gsheet" "Keyword Planner 2017-03-19 at 22:05:33.gsheet" "Keyword Planner 2017-03-19 at 16:15:41.gsheet" "Flipside_SEO_onderzoek_Singlereizen.docx" "Flipside_SEO_onderzoek_Deel_II.docx" "Flipside_SEO_onderzoek.docx" "Flipside_SEO_Analyse.xlsx" "Flipside_SEO.docx" "flipside.org" "flipside.html" "blockchain_reinforcement.docx" "advies_flipside_sitemap.docx" "201704001_factuur_flipside.docx" "../" "./")
+
+ ("/Users/avdh/Google Drive/Projects/B3i/" (22885 61788 0 0) "Sprint 6_Calculation Engine.xlsx.gsheet" "Sprint 6_Calculation Engine.xlsx" "Sprint 5_Calculation Engine.xlsx.gsheet" "Sprint 5_Calculation Engine.xlsx" ".DS_Store" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/controllers/" (22887 37076 0 0) "worldstate.controller.ts" "transaction.controller.ts" "stub-data.controller.ts" "section.controller.ts" "masterData.controller.ts" "loss-events.controller.ts" "loss-event.controller.ts" "loss-event.client.controller..ts" "generate-go.controller.ts" "exchange-rate.controller.ts" "contracts.controller.ts" "contract.controller.ts" "clauses.controller.ts" "auth.controller.ts" "accounting.controller.ts" "../" "./")
+
+ ("/Users/avdh/Documents/codex1_mvp/web/server/src/utils/fabric/" (22887 22257 0 0) "query-chaincode.ts" "invoke-chaincode.ts" "common.ts" "../" "./")
+
+ ("/Users/avdh/.emacs.d/packages/discover-20140103.1339/" (22887 47904 0 0) "discover.elc" "discover.el" "discover-pkg.el" "discover-autoloads.el" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

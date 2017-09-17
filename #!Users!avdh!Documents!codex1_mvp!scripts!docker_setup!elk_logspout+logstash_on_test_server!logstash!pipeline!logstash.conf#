@@ -1,0 +1,93 @@
+input {
+	tcp {
+		port => 5001
+	}
+    udp {
+        port  => 5001
+        codec => json
+    }
+}
+
+filter {
+if [docker][name] =~ "test" {
+  mutate {
+     # Copy of original message.
+     copy               => { "message" => "message_original" }
+     }
+
+  mutate {
+     # Get rid of terminal color scheme codings, and use one as seperator :-)
+     gsub               => [ "message", "\u001b\[36m", "",
+                             "message", "\u001b\[31m", "",      
+                             "message", "\u001b\[0m", "||" ]   
+     copy               => { "message" => "message_cleanedup" }
+     }
+
+  mutate {
+     # Split message field and save it in two seperate fields for further processing on message_firstpart.
+     split              => { "message" => "||" }
+     add_field          => { "message_firstpart" => "%{message[0]}"}
+     add_field          => { "message_content" => "%{message[1]}"}
+}
+
+  mutate {
+     # Split message_firstpart, and save the timestamp in an added field.
+     split              => { "message_firstpart" => "[" }
+     add_field          => { "message_timestamp" => "%{message_firstpart[0]}"}
+     # Save the rest in temp_field for further splitting.
+     add_field          => { "temp_field" => "%{message_firstpart[1]}"}
+     }
+
+mutate {
+     # Split this temp_field to get the second part, the area.
+     split              => { "temp_field" => "]" }
+     add_field          => {"area" => "%{temp_field[0]}"}
+     }
+
+
+mutate {
+     replace            => {"temp_field" => "%{temp_field[1]}"}
+     # Split this temp_field to get the second part, the area.
+     split              => { "temp_field" => "->" }
+     add_field          => {"action" => "%{temp_field[0]}"}
+     }
+
+mutate {
+     replace            => {"temp_field" => "%{temp_field[1]}"}
+     # Split this temp_field to get the third part, the logging level and sequence_nr
+     split              => { "temp_field" => " " }
+     add_field          => {"log_level" => "%{temp_field[0]}"}
+     add_field          => {"sequence_nr" => "%{temp_field[1]}"}     
+     }
+
+mutate {
+     # Remove unnecessary fields. 
+     remove_field       => ["temp_field", "message_firstpart"]    
+     # Strip leading and trailing whitespace from fields. 
+     strip              => ["sequence_nr", "log_level", "area", "action", "message_content", "message_original", "message_timestamp"]
+     }
+
+} else {
+drop {}
+}
+}
+
+
+
+
+output {
+	elasticsearch {
+		hosts => "158.177.83.61:9200"
+        index => "fabric_events-%{+YYYY-MM-dd_hh:mm}"
+	}
+}
+
+output {
+    if [log_level] == "ERRO" {
+    elasticsearch {
+		hosts => "158.177.83.61:9200"
+        index => "fabric_errors-%{+YYYY-MM-dd_hh:mm}"
+        }
+    }
+    
+}

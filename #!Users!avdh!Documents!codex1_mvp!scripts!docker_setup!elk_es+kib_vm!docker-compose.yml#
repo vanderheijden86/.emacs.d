@@ -1,0 +1,77 @@
+# https://github.com/yeasy/docker-compose-files/tree/master/hyperledger
+# This compose file will start a Hyperledger Fabric 1.0 MVE, including
+# * ca
+# * orderer
+# * peer
+# * sdk for testing
+
+version: '2.0'
+
+services:
+
+  # Elastic search provides a place for the logs to be processed
+  # and indexed, so that they can be searched through Kibana
+  elasticsearch:
+    build: elasticsearch/
+    container_name: elasticsearch
+    hostname: elasticsearch
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms12g -Xmx12g"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+    networks:
+      - elk
+
+  # Kibana provides a front-end to search the log file entries
+  kibana:
+    build: kibana/
+    container_name: kibana
+    hostname: kibana
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+    networks:
+      - elk
+
+        # Kibana provides a front-end to search the log file entries
+  curator:
+    build: curator/
+    container_name: curator
+    hostname: curator
+    volumes:
+      - ./extensions/curator/:/root/.curator/
+    # ports:
+    #   - "5601:5601"
+    depends_on:
+      - elasticsearch
+    command: curator --dry-run /root/.curator/action.yml
+#      command: bash -c "sleep 100000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+    networks:
+      - elk
+
+
+    
+networks:
+  elk:
+    driver: bridge

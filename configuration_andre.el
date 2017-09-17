@@ -104,8 +104,8 @@
 ;  (setq-default indent-tabs-mode nil)
 
 (setq yas-snippet-dirs '(
-"~/emp-24.5/.emacs.d/snippets/text-mode/" 
-"/Users/avdh/emp-24.5/.emacs.d/packages/yasnippet-20170310.1724/snippets"
+"~/.emacs.d/snippets/text-mode/" 
+"/Users/avdh/.emacs.d/packages/yasnippet-20170624.803/snippets/"
 ))
   (yas-global-mode 1)
 
@@ -417,7 +417,7 @@ same directory as the org-buffer and insert a link to this file."
 
 (setq diredp-hide-details-initially-flag nil)
 
-(diredp-toggle-find-file-reuse-dir 1)
+(toggle-diredp-find-file-reuse-dir nil)
 
 (require 'dired-x)
 (require 'dired+)
@@ -461,6 +461,7 @@ same directory as the org-buffer and insert a link to this file."
   (define-key global-map (kbd "M-.") nil)
   (define-key global-map (kbd "M-,") nil)
   (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "C-M-.") 'godef-jump-other-window)
   (local-set-key (kbd "M-,") 'pop-tag-mark)
   (go-guru-hl-identifier-mode)
 )
@@ -506,7 +507,7 @@ same directory as the org-buffer and insert a link to this file."
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-inf-ruby 'company-robe))
 
-(define-key global-map (kbd "<f10>") 'toggle-frame-fullscreen)
+(define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
@@ -515,13 +516,14 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
 (global-set-key (kbd "<f7>") 'other-window)
 (global-set-key (kbd "<f8>") 'delete-window)
-(global-set-key (kbd "<f11>") 'helm-semantic-or-imenu)
-(global-set-key (kbd "<f12>") 'helm-all-mark-rings)
+(global-set-key (kbd "<f11>") 'helm-all-mark-rings)
+(global-set-key (kbd "<f12>") 'helm-semantic-or-imenu)
+(global-set-key (kbd "<f13>") 'helm-ag)
 (global-set-key (kbd "C-c r") 'helm-recentf)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-f") 'find-file)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
@@ -587,3 +589,18 @@ same directory as the org-buffer and insert a link to this file."
 (eval-after-load 'helm-semantic-or-imenu
   (custom-set-variables
    '(helm-follow-mode-persistent t)))
+
+(require 'maxframe)
+(add-hook 'window-setup-hook 'maximize-frame t)
+
+(defvar frame-maximized 1)
+(defun maximize-frame-toggle ()
+"Doc-string for `my-switch` function."
+(interactive)
+  (cond
+   ((= frame-maximized 0)
+    (maximize-frame) 
+      (setq frame-maximized 1))
+   ((= frame-maximized 1)
+     (restore-frame)
+      (setq frame-maximized 0)) ) )

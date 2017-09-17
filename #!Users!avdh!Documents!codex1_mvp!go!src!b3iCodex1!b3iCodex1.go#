@@ -1,0 +1,63 @@
+package main
+
+//go:generate go run vendor/github.com/ungerik/pkgreflect/pkgreflect.go -notests -unexported -novars -noconsts -nofuncs models/
+import (
+	iv "b3iCodex1/invoke"
+	"b3iCodex1/utils"
+	"os"
+	"strings"
+
+	"github.com/hyperledger/fabric/core/chaincode/shim"
+	pb "github.com/hyperledger/fabric/protos/peer"
+)
+
+// B3iCodex1 dummy struct
+type B3iCodex1 struct {
+}
+
+var logger = shim.NewLogger("B3iCodex1-main")
+
+
+// Init - is called when the chaincode is deployed
+func (t *B3iCodex1) Init(stub shim.ChaincodeStubInterface) pb.Response {
+	// set identity if we are instantiating on the private channel
+	channelContext, err := utils.GetChannelID(stub)
+	if err != nil {
+		return shim.Error("Could not get channel context")
+	}
+	if strings.HasPrefix(channelContext, "private") {
+		args := stub.GetArgs()
+		if len(args) != 1 {
+			return shim.Error("Identity not specified")
+		}
+		utils.SetIdentity(string(args[0]))
+	}
+	logger.Debugf("B3iCodex CC init complete")
+	return shim.Success(nil)
+}
+
+// Invoke - handles all the invoke functions
+func (t *B3iCodex1) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+	funcName, _ := stub.GetFunctionAndParameters()
+
+	// dispatch functions
+	if function, ok := iv.Functions[funcName]; ok {
+		logger.Debugf("Invoking %s", funcName)
+		return function(stub)
+	}
+	return shim.Error("Function not implemented: " + funcName)
+}
+
+// Main - starts up the chaincode
+func main() {
+	logger.SetLevel(shim.LogInfo)
+
+	logLevel, _ := shim.LogLevel(os.Getenv("SHIM_LOGGING_LEVEL"))
+	shim.SetLoggingLevel(logLevel)
+	logger.SetLevel(shim.LogDebug)
+
+	err := shim.Start(new(B3iCodex1))
+	if err != nil {
+		logger.Errorf("Error starting chaincode: %v", err)
+	}
+}

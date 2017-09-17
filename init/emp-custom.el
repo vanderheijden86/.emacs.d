@@ -14,6 +14,7 @@
                 company-oddmuse company-dabbrev)))
  '(company-idle-delay 0.1)
  '(compilation-message-face (quote default))
+ '(conf-assignment-space nil)
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
@@ -23,16 +24,17 @@
     ("938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "b51c2dda65e8e7e66ab1b06bc10b59e61c153b0cf928f296efab5a7574779fb6" "7a6059160b29bffb886dfaddaa4b351588090bcb74946c30a6782f50288c9892" "9ab634dcc9131f79016c96c4955298409649f6538908c743a8a9d2c6bc8321ef" "614d92e2a3af6a08bfe6ff68a59875f987271415c3bda7bec1216b80f5db741d" "c3d843722b3bf87f037a6d54cdf0042ce4b2150bd24af4e32eb7342f782bdd44" default)))
  '(dired-use-ls-dired nil)
  '(elpy-rpc-python-command "python3")
- '(elpy-syntax-check-command "/Users/avdh/emp-24.5/.emacs.d/pyflymake.py")
+ '(elpy-syntax-check-command "/Users/avdh/.emacs.d/pyflymake.py")
  '(fci-rule-color "#14151E")
+ '(fill-column 100)
  '(global-discover-mode nil)
  '(go-mode-hook (quote (my-go-mode-hook git-gutter-mode flycheck-mode)))
  '(goflymake-debug t)
  '(helm-follow-mode-persistent t)
- '(helm-mode t)
+ '(helm-mode nil)
  '(helm-source-names-using-follow
    (quote
-    ("Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
+    ("global-mark-ring" "Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-symbol-colors
    (--map
@@ -75,7 +77,7 @@
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(org-agenda-files
    (quote
-    ("~/Google Drive/Projects/Flipside/flipside.org" "~/Google Drive/Documentation/planning.org")))
+    ("~/Google Drive/Projects/Blockchain/b3i.org" "~/.emacs.d/configuration_andre.org" "~/org/index.org")))
  '(org-file-apps
    (quote
     ((auto-mode . emacs)
@@ -88,7 +90,7 @@
  '(org-mobile-directory "~/Dropbox/org-share")
  '(package-selected-packages
    (quote
-    (maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode vagrant-tramp go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired-open dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+    (string-utils vagrant-tramp dired-open go-playmode maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud python-mode pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired+ diminish company-jedi buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(py-ipython-command "~/bin/ipython")

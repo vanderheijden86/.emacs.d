@@ -1,0 +1,33 @@
+
+;; ----- smex-history -----
+(
+ goto-char
+ helm-themes
+ rgrep
+ helm-M-x
+ helm-ag-project-root
+ helm-ag
+ package-install
+)
+
+;; ----- smex-data -----
+(
+ (goto-line . 1)
+ (goto-char . 3)
+ (find-name-dired . 1)
+ (rgrep . 6)
+ (helm-ag . 3)
+ (helm-ag--do-ag-help . 1)
+ (helm-ag-project-root . 2)
+ (ivy-mode . 1)
+ (helm-recentf . 2)
+ (helm-mode . 3)
+ (helm-M-x . 2)
+ (helm-show-kill-ring . 1)
+ (helm-mini . 2)
+ (helm-find-files . 1)
+ (package-install . 6)
+ (helm-themes . 29)
+ (git-timemachine . 2)
+ (package-delete . 2)
+)

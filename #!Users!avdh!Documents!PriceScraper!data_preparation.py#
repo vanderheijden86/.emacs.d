@@ -1,0 +1,53 @@
+import sqlite3
+import pandas as pd
+
+# Read the csv-files with model customers, attribute_to_element and
+# website_elements into a pandas dataframe.
+df_template = pd.read_excel('data/template_price_scraper.xlsx', sheetname=[0, 1, 2, 3, 4])
+df_m = df_template[0]
+df_ate = df_template[1]
+df_we = df_template[2]
+df_ws = df_template[3]
+df_sc = df_template[4]
+
+df_m.keys()
+
+# Convert floats to integers where necessary.
+df_m["Omzet"] = df_m["Omzet"].fillna(0.0).astype(int)
+df_m["Schadevrije_jaren"] = df_m["Schadevrije_jaren"].fillna(0.0).astype(int)
+df_m["Huisnr"] = df_m["Huisnr"].fillna(0.0).astype(int)
+df_m["Medewerkers"] = df_m["Medewerkers"].fillna(0.0).astype(int)
+df_m["Oproepkrachten"] = df_m["Oproepkrachten"].fillna(0.0).astype(int)
+
+# Melt df_m, hold the ID_CUSTOMER, rename the melted columns.
+melted = pd.melt(df_m, id_vars=['ID_WEBSITE', 'ID_MODEL_CUSTOMER'],
+                 var_name='ATTRIBUTE_NAME', value_name='ATTRIBUTE_CONTENT')
+# Sort by ID_MODEL_CUSTOMER for convenience.
+melted_sorted = melted.sort_values(by='ID_MODEL_CUSTOMER')
+
+# Write dfs to the database tables.
+# Connect to the sqlite3 database.
+conn = sqlite3.connect('data/pricescraper.db')
+conn.row_factory = sqlite3.Row
+cursor = conn.cursor()
+
+# Delete old data from the tables.
+cursor.execute("DELETE FROM MODEL_CUSTOMERS")
+cursor.execute("DELETE FROM ATTRIBUTE_TO_ELEMENT")
+cursor.execute("DELETE FROM WEBSITE_ELEMENTS")
+cursor.execute("DELETE FROM WEBSITE")
+cursor.execute("DELETE FROM SCRAPE_ELEMENTS")
+conn.commit()
+print("Old records deleted.")
+
+# Write new data to the tables.
+melted_sorted.to_sql("MODEL_CUSTOMERS", conn, if_exists='append', index=False)
+df_ate.to_sql("ATTRIBUTE_TO_ELEMENT", conn, if_exists='append', index=False)
+df_we.to_sql("WEBSITE_ELEMENTS", conn, if_exists='append', index=False)
+df_ws.to_sql("WEBSITE", conn, if_exists='append', index=False)
+df_sc.to_sql("SCRAPE_ELEMENTS", conn, if_exists='append', index=False)
+print("New records inserted.")
+
+# Close the connection.
+conn.close()
+

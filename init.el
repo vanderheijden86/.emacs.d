@@ -19,7 +19,7 @@
 
 (setq default-directory user-emacs-directory)
 
-(setq emacsd (concat user-emacs-directory ""))
+(setq emacsd (concat user-emacs-directory ".emacs.d/"))
 
 
                 (setq empinit (concat emacsd "init/"))
@@ -104,4 +104,5 @@
 ;; (tool-bar-mode 0)
 ;; (set-frame-size nil 206 54)
 
-(org-babel-load-file "configuration_andre.org")
+(setq org_config (concat emacsd "configuration_andre.org"))
+(org-babel-load-file org_config)
