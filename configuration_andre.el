@@ -225,6 +225,8 @@
 
 (setq mouse-autoselect-window nil)
 
+(setq mac-option-modifier 'meta)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (org-bullets-mode t)))

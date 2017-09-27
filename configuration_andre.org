@@ -489,6 +489,19 @@ Hide emphasis markers because I view my org text mostly in Emacs itself.
 (setq org-hide-emphasis-markers t)
 #+END_SRC
 
+Show inline images by default when starting org documents.
+#+BEGIN_SRC emacs-lisp
+(setq org-startup-with-inline-images t)
+#+END_SRC
+
+Set the maximal width of these org inline images.
+#+BEGIN_SRC emacs-lisp
+(setq org-image-actual-width 600)
+#+END_SRC
+
+
+
+
 ** Task and org-capture management
 
 Hide done items from the agenda view.
