@@ -499,9 +499,6 @@ Set the maximal width of these org inline images.
 (setq org-image-actual-width 600)
 #+END_SRC
 
-
-
-
 ** Task and org-capture management
 
 Hide done items from the agenda view.
@@ -836,6 +833,25 @@ I'm usually actually in an org document.
               (LaTeX-math-mode)
               (setq TeX-master t)))
 #+END_SRC
+** Org electric-pair functions for mark-up
+With this in place, all you need to do to wrap a region with mark-up characters is press the corresponding character (*, /, =, _, ~, or +) once.
+
+As an additional benefit, Emacs will automatically insert matching pairs of mark-up characters at
+point if there is no region. For example, pressing * will insert ** and leave point between the two
+chars so you can continue typing without having to move point.
+
+
+#+BEGIN_SRC lisp
+(defvar org-electric-pairs '((?\* . ?\*) (?/ . ?/) (?= . ?=)
+                             (?\_ . ?\_) (?~ . ?~) (?+ . ?+)) "Electric pairs for org-mode.")
+
+(defun org-add-electric-pairs ()
+  (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))
+  (setq-local electric-pair-text-pairs electric-pair-pairs))
+
+(add-hook 'org-mode-hook 'org-add-electric-pairs)
+#+END_SRC
+
 * =dired=
 
 Do not send --dired to ls, this gives error.
