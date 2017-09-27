@@ -140,7 +140,7 @@
 
 (define-key python-mode-map (kbd "C-c c") 'python-send-my-buffer)
 
-(define-key python-mode-map (kbd "<tab>") 'py-shift-right)
+;;(define-key python-mode-map (kbd "<tab>") 'py-shift-right)
 (define-key python-mode-map [backtab] 'py-shift-left)
 
 (define-key python-mode-map (kbd "C-<backspace>") 'backward-delete-word)
@@ -314,8 +314,8 @@
                (setq-local flymake-start-syntax-check-on-newline t)
                (setq elpy-rpc-python-command "python3")
                (elpy-use-ipython)
-               ;;(setq elpy-rpc-backend "jedi")
-               ;;(jedi:ac-setup)
+               (setq elpy-rpc-backend "jedi")
+               (jedi:setup) 
                (setq python-check-command (concat emacsd "pyflymake.py"))
                (setq flymake-no-changes-timeout 0.5)
                (define-key elpy-mode-map (kbd "C-<return>") 'new-python-eval)

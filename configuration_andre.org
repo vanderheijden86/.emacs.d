@@ -159,8 +159,8 @@ Assume that I always want to kill the current buffer when hitting =C-x k=.
 
 ** Look for executables in =/usr/local/bin=.
 
-#+BEGIN_SRC emacs-lisp
-  (setq exec-path (append exec-path '("/usr/local/bin")))
+#+BEGIN_SRC emacs-lisp 
+(setq exec-path (append exec-path '("/usr/local/bin")))
 #+END_SRC
 ** Use =company-mode= everywhere
 
@@ -180,22 +180,7 @@ Never use tabs. Tabs are the devil’s whitespace. (Commented out for now)
 
 Function to run before safe to replace tabs with whitespaces. (Commented out for now)
 
-# #+BEGIN_SRC emacs-lisp
-# (defun cleanup-buffer-safe ()
-#   "Perform a bunch of safe operations on the whitespace content of a buffer.
-# Does not indent buffer, because it is used for a before-save-hook, and that
-# might be bad."
-#   (interactive)
-#   (when (not (string-match-p (regexp-quote "akefile") (buffer-file-name)))
-#     (untabify (point-min) (point-max))
-#     (delete-trailing-whitespace)
-#     (set-buffer-file-coding-system 'utf-8)))
-
-# ;; Various superfluous white-space. Just say no.
-# (add-hook 'before-save-hook 'cleanup-buffer-safe)
-
-# #+END_SRC
-
+#
 ** Configure yasnippet
 
 I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippet=
@@ -453,6 +438,12 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 
 #+BEGIN_SRC emacs-lisp
 (setq mouse-autoselect-window nil)
+#+END_SRC
+
+** Use ALT as the META key
+
+#+BEGIN_SRC emacs-lisp
+(setq mac-option-modifier 'meta)
 #+END_SRC
 
 
@@ -1003,10 +994,19 @@ Load company backend for go.
 Add company-jedi to company backends.
 
 #+BEGIN_SRC emacs-lisp
-;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
+;; (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
 #+END_SRC
 *** Keybindings
+
+#+BEGIN_SRC emacs-lisp
+  (defun my-python-mode-hook ()
 (define-key python-mode-map (kbd "<tab>") 'py-indent-line)
+(local-set-key (kbd "M-,") 'pop-tag-mark)
+)
+  (add-hook 'python-mode-hook 'my-python-mode-hook)
+
+#+END_SRC
+
 ** Node-js
 
 *** js2-mode
@@ -1120,6 +1120,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'find-file)
+(global-set-key (kbd "C-x M-f") 'helm-find-files)
 
 #+END_SRC
 

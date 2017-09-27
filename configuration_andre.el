@@ -473,7 +473,13 @@ same directory as the org-buffer and insert a link to this file."
   (add-to-list 'company-backends 'company-go)
  (add-to-list 'company-backends 'company-elisp))
 
-;;  (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
+;; (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
+
+(defun my-python-mode-hook ()
+(define-key python-mode-map (kbd "<tab>") 'py-indent-line)
+(local-set-key (kbd "M-,") 'pop-tag-mark)
+)
+  (add-hook 'python-mode-hook 'my-python-mode-hook)
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -524,6 +530,7 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'find-file)
+(global-set-key (kbd "C-x M-f") 'helm-find-files)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)

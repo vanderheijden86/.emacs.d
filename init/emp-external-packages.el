@@ -28,7 +28,6 @@
     flx-ido
     powerline
     flymake
-    company-jedi
     ag
     dockerfile-mode
     python-mode
@@ -96,6 +95,8 @@
     json-mode
     go-eldoc
     jq-mode
+    jedi
+    company-jedi
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)
