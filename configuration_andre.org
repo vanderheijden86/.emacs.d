@@ -1068,9 +1068,11 @@ Set autocomplete settings:
        (setq ac-auto-show-menu t)
        (setq ac-auto-start t)
        (setq completion-at-point-functions '(auto-complete))
-       (set-face-background 'popup-summary-face "darkgrey")
-       (set-face-underline 'popup-summary-face "darkgrey")
-       (set-face-background 'popup-tip-face "darkgrey")
+       (set-face-background 'popup-summary-face "lightgrey")
+       (set-face-foreground 'popup-summary-face "black")
+       (set-face-background 'popup-menu-summary-face "lightgrey")
+       (set-face-underline 'popup-summary-face "lightgrey")
+       (set-face-background 'popup-tip-face "lightgrey")
   )
 #+END_SRC
 
