@@ -217,6 +217,11 @@ I'm prefixing them with semicolons to avoid collisions with real words.
       (";site" "http://harryrschwartz.com")))
 #+END_SRC
 
+blockchain
+
+bc 
+
+
 Always enable =abbrev-mode=:
 
 #+BEGIN_SRC emacs-lisp
@@ -1206,6 +1211,14 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
 )
 #+END_SRC
+
+** Bash
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "sh"
+ (define-key sh-mode-map (kbd "M-.") 'ffap)
+)
+#+END_SRC
+
 
 
 * General Custom Keybindings
