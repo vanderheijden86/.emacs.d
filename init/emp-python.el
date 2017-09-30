@@ -15,7 +15,6 @@
 
 ;;; consider reimplementing the wrap shifting
 
-
 (require 'python-mode)
 
 (require 'python)
@@ -306,24 +305,7 @@
 (require 'sphinx-doc)
 (add-hook 'python-mode-hook 'sphinx-doc-mode)
 
-(add-hook 'python-mode-hook
-          '(lambda ()
-             (progn
-               (elpy-enable)
-               (elpy-mode)
-               (setq-local flymake-start-syntax-check-on-newline t)
-               (setq elpy-rpc-python-command "python3")
-               (elpy-use-ipython)
-               (setq elpy-rpc-backend "jedi")
-               (jedi:setup) 
-               (setq python-check-command (concat emacsd "pyflymake.py"))
-               (setq flymake-no-changes-timeout 0.5)
-               (define-key elpy-mode-map (kbd "C-<return>") 'new-python-eval)
-               (setq elpy-test-runner 'elpy-test-pytest-runner)
-               )))
 
-(add-hook 'python-mode-hook
-          (lambda () (flymake-mode t)))
 
 (add-hook 'elpy-mode-hook
           '(lambda ()
@@ -338,11 +320,6 @@
 (setq py-split-windows-on-execute-function (quote split-window-horizontally))
 ;;(py-exception-name-face ((t (:foreground "#94bff3"))))
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key "\C-ca" 'pytest-all)
-            (local-set-key "\C-c0" 'pytest-pdb-one)
-            (local-set-key "\C-c1" 'pytest-one)))
 
 (provide 'emp-python)
 

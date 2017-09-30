@@ -104,8 +104,8 @@
 ;  (setq-default indent-tabs-mode nil)
 
 (setq yas-snippet-dirs '(
-"~/.emacs.d/snippets/text-mode/" 
-"/Users/avdh/.emacs.d/packages/yasnippet-20170624.803/snippets/"
+"~/emacs/emp-25.2/.emacs.d/snippets/text-mode/"
+"~/emacs/emp-25.2/.emacs.d/packages/yasnippet-20170624.803/snippets/"
 ))
   (yas-global-mode 1)
 
@@ -148,9 +148,7 @@
 
 (setq-default fill-column 100)
 
-(add-hook 'temp-buffer-show-hook (lambda () (other-window 1)))
-;;remove-hook 'temp-buffer-window-show-hook (lambda () (other-window 1))
-;;(remove-hook 'help-mode-hook (lambda () (other-window 1)))
+(setq help-window-select t)
 
 (require 'flycheck)
 
@@ -226,6 +224,8 @@
 (setq mouse-autoselect-window nil)
 
 (setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
+(set-keyboard-coding-system nil)
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -240,6 +240,10 @@
 (setq org-src-window-setup 'current-window)
 
 (setq org-hide-emphasis-markers t)
+
+(setq org-startup-with-inline-images t)
+
+(setq org-image-actual-width 600)
 
 (setq org-agenda-skip-scheduled-if-done t)
 
@@ -347,9 +351,11 @@ same directory as the org-buffer and insert a link to this file."
           (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
 
 (define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(define-key global-map "\C-cc" 'org-capture)
-(define-key global-map "\C-ct" 'org-deadline)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-ct" 'org-deadline)
+
+(with-eval-after-load "org" (define-key org-mode-map (kbd "s-i") 'org-toggle-inline-images))
 
 (defun open-index-file ()
   "Open the master org TODO list."
@@ -415,6 +421,15 @@ same directory as the org-buffer and insert a link to this file."
             (LaTeX-math-mode)
             (setq TeX-master t)))
 
+(defvar org-electric-pairs '((?\* . ?\*) (?/ . ?/) (?= . ?=)
+                             (?\_ . ?\_) (?~ . ?~) (?+ . ?+)) "Electric pairs for org-mode.")
+
+(defun org-add-electric-pairs ()
+  (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))
+  (setq-local electric-pair-text-pairs electric-pair-pairs))
+
+(add-hook 'org-mode-hook 'org-add-electric-pairs)
+
 (setq dired-use-ls-dired nil)
 
 (setq diredp-hide-details-initially-flag nil)
@@ -475,13 +490,53 @@ same directory as the org-buffer and insert a link to this file."
   (add-to-list 'company-backends 'company-go)
  (add-to-list 'company-backends 'company-elisp))
 
-;; (add-to-list 'company-backends 'company-jedi)          ; add company-jedi to the backends.
-
 (defun my-python-mode-hook ()
+                     (elpy-enable)
+                     ;; Disable flymake in Elpy.
+                     (setq elpy-modules
+                           (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
+                           )
+                     (elpy-mode)
+                     (flycheck-mode)
+                     (setq elpy-rpc-python-command "python3")
+                     (elpy-use-ipython)
+                     (setq elpy-rpc-backend "jedi")
+                     (company-mode 0)
+                     (auto-complete-mode t)
+                     (jedi:setup) 
+                     (setq python-check-command (concat emacsd "pyflymake.py"))
+                     (define-key elpy-mode-map (kbd "C-<return>") 'new-python-eval)
+                     (setq elpy-test-runner 'elpy-test-pytest-runner)
+                     (setq jedi:complete-on-dot t)
+)
+
+
+                     
+  (add-hook 'python-mode-hook 'my-python-mode-hook)
+  ;; (flymake-mode t)
+  ;;                   (setq-local flymake-start-syntax-check-on-newline t)
+  ;;                   (setq flymake-no-changes-timeout 10000)
+
+;;(add-to-list 'company-backends 'company-jedi)
+(setq company-global-modes '(not python-mode))
+
+(with-eval-after-load "auto-complete"
+     (setq ac-auto-show-menu t)
+     (setq ac-auto-start t)
+     (setq completion-at-point-functions '(auto-complete))
+     (set-face-background 'popup-summary-face "darkgrey")
+     (set-face-underline 'popup-summary-face "darkgrey")
+     (set-face-background 'popup-tip-face "darkgrey")
+)
+
+(defun my-python-keybindings-hook ()
 (define-key python-mode-map (kbd "<tab>") 'py-indent-line)
 (local-set-key (kbd "M-,") 'pop-tag-mark)
+            (local-set-key "\C-ca" 'pytest-all)
+            (local-set-key "\C-c0" 'pytest-pdb-one)
+            (local-set-key "\C-c1" 'pytest-one)
 )
-  (add-hook 'python-mode-hook 'my-python-mode-hook)
+(add-hook 'python-mode-hook 'my-python-keybindings-hook)
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -515,6 +570,26 @@ same directory as the org-buffer and insert a link to this file."
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-inf-ruby 'company-robe))
 
+(defun my-typescript-mode-hook ()
+               (tide-setup)
+              (flycheck-mode +1)
+              (setq flycheck-check-syntax-automatically '(save mode-enabled))
+              (eldoc-mode +1)
+              (tide-hl-identifier-mode +1)
+              (yafolding-mode)
+              ;; company is an optional dependency. You have to
+              ;; install it separately via package-install
+              (company-mode-on)
+              (helm-mode)
+  )
+  (add-hook 'typescript-mode-hook 'my-typescript-mode-hook)
+(setq tide-tssserver-executable "~/.nvm/versions/node/v6.10.3/bin/tsserver")
+(setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
+
+(with-eval-after-load "typescript"
+ (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
+)
+
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
@@ -533,6 +608,7 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'find-file)
 (global-set-key (kbd "C-x M-f") 'helm-find-files)
+(global-set-key (kbd "s-u") 'revert-buffer)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
