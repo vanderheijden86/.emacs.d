@@ -188,7 +188,7 @@ enabled.
 
 #+BEGIN_SRC emacs-lisp
 (setq yas-snippet-dirs '(
-"~/emacs/emp-25.2/.emacs.d/snippets/text-mode/"
+"~/emacs/emp-25.2/.emacs.d/snippets/"
 "~/emacs/emp-25.2/.emacs.d/packages/yasnippet-20170624.803/snippets/"
 ))
   (yas-global-mode 1)
@@ -1209,6 +1209,8 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load "typescript"
  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
+ (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+ (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
 )
 #+END_SRC
 
@@ -1216,6 +1218,8 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load "sh"
  (define-key sh-mode-map (kbd "M-.") 'ffap)
+ (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+ (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
 )
 #+END_SRC
 
@@ -1236,7 +1240,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (global-set-key (kbd "<f8>") 'delete-window)
 (global-set-key (kbd "<f11>") 'helm-all-mark-rings)
 (global-set-key (kbd "<f12>") 'helm-semantic-or-imenu)
-(global-set-key (kbd "<f13>") 'helm-ag)
+(global-set-key (kbd "s-s") 'helm-ag)
 (global-set-key (kbd "C-c r") 'helm-recentf)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -1244,7 +1248,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (global-set-key (kbd "C-x C-f") 'find-file)
 (global-set-key (kbd "C-x M-f") 'helm-find-files)
 (global-set-key (kbd "s-u") 'revert-buffer)
-
+(global-set-key (kbd "s-d") 'iterm-goto-filedir-or-home)
 
 #+END_SRC
 
@@ -1401,3 +1405,153 @@ Defined function to toggle between maximized and restored.
       (setq frame-maximized 0)) ) )
 
 #+END_SRC
+** Iterm2 Integration
+*** Open Iterm2 in directory of buffer file.
+
+This one return the _directory_ of the file currently opened. If it is a *scratch* buffer or something
+like that, it simply returns the home directory.
+
+#+BEGIN_SRC  emacs-lisp
+
+(defun get-file-dir-or-home ()
+  "If inside a file buffer, return the directory, else return home"
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+	"~/"
+      (file-name-directory filename))))
+#+END_SRC
+
+This one allow me to cd to the directory of the file I am editing in emacs. If I am in a *scratch*
+buffer or something like that, it cd to the $HOME directory. It then focus the =iTerm2= app.
+
+#+BEGIN_SRC  emacs-lisp
+(defun iterm-goto-filedir-or-home ()
+  "Go to present working dir and focus iterm"
+  (interactive)
+  (do-applescript
+   (concat
+    " tell application \"iTerm2\"\n"
+    "   tell the current session of current window\n"
+    (format "     write text \"cd %s\" \n" (get-file-dir-or-home))
+    "   end tell\n"
+    " end tell\n"
+    " do shell script \"open -a iTerm\"\n"
+    ))
+  )
+#+END_SRC
+
+*** Send Text to Iterm2
+
+#+BEGIN_SRC emacs-lisp
+            ;;; iterm.el - Send text to a running iTerm instance
+
+            (require 'pcase)
+            (require 'thingatpt)
+
+            ;; To match SublimeText's key binding:
+            ;; (global-set-key (kbd "<C-return>") 'iterm-send-text)
+
+            (defvar iterm-default-thing 'line
+              "The \"thing\" to send if no region is active.
+            Can be any symbol understood by `bounds-of-thing-at-point'.")
+
+            (defvar iterm-empty-line-regexp "^[[:space:]]*$"
+              "Regexp to match empty lines, which will not be sent to iTerm.
+            Set to nil to disable removing empty lines.")
+
+            (defun iterm-escape-string (str)
+              (let* ((str (replace-regexp-in-string "\\\\" "\\\\" str nil t))
+                     (str (replace-regexp-in-string "\"" "\\\"" str nil t)))
+                str))
+
+            (defun iterm-last-char-p (str char)
+              (let ((length (length str)))
+                (and (> length 0)
+                     (char-equal (elt str (- length 1)) char))))
+
+            (defun iterm-chop-newline (str)
+              (let ((length (length str)))
+                (if (iterm-last-char-p str ?\n)
+                    (substring str 0 (- length 1))
+                  str)))
+
+            (defun iterm-maybe-add-newline (str)
+              (if (iterm-last-char-p str ? )
+                  (concat str "\n")
+                str))
+
+              (defun enclose-brackets (str)
+        ;;        (let (result ""))
+                (setq str (concatenate  'string str "\n"))
+                    str)
+
+
+            (defun iterm-handle-newline (str)
+              (iterm-maybe-add-newline (iterm-chop-newline str)))
+
+            (defun iterm-maybe-remove-empty-lines (str)
+              (if iterm-empty-line-regexp
+                  (let ((regexp iterm-empty-line-regexp)
+                        (lines (split-string str "\n")))
+                    (mapconcat #'identity
+                               (delq nil (mapcar (lambda (line)
+                                                   (unless (string-match-p regexp line)
+                                                     line))
+                                                 lines))
+                               "\n"))
+                str))
+
+      (defun iterm-send-string (str)   
+        "Send STR to a running iTerm instance."
+        (setq str (iterm-escape-string str))
+          (shell-command (concat "osascript "
+                                 "-e 'tell app \"iTerm2\"' "
+                                 "-e 'tell current window' "
+                                 "-e 'tell current session' "
+                                 "-e 'write text \"" str "\"' "
+                                 "-e 'end tell' "
+                                 "-e 'end tell' "
+                                 "-e 'end tell' "))
+          )
+
+(defun iterm-send-text-clipboard ()
+  (interactive)
+  (copy-region-as-kill 0 0 t)
+                  (shell-command (concat "osascript "
+  ;                                     "-e 'set the clipboard to \"" str "\"' "
+                                       "-e 'tell application \"iTerm\"' "
+                                       "-e 'activate' "
+                                       "-e 'end tell' "
+                                       "-e 'tell application \"System Events\" to keystroke \"v\" using {command down}'"
+                                       )))
+
+
+            (defun iterm-text-bounds ()
+              (pcase-let ((`(,beg . ,end) (if (use-region-p)
+                                              (cons (region-beginning) (region-end))
+                                            (bounds-of-thing-at-point
+                                             iterm-default-thing))))
+                (list beg end)))
+
+            (defun iterm-send-text (beg end)
+              "Send buffer text in region from BEG to END to iTerm.
+            If called interactively without an active region, send text near
+            point (determined by `iterm-default-thing') instead."
+              (interactive (iterm-text-bounds))
+              (let ((str (buffer-substring-no-properties beg end)))
+                (iterm-send-string str))
+              (forward-line 1))
+
+            (defun iterm-send-text-brackets (beg end)
+              "Send buffer text in region from BEG to END to iTerm.
+            If called interactively without an active region, send text near
+            point (determined by `iterm-default-thing') instead."
+              (interactive (iterm-text-bounds))
+              (let ((str (buffer-substring-no-properties beg end)))
+                (setq str (enclose-brackets str))
+                (message str)
+              (forward-line 1)))
+            (provide 'iterm)
+#+END_SRC
+

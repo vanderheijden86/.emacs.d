@@ -104,7 +104,7 @@
 ;  (setq-default indent-tabs-mode nil)
 
 (setq yas-snippet-dirs '(
-"~/emacs/emp-25.2/.emacs.d/snippets/text-mode/"
+"~/emacs/emp-25.2/.emacs.d/snippets/"
 "~/emacs/emp-25.2/.emacs.d/packages/yasnippet-20170624.803/snippets/"
 ))
   (yas-global-mode 1)
@@ -524,9 +524,11 @@ same directory as the org-buffer and insert a link to this file."
      (setq ac-auto-show-menu t)
      (setq ac-auto-start t)
      (setq completion-at-point-functions '(auto-complete))
-     (set-face-background 'popup-summary-face "darkgrey")
-     (set-face-underline 'popup-summary-face "darkgrey")
-     (set-face-background 'popup-tip-face "darkgrey")
+     (set-face-background 'popup-summary-face "lightgrey")
+     (set-face-foreground 'popup-summary-face "black")
+     (set-face-background 'popup-menu-summary-face "lightgrey")
+     (set-face-underline 'popup-summary-face "lightgrey")
+     (set-face-background 'popup-tip-face "lightgrey")
 )
 
 (defun my-python-keybindings-hook ()
@@ -590,6 +592,10 @@ same directory as the org-buffer and insert a link to this file."
  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
 )
 
+(with-eval-after-load "sh"
+ (define-key sh-mode-map (kbd "M-.") 'ffap)
+)
+
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
@@ -601,7 +607,7 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "<f8>") 'delete-window)
 (global-set-key (kbd "<f11>") 'helm-all-mark-rings)
 (global-set-key (kbd "<f12>") 'helm-semantic-or-imenu)
-(global-set-key (kbd "<f13>") 'helm-ag)
+(global-set-key (kbd "s-s") 'helm-ag)
 (global-set-key (kbd "C-c r") 'helm-recentf)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -609,6 +615,7 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "C-x C-f") 'find-file)
 (global-set-key (kbd "C-x M-f") 'helm-find-files)
 (global-set-key (kbd "s-u") 'revert-buffer)
+(global-set-key (kbd "s-d") 'iterm-goto-filedir-or-home)
 
 (setq magit-refs-show-commit-count nil)
 ;(setq magit-refs-margin nil)
@@ -689,3 +696,25 @@ same directory as the org-buffer and insert a link to this file."
    ((= frame-maximized 1)
      (restore-frame)
       (setq frame-maximized 0)) ) )
+
+(defun get-file-dir-or-home ()
+  "If inside a file buffer, return the directory, else return home"
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+    "~/"
+      (file-name-directory filename))))
+
+(defun iterm-goto-filedir-or-home ()
+  "Go to present working dir and focus iterm"
+  (interactive)
+  (do-applescript
+   (concat
+    " tell application \"iTerm2\"\n"
+    "   tell the current session of current window\n"
+    (format "     write text \"cd %s\" \n" (get-file-dir-or-home))
+    "   end tell\n"
+    " end tell\n"
+    " do shell script \"open -a iTerm\"\n"
+    ))
+  )
