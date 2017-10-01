@@ -1218,7 +1218,7 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 (with-eval-after-load "typescript"
  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
  (define-key yafolding-mode-map  (kbd "C-<return>") nil)
- (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text)
+ (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
 )
 #+END_SRC
 
