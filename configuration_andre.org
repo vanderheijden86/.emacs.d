@@ -1215,24 +1215,24 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 *** Keybindings
 
 #+BEGIN_SRC emacs-lisp
-(with-eval-after-load "typescript"
- (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
- (define-key yafolding-mode-map  (kbd "C-<return>") nil)
- (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
-)
+  (with-eval-after-load "typescript"
+   (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
+   (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+   (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
+  )
 #+END_SRC
 
 ** Bash
 #+BEGIN_SRC emacs-lisp
-(with-eval-after-load "sh"
- (define-key sh-mode-map (kbd "M-.") 'ffap)
- (define-key yafolding-mode-map  (kbd "C-<return>") nil)
- (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
-)
+  (with-eval-after-load "shell"
+   (define-key sh-mode-map (kbd "M-.") 'ffap)
+   (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+   (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
+  )
 #+END_SRC
 
 
-
+   
 * General Custom Keybindings
 Hit F10 to toggle between =fullscreen= and back.
 
@@ -1419,7 +1419,7 @@ Defined function to toggle between maximized and restored.
 This one return the _directory_ of the file currently opened. If it is a *scratch* buffer or something
 like that, it simply returns the home directory.
 
-#+BEGIN_SRC  emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (defun get-file-dir-or-home ()
   "If inside a file buffer, return the directory, else return home"
@@ -1433,20 +1433,23 @@ like that, it simply returns the home directory.
 This one allow me to cd to the directory of the file I am editing in emacs. If I am in a *scratch*
 buffer or something like that, it cd to the $HOME directory. It then focus the =iTerm2= app.
 
-#+BEGIN_SRC  emacs-lisp
-(defun iterm-goto-filedir-or-home ()
-  "Go to present working dir and focus iterm"
-  (interactive)
-  (do-applescript
-   (concat
-    " tell application \"iTerm2\"\n"
-    "   tell the current session of current window\n"
-    (format "     write text \"cd %s\" \n" (get-file-dir-or-home))
-    "   end tell\n"
-    " end tell\n"
-    " do shell script \"open -a iTerm\"\n"
-    ))
-  )
+#+BEGIN_SRC emacs-lisp
+  (defun iterm-goto-filedir-or-home ()
+    "Go to present working dir and focus iterm"
+    (interactive)
+    (do-applescript
+     (concat
+      " tell application \"iTerm2\"\n"
+      "   tell the current session of current window\n"
+      (format "     write text \"cd %s\" \n" (get-file-dir-or-home))
+      "   end tell\n"
+      " end tell\n"
+      " do shell script \"open -a iTerm\"\n"
+      ))
+                        (shell-command "sleep 0.5")
+                        (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+  (message (concat (get-file-dir-or-home) " opened in iTerm2."))
+    )
 #+END_SRC
 
 *** Send Text to Iterm2
@@ -1512,70 +1515,76 @@ buffer or something like that, it cd to the $HOME directory. It then focus the =
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (defun iterm-send-string (str)   
-    "Send STR to a running iTerm instance."
-    (let* ((str (iterm-maybe-remove-empty-lines str))
-           (str (iterm-handle-newline str))
-           (str (iterm-escape-string str)))
-      (shell-command (concat "osascript "
-                             "-e 'tell app \"iTerm2\"' "
-                             "-e 'tell current window' "
-                             "-e 'tell current session' "
-                             "-e 'write text \"" str "\"' "
-                             "-e 'end tell' "
-                             "-e 'end tell' "
-                             "-e 'end tell' "))))
-
-    (defun iterm-send-text-clipboard ()
-      (interactive)
-      (copy-region-as-kill 0 0 t)
-  ;; Could cut op the osa script into seperate file. 
-                      (shell-command (concat "osascript "
-      ;                                     "-e 'set the clipboard to \"" str "\"' "
-  ;                                         "-e 'tell application \"iTerm2\"' "
-  ;                                         "-e 'activate' "
-  ;                                         "-e 'end tell' "
-                                           "-e 'tell application \"iTerm\" to activate' "
-                                           "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
-                                           "-e 'keystroke \"v\" using {command down}' "
-  ;                                         "-e 'key down {return}' "
-  ;                                         "-e 'key up {return}' "
-  ;                                         "-e 'keystroke \"v\" using {command down}' "
-                                           "-e 'end tell' "
-  ;                                         "-e 'end tell' "
-                                           ))
-                      (shell-command "sleep 0.5")
-                      (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
-                      (shell-command "sleep 0.5")
-                      (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+      (defun iterm-send-string (str)   
+        "Send STR to a running iTerm instance."
+        (let* ((str (iterm-maybe-remove-empty-lines str))
+               (str (iterm-handle-newline str))
+               (str (iterm-escape-string str)))
+          (shell-command (concat "osascript "
+                                 "-e 'tell app \"iTerm2\"' "
+                                 "-e 'tell current window' "
+                                 "-e 'tell current session' "
+                                 "-e 'write text \"" str "\"' "
+                                 "-e 'end tell' "
+                                 "-e 'end tell' "
+                                 "-e 'end tell' ")))
+;    (do-applescript "tell application \"iTerm2\" to activate")
+;    (shell-command "sleep 1.5")
+;    (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
   )
+        (defun iterm-send-text-clipboard ()
+          (interactive)
+          (copy-region-as-kill 0 0 t)
+      ;; Could cut op the osa script into seperate file. 
+                          (shell-command (concat "osascript "
+          ;                                     "-e 'set the clipboard to \"" str "\"' "
+      ;                                         "-e 'tell application \"iTerm2\"' "
+      ;                                         "-e 'activate' "
+      ;                                         "-e 'end tell' "
+                                               "-e 'tell application \"iTerm\" to activate' "
+                                               "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
+                                               "-e 'keystroke \"v\" using {command down}' "
+      ;                                         "-e 'key down {return}' "
+      ;                                         "-e 'key up {return}' "
+      ;                                         "-e 'keystroke \"v\" using {command down}' "
+                                               "-e 'end tell' "
+      ;                                         "-e 'end tell' "
+                                               ))
+                          (shell-command "sleep 0.5")
+                          (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
+                          (shell-command "sleep 0.5")
+                          (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+                          (message "Command pasted and executed into iTerm2.")
+      )
 
 
-                (defun iterm-text-bounds ()
-                  (pcase-let ((`(,beg . ,end) (if (use-region-p)
-                                                  (cons (region-beginning) (region-end))
-                                                (bounds-of-thing-at-point
-                                                 iterm-default-thing))))
-                    (list beg end)))
+                    (defun iterm-text-bounds ()
+                      (pcase-let ((`(,beg . ,end) (if (use-region-p)
+                                                      (cons (region-beginning) (region-end))
+                                                    (bounds-of-thing-at-point
+                                                     iterm-default-thing))))
+                        (list beg end)))
 
-                (defun iterm-send-text (beg end)
-                  "Send buffer text in region from BEG to END to iTerm.
-                If called interactively without an active region, send text near
-                point (determined by `iterm-default-thing') instead."
-                  (interactive (iterm-text-bounds))
-                  (let ((str (buffer-substring-no-properties beg end)))
-                    (iterm-send-string str))
-                  (forward-line 1))
+                    (defun iterm-send-text (beg end)
+                      "Send buffer text in region from BEG to END to iTerm.
+                    If called interactively without an active region, send text near
+                    point (determined by `iterm-default-thing') instead."
+                      (interactive (iterm-text-bounds))
+                      (let ((str (buffer-substring-no-properties beg end)))
+                        (iterm-send-string str))
+                      (forward-line 1)
+                       (message "Command written into iTerm2.")
+    )
 
-                (defun iterm-send-text-brackets (beg end)
-                  "Send buffer text in region from BEG to END to iTerm.
-                If called interactively without an active region, send text near
-                point (determined by `iterm-default-thing') instead."
-                  (interactive (iterm-text-bounds))
-                  (let ((str (buffer-substring-no-properties beg end)))
-                    (setq str (enclose-brackets str))
-                    (message str)
-                  (forward-line 1)))
-                (provide 'iterm)
+                    (defun iterm-send-text-brackets (beg end)
+                      "Send buffer text in region from BEG to END to iTerm.
+                    If called interactively without an active region, send text near
+                    point (determined by `iterm-default-thing') instead."
+                      (interactive (iterm-text-bounds))
+                      (let ((str (buffer-substring-no-properties beg end)))
+                        (setq str (enclose-brackets str))
+                        (message str)
+                      (forward-line 1)))
+                    (provide 'iterm)
 #+END_SRC
 

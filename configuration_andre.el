@@ -532,13 +532,19 @@ same directory as the org-buffer and insert a link to this file."
 )
 
 (defun my-python-keybindings-hook ()
-(define-key python-mode-map (kbd "<tab>") 'py-indent-line)
-(local-set-key (kbd "M-,") 'pop-tag-mark)
-            (local-set-key "\C-ca" 'pytest-all)
-            (local-set-key "\C-c0" 'pytest-pdb-one)
-            (local-set-key "\C-c1" 'pytest-one)
+   (define-key python-mode-map (kbd "<tab>") 'py-indent-line)
+   (local-set-key (kbd "M-,") 'pop-tag-mark)
+               (local-set-key "\C-ca" 'pytest-all)
+               (local-set-key "\C-c0" 'pytest-pdb-one)
+               (local-set-key "\C-c1" 'pytest-one)
+;               (local-set-key (kbd "s-<return>") 'iterm-send-text-clipboard)
+   )
+   (add-hook 'python-mode-hook 'my-python-keybindings-hook)
+
+(with-eval-after-load "python"
+               (define-key python-mode-map  (kbd "s-<return>") nil)
+               (define-key python-mode-map (kbd "s-<return>") 'iterm-send-text-clipboard)
 )
-(add-hook 'python-mode-hook 'my-python-keybindings-hook)
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -590,10 +596,14 @@ same directory as the org-buffer and insert a link to this file."
 
 (with-eval-after-load "typescript"
  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
+ (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+ (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
 )
 
 (with-eval-after-load "sh"
  (define-key sh-mode-map (kbd "M-.") 'ffap)
+ (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+ (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
 )
 
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
@@ -718,3 +728,127 @@ same directory as the org-buffer and insert a link to this file."
     " do shell script \"open -a iTerm\"\n"
     ))
   )
+
+;;; iterm.el - Send text to a running iTerm instance
+
+(require 'pcase)
+(require 'thingatpt)
+
+;; To match SublimeText's key binding:
+;; (global-set-key (kbd "<C-return>") 'iterm-send-text)
+
+(defvar iterm-default-thing 'line
+  "The \"thing\" to send if no region is active.
+Can be any symbol understood by `bounds-of-thing-at-point'.")
+
+(defvar iterm-empty-line-regexp "^[[:space:]]*$"
+  "Regexp to match empty lines, which will not be sent to iTerm.
+Set to nil to disable removing empty lines.")
+
+(defun iterm-escape-string (str)
+  (let* ((str (replace-regexp-in-string "\\\\" "\\\\" str nil t))
+         (str (replace-regexp-in-string "\"" "\\\"" str nil t)))
+    str))
+
+(defun iterm-last-char-p (str char)
+  (let ((length (length str)))
+    (and (> length 0)
+         (char-equal (elt str (- length 1)) char))))
+
+(defun iterm-chop-newline (str)
+  (let ((length (length str)))
+    (if (iterm-last-char-p str ?\n)
+        (substring str 0 (- length 1))
+      str)))
+
+(defun iterm-maybe-add-newline (str)
+  (if (iterm-last-char-p str ? )
+      (concat str "\n")
+    str))
+
+  (defun enclose-brackets (str)
+    ;;        (let (result ""))
+    (setq str (concatenate  'string str "\n"))
+        str)
+
+
+(defun iterm-handle-newline (str)
+  (iterm-maybe-add-newline (iterm-chop-newline str)))
+
+(defun iterm-maybe-remove-empty-lines (str)
+  (if iterm-empty-line-regexp
+      (let ((regexp iterm-empty-line-regexp)
+            (lines (split-string str "\n")))
+        (mapconcat #'identity
+                   (delq nil (mapcar (lambda (line)
+                                       (unless (string-match-p regexp line)
+                                         line))
+                                     lines))
+                   "\n"))
+    str))
+
+(defun iterm-send-string (str)   
+  "Send STR to a running iTerm instance."
+  (let* ((str (iterm-maybe-remove-empty-lines str))
+         (str (iterm-handle-newline str))
+         (str (iterm-escape-string str)))
+    (shell-command (concat "osascript "
+                           "-e 'tell app \"iTerm2\"' "
+                           "-e 'tell current window' "
+                           "-e 'tell current session' "
+                           "-e 'write text \"" str "\"' "
+                           "-e 'end tell' "
+                           "-e 'end tell' "
+                           "-e 'end tell' "))))
+
+  (defun iterm-send-text-clipboard ()
+    (interactive)
+    (copy-region-as-kill 0 0 t)
+;; Could cut op the osa script into seperate file. 
+                    (shell-command (concat "osascript "
+    ;                                     "-e 'set the clipboard to \"" str "\"' "
+;                                         "-e 'tell application \"iTerm2\"' "
+;                                         "-e 'activate' "
+;                                         "-e 'end tell' "
+                                         "-e 'tell application \"iTerm\" to activate' "
+                                         "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
+                                         "-e 'keystroke \"v\" using {command down}' "
+;                                         "-e 'key down {return}' "
+;                                         "-e 'key up {return}' "
+;                                         "-e 'keystroke \"v\" using {command down}' "
+                                         "-e 'end tell' "
+;                                         "-e 'end tell' "
+                                         ))
+                    (shell-command "sleep 0.5")
+                    (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
+                    (shell-command "sleep 0.5")
+                    (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+)
+
+
+              (defun iterm-text-bounds ()
+                (pcase-let ((`(,beg . ,end) (if (use-region-p)
+                                                (cons (region-beginning) (region-end))
+                                              (bounds-of-thing-at-point
+                                               iterm-default-thing))))
+                  (list beg end)))
+
+              (defun iterm-send-text (beg end)
+                "Send buffer text in region from BEG to END to iTerm.
+              If called interactively without an active region, send text near
+              point (determined by `iterm-default-thing') instead."
+                (interactive (iterm-text-bounds))
+                (let ((str (buffer-substring-no-properties beg end)))
+                  (iterm-send-string str))
+                (forward-line 1))
+
+              (defun iterm-send-text-brackets (beg end)
+                "Send buffer text in region from BEG to END to iTerm.
+              If called interactively without an active region, send text near
+              point (determined by `iterm-default-thing') instead."
+                (interactive (iterm-text-bounds))
+                (let ((str (buffer-substring-no-properties beg end)))
+                  (setq str (enclose-brackets str))
+                  (message str)
+                (forward-line 1)))
+              (provide 'iterm)
