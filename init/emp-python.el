@@ -133,9 +133,9 @@
   (switch-to-buffer "*Python*")
   (other-window -1))
 
-(add-hook 'python-mode-hook
-          '(lambda()
-             (define-key python-mode-map (kbd "C-<return>") 'new-python-eval)))
+;; (add-hook 'python-mode-hook
+;;           '(lambda()
+;;              (define-key python-mode-map (kbd "C-<return>") 'new-python-eval)))
 
 (define-key python-mode-map (kbd "C-c c") 'python-send-my-buffer)
 
