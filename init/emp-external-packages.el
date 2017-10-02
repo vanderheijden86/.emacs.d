@@ -97,6 +97,7 @@
     jq-mode
     jedi
     company-jedi
+    robe
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

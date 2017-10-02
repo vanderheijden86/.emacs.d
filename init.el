@@ -1,4 +1,3 @@
-
 ;;; .emacs - Pascal van Kooten <kootenpv@gmail.com>
 
 ;;Benchmarking

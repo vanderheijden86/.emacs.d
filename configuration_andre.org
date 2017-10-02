@@ -1059,28 +1059,6 @@ Load company backend for go.
 
  
 
-*** Settings for autocompletion.
-
-Disable company mode for python.
-#+BEGIN_SRC emacs-lisp
-;;(add-to-list 'company-backends 'company-jedi)
-(setq company-global-modes '(not python-mode))
-#+END_SRC
-
-Set autocomplete settings:
-#+BEGIN_SRC emacs-lisp
-     (with-eval-after-load "auto-complete"
-       (setq ac-auto-show-menu t)
-       (setq ac-auto-start t)
-       (setq completion-at-point-functions '(auto-complete))
-       (set-face-background 'popup-summary-face "lightgrey")
-       (set-face-foreground 'popup-summary-face "black")
-       (set-face-background 'popup-menu-summary-face "lightgrey")
-       (set-face-underline 'popup-summary-face "lightgrey")
-       (set-face-background 'popup-tip-face "lightgrey")
-  )
-#+END_SRC
-
 *** Keybindings
 
 #+BEGIN_SRC emacs-lisp
@@ -1170,17 +1148,19 @@ jq mode for jquery files.
 ** Ruby
 Set custom keybindings for inf-ruby.
 
-# #+BEGIN_SRC emacs-lisp
-# (defun my-inf-ruby-mode-hook ()
-# ;;  (define-key global-map (kbd "M-.") nil)
-# ;;  (define-key global-map (kbd "M-,") nil)
-#   (local-set-key (kbd "C-<return>") 'ruby-send-line)
-# )
-# (add-hook 'inf-ruby-mode-hook 'my-inf-ruby-mode-hook)
-# #+END_SRC
-
 #+BEGIN_SRC emacs-lisp
-(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode 'robe-mode)
+(defun my-ruby-mode-hook ()
+;;  (define-key global-map (kbd "M-.") nil)
+;;  (define-key global-map (kbd "M-,") nil)
+(inf-ruby-minor-mode t)
+(robe-mode t)
+(robe-start)
+(local-set-key (kbd "C-<return>") 'ruby-send-line)
+(inf-ruby)
+(auto-complete-mode t)
+)
+
+(add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 #+END_SRC
 
 Load company backend for ruby.
@@ -1228,6 +1208,29 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
    (define-key sh-mode-map (kbd "M-.") 'ffap)
    (define-key yafolding-mode-map  (kbd "C-<return>") nil)
    (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
+  )
+#+END_SRC
+
+
+** Settings for autocompletion (Company vs Autocomplete)
+
+Disable company mode for python.
+#+BEGIN_SRC emacs-lisp
+;;(add-to-list 'company-backends 'company-jedi)
+(setq company-global-modes '(not python-mode not ruby-mode))
+#+END_SRC
+
+Set autocomplete settings:
+#+BEGIN_SRC emacs-lisp
+     (with-eval-after-load "auto-complete"
+       (setq ac-auto-show-menu t)
+       (setq ac-auto-start t)
+       (setq completion-at-point-functions '(auto-complete))
+       (set-face-background 'popup-summary-face "lightgrey")
+       (set-face-foreground 'popup-summary-face "black")
+       (set-face-background 'popup-menu-summary-face "lightgrey")
+       (set-face-underline 'popup-summary-face "lightgrey")
+       (set-face-background 'popup-tip-face "lightgrey")
   )
 #+END_SRC
 
@@ -1515,76 +1518,136 @@ buffer or something like that, it cd to the $HOME directory. It then focus the =
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-      (defun iterm-send-string (str)   
-        "Send STR to a running iTerm instance."
-        (let* ((str (iterm-maybe-remove-empty-lines str))
-               (str (iterm-handle-newline str))
-               (str (iterm-escape-string str)))
-          (shell-command (concat "osascript "
-                                 "-e 'tell app \"iTerm2\"' "
-                                 "-e 'tell current window' "
-                                 "-e 'tell current session' "
-                                 "-e 'write text \"" str "\"' "
-                                 "-e 'end tell' "
-                                 "-e 'end tell' "
-                                 "-e 'end tell' ")))
-;    (do-applescript "tell application \"iTerm2\" to activate")
-;    (shell-command "sleep 1.5")
-;    (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
-  )
-        (defun iterm-send-text-clipboard ()
-          (interactive)
-          (copy-region-as-kill 0 0 t)
-      ;; Could cut op the osa script into seperate file. 
-                          (shell-command (concat "osascript "
-          ;                                     "-e 'set the clipboard to \"" str "\"' "
-      ;                                         "-e 'tell application \"iTerm2\"' "
-      ;                                         "-e 'activate' "
-      ;                                         "-e 'end tell' "
-                                               "-e 'tell application \"iTerm\" to activate' "
-                                               "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
-                                               "-e 'keystroke \"v\" using {command down}' "
-      ;                                         "-e 'key down {return}' "
-      ;                                         "-e 'key up {return}' "
-      ;                                         "-e 'keystroke \"v\" using {command down}' "
-                                               "-e 'end tell' "
-      ;                                         "-e 'end tell' "
-                                               ))
-                          (shell-command "sleep 0.5")
-                          (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
-                          (shell-command "sleep 0.5")
-                          (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
-                          (message "Command pasted and executed into iTerm2.")
+        (defun iterm-send-string (str)   
+          "Send STR to a running iTerm instance."
+          (let* ((str (iterm-maybe-remove-empty-lines str))
+                 (str (iterm-handle-newline str))
+                 (str (iterm-escape-string str)))
+            (shell-command (concat "osascript "
+                                   "-e 'tell app \"iTerm2\"' "
+                                   "-e 'tell current window' "
+                                   "-e 'tell current session' "
+                                   "-e 'write text \"" str "\"' "
+                                   "-e 'end tell' "
+                                   "-e 'end tell' "
+                                   "-e 'end tell' ")))
+  ;    (do-applescript "tell application \"iTerm2\" to activate")
+  ;    (shell-command "sleep 1.5")
+  ;    (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+    )
+          (defun iterm-send-text-clipboard ()
+            (interactive) 
+                                          ; (copy-region-as-kill 0 0 t)
+            (new-python-get-text)
+        ;; Could cut op the osa script into seperate file. 
+                            (shell-command (concat "osascript "
+            ;                                     "-e 'set the clipboard to \"" str "\"' "
+        ;                                         "-e 'tell application \"iTerm2\"' "
+        ;                                         "-e 'activate' "
+        ;                                         "-e 'end tell' "
+                                                 "-e 'tell application \"iTerm\" to activate' "
+                                                 "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
+                                                 "-e 'keystroke \"v\" using {command down}' "
+        ;                                         "-e 'key down {return}' "
+        ;                                         "-e 'key up {return}' "
+        ;                                         "-e 'keystroke \"v\" using {command down}' "
+                                                 "-e 'end tell' "
+        ;                                         "-e 'end tell' "
+                                                 ))
+                            (shell-command "sleep 0.5")
+                            (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
+                            (shell-command "sleep 0.5")
+                            (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+                            (message "Command pasted and executed into iTerm2.")
+                            )
+
+
+                      (defun iterm-text-bounds ()
+                        (pcase-let ((`(,beg . ,end) (if (use-region-p)
+                                                        (cons (region-beginning) (region-end))
+                                                      (bounds-of-thing-at-point
+                                                       iterm-default-thing))))
+                          (list beg end)))
+
+                      (defun iterm-send-text (beg end)
+                        "Send buffer text in region from BEG to END to iTerm.
+                      If called interactively without an active region, send text near
+                      point (determined by `iterm-default-thing') instead."
+                        (interactive (iterm-text-bounds))
+                        (let ((str (buffer-substring-no-properties beg end)))
+                          (iterm-send-string str))
+                        (forward-line 1)
+                         (message "Command written into iTerm2.")
       )
 
-
-                    (defun iterm-text-bounds ()
-                      (pcase-let ((`(,beg . ,end) (if (use-region-p)
-                                                      (cons (region-beginning) (region-end))
-                                                    (bounds-of-thing-at-point
-                                                     iterm-default-thing))))
-                        (list beg end)))
-
-                    (defun iterm-send-text (beg end)
-                      "Send buffer text in region from BEG to END to iTerm.
-                    If called interactively without an active region, send text near
-                    point (determined by `iterm-default-thing') instead."
-                      (interactive (iterm-text-bounds))
-                      (let ((str (buffer-substring-no-properties beg end)))
-                        (iterm-send-string str))
-                      (forward-line 1)
-                       (message "Command written into iTerm2.")
-    )
-
-                    (defun iterm-send-text-brackets (beg end)
-                      "Send buffer text in region from BEG to END to iTerm.
-                    If called interactively without an active region, send text near
-                    point (determined by `iterm-default-thing') instead."
-                      (interactive (iterm-text-bounds))
-                      (let ((str (buffer-substring-no-properties beg end)))
-                        (setq str (enclose-brackets str))
-                        (message str)
-                      (forward-line 1)))
-                    (provide 'iterm)
+                      (defun iterm-send-text-brackets (beg end)
+                        "Send buffer text in region from BEG to END to iTerm.
+                      If called interactively without an active region, send text near
+                      point (determined by `iterm-default-thing') instead."
+                        (interactive (iterm-text-bounds))
+                        (let ((str (buffer-substring-no-properties beg end)))
+                          (setq str (enclose-brackets str))
+                          (message str)
+                        (forward-line 1)))
+                      (provide 'iterm)
 #+END_SRC
 
+*** Get Text Functions iPython Kootenpv
+
+#+BEGIN_SRC emacs-lisp
+
+(defun new-python-get-start ()
+  (interactive)
+  (ignore-errors
+    (while (looking-at "[ ]*$")
+      (next-line)
+      ))
+  (move-end-of-line 1)
+  (search-backward-regexp "^[@a-zA-Z0-9#\[\{]" 0 t)
+  (when (or (looking-at "else") (looking-at "elif") (looking-at "except") (looking-at "finally"))
+    (search-backward-regexp "^if" 0 t)
+    )
+  (ignore-errors
+    (previous-line)
+    (while (looking-at "[@a-zA-Z]")
+      (previous-line))
+    (next-line)
+    )
+  (point)
+  )
+
+(defun new-python-get-end ()
+  (interactive)
+  (ignore-errors
+    (while (looking-at "^[@a-zA-Z0-9#\[\{]")
+      (next-line)))
+  (if (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+      (progn (move-beginning-of-line 1)
+             (when (or (looking-at "elif") (looking-at "else"))
+               (search-forward-regexp "^else" (point-max) t)
+               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+               (left-char 1))
+             (when (or (looking-at "except"))
+               (search-forward-regexp "^except" (point-max) t)
+               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+               (left-char 1))
+             (when (or (looking-at "finally"))
+               (search-forward-regexp "^finally" (point-max) t)
+               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+               (left-char 1))
+             (point))
+    (point-max))
+  )
+
+(defun new-python-get-text ()
+  (interactive)
+  (ignore-errors
+    (let ((start (new-python-get-start))
+          (end (new-python-get-end)))
+      (when (eq (point-max) end)
+        (goto-char end))
+      (kill-ring-save start end)
+      ))
+  )
+
+#+END_SRC

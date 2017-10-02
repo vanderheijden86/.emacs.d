@@ -219,59 +219,6 @@
 
 
 
-(defun new-python-get-start ()
-  (interactive)
-  (ignore-errors
-    (while (looking-at "[ ]*$")
-      (next-line)
-      ))
-  (move-end-of-line 1)
-  (search-backward-regexp "^[@a-zA-Z0-9#\[\{]" 0 t)
-  (when (or (looking-at "else") (looking-at "elif") (looking-at "except") (looking-at "finally"))
-    (search-backward-regexp "^if" 0 t)
-    )
-  (ignore-errors
-    (previous-line)
-    (while (looking-at "[@a-zA-Z]")
-      (previous-line))
-    (next-line)
-    )
-  (point)
-  )
-
-(defun new-python-get-end ()
-  (interactive)
-  (ignore-errors
-    (while (looking-at "^[@a-zA-Z0-9#\[\{]")
-      (next-line)))
-  (if (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
-      (progn (move-beginning-of-line 1)
-             (when (or (looking-at "elif") (looking-at "else"))
-               (search-forward-regexp "^else" (point-max) t)
-               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
-               (left-char 1))
-             (when (or (looking-at "except"))
-               (search-forward-regexp "^except" (point-max) t)
-               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
-               (left-char 1))
-             (when (or (looking-at "finally"))
-               (search-forward-regexp "^finally" (point-max) t)
-               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
-               (left-char 1))
-             (point))
-    (point-max))
-  )
-
-(defun new-python-get-text ()
-  (interactive)
-  (ignore-errors
-    (let ((start (new-python-get-start))
-          (end (new-python-get-end)))
-      (when (eq (point-max) end)
-        (goto-char end))
-      (kill-ring-save start end)
-      ))
-  )
 
 (setenv "LC_CTYPE" "UTF-8")
 
