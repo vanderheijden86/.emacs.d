@@ -517,20 +517,6 @@ same directory as the org-buffer and insert a link to this file."
   ;;                   (setq-local flymake-start-syntax-check-on-newline t)
   ;;                   (setq flymake-no-changes-timeout 10000)
 
-;;(add-to-list 'company-backends 'company-jedi)
-(setq company-global-modes '(not python-mode))
-
-(with-eval-after-load "auto-complete"
-     (setq ac-auto-show-menu t)
-     (setq ac-auto-start t)
-     (setq completion-at-point-functions '(auto-complete))
-     (set-face-background 'popup-summary-face "lightgrey")
-     (set-face-foreground 'popup-summary-face "black")
-     (set-face-background 'popup-menu-summary-face "lightgrey")
-     (set-face-underline 'popup-summary-face "lightgrey")
-     (set-face-background 'popup-tip-face "lightgrey")
-)
-
 (defun my-python-keybindings-hook ()
    (define-key python-mode-map (kbd "<tab>") 'py-indent-line)
    (local-set-key (kbd "M-,") 'pop-tag-mark)
@@ -578,10 +564,12 @@ same directory as the org-buffer and insert a link to this file."
 ;;  (define-key global-map (kbd "M-,") nil)
 (inf-ruby-minor-mode t)
 (robe-mode t)
-(inf-ruby)
 (robe-start)
 (local-set-key (kbd "C-<return>") 'ruby-send-line)
+(inf-ruby)
+(auto-complete-mode t)
 )
+
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
 (eval-after-load 'company
@@ -613,6 +601,20 @@ same directory as the org-buffer and insert a link to this file."
  (define-key sh-mode-map (kbd "M-.") 'ffap)
  (define-key yafolding-mode-map  (kbd "C-<return>") nil)
  (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
+)
+
+;;(add-to-list 'company-backends 'company-jedi)
+(setq company-global-modes '(not python-mode not ruby-mode))
+
+(with-eval-after-load "auto-complete"
+     (setq ac-auto-show-menu t)
+     (setq ac-auto-start t)
+     (setq completion-at-point-functions '(auto-complete))
+     (set-face-background 'popup-summary-face "lightgrey")
+     (set-face-foreground 'popup-summary-face "black")
+     (set-face-background 'popup-menu-summary-face "lightgrey")
+     (set-face-underline 'popup-summary-face "lightgrey")
+     (set-face-background 'popup-tip-face "lightgrey")
 )
 
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
@@ -800,73 +802,128 @@ Set to nil to disable removing empty lines.")
     str))
 
 (defun iterm-send-string (str)   
-        "Send STR to a running iTerm instance."
-        (let* ((str (iterm-maybe-remove-empty-lines str))
-               (str (iterm-handle-newline str))
-               (str (iterm-escape-string str)))
-          (shell-command (concat "osascript "
-                                 "-e 'tell app \"iTerm2\"' "
-                                 "-e 'tell current window' "
-                                 "-e 'tell current session' "
-                                 "-e 'write text \"" str "\"' "
-                                 "-e 'end tell' "
-                                 "-e 'end tell' "
-                                 "-e 'end tell' ")))
-;    (do-applescript "tell application \"iTerm2\" to activate")
-;    (shell-command "sleep 1.5")
-;    (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
-  )
-        (defun iterm-send-text-clipboard ()
-          (interactive)
-          (copy-region-as-kill 0 0 t)
-      ;; Could cut op the osa script into seperate file. 
-                          (shell-command (concat "osascript "
-          ;                                     "-e 'set the clipboard to \"" str "\"' "
-      ;                                         "-e 'tell application \"iTerm2\"' "
-      ;                                         "-e 'activate' "
-      ;                                         "-e 'end tell' "
-                                               "-e 'tell application \"iTerm\" to activate' "
-                                               "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
-                                               "-e 'keystroke \"v\" using {command down}' "
-      ;                                         "-e 'key down {return}' "
-      ;                                         "-e 'key up {return}' "
-      ;                                         "-e 'keystroke \"v\" using {command down}' "
-                                               "-e 'end tell' "
-      ;                                         "-e 'end tell' "
-                                               ))
-                          (shell-command "sleep 0.5")
-                          (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
-                          (shell-command "sleep 0.5")
-                          (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
-                          (message "Command pasted and executed into iTerm2.")
+          "Send STR to a running iTerm instance."
+          (let* ((str (iterm-maybe-remove-empty-lines str))
+                 (str (iterm-handle-newline str))
+                 (str (iterm-escape-string str)))
+            (shell-command (concat "osascript "
+                                   "-e 'tell app \"iTerm2\"' "
+                                   "-e 'tell current window' "
+                                   "-e 'tell current session' "
+                                   "-e 'write text \"" str "\"' "
+                                   "-e 'end tell' "
+                                   "-e 'end tell' "
+                                   "-e 'end tell' ")))
+  ;    (do-applescript "tell application \"iTerm2\" to activate")
+  ;    (shell-command "sleep 1.5")
+  ;    (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+    )
+          (defun iterm-send-text-clipboard ()
+            (interactive) 
+            (copy-region-as-kill 0 0 t)
+;;            (new-python-get-text)
+        ;; Could cut op the osa script into seperate file. 
+                            (shell-command (concat "osascript "
+            ;                                     "-e 'set the clipboard to \"" str "\"' "
+        ;                                         "-e 'tell application \"iTerm2\"' "
+        ;                                         "-e 'activate' "
+        ;                                         "-e 'end tell' "
+                                                 "-e 'tell application \"iTerm\" to activate' "
+                                                 "-e 'tell application \"System Events\" to tell process \"iTerm2\"' "
+                                                 "-e 'keystroke \"v\" using {command down}' "
+        ;                                         "-e 'key down {return}' "
+        ;                                         "-e 'key up {return}' "
+        ;                                         "-e 'keystroke \"v\" using {command down}' "
+                                                 "-e 'end tell' "
+        ;                                         "-e 'end tell' "
+                                                 ))
+                            (shell-command "sleep 0.5")
+                            (do-applescript "tell application \"System Events\" to tell process \"iTerm2\" to keystroke return")
+                            (shell-command "sleep 0.5")
+                            (do-applescript "tell application \"System Events\" to keystroke {tab} using {command down}")
+                            (message "Command pasted and executed into iTerm2.")
+                            )
+
+
+                      (defun iterm-text-bounds ()
+                        (pcase-let ((`(,beg . ,end) (if (use-region-p)
+                                                        (cons (region-beginning) (region-end))
+                                                      (bounds-of-thing-at-point
+                                                       iterm-default-thing))))
+                          (list beg end)))
+
+                      (defun iterm-send-text (beg end)
+                        "Send buffer text in region from BEG to END to iTerm.
+                      If called interactively without an active region, send text near
+                      point (determined by `iterm-default-thing') instead."
+                        (interactive (iterm-text-bounds))
+                        (let ((str (buffer-substring-no-properties beg end)))
+                          (iterm-send-string str))
+                        (forward-line 1)
+                         (message "Command written into iTerm2.")
       )
 
+                      (defun iterm-send-text-brackets (beg end)
+                        "Send buffer text in region from BEG to END to iTerm.
+                      If called interactively without an active region, send text near
+                      point (determined by `iterm-default-thing') instead."
+                        (interactive (iterm-text-bounds))
+                        (let ((str (buffer-substring-no-properties beg end)))
+                          (setq str (enclose-brackets str))
+                          (message str)
+                        (forward-line 1)))
+                      (provide 'iterm)
 
-                    (defun iterm-text-bounds ()
-                      (pcase-let ((`(,beg . ,end) (if (use-region-p)
-                                                      (cons (region-beginning) (region-end))
-                                                    (bounds-of-thing-at-point
-                                                     iterm-default-thing))))
-                        (list beg end)))
-
-                    (defun iterm-send-text (beg end)
-                      "Send buffer text in region from BEG to END to iTerm.
-                    If called interactively without an active region, send text near
-                    point (determined by `iterm-default-thing') instead."
-                      (interactive (iterm-text-bounds))
-                      (let ((str (buffer-substring-no-properties beg end)))
-                        (iterm-send-string str))
-                      (forward-line 1)
-                       (message "Command written into iTerm2.")
+(defun new-python-get-start ()
+  (interactive)
+  (ignore-errors
+    (while (looking-at "[ ]*$")
+      (next-line)
+      ))
+  (move-end-of-line 1)
+  (search-backward-regexp "^[@a-zA-Z0-9#\[\{]" 0 t)
+  (when (or (looking-at "else") (looking-at "elif") (looking-at "except") (looking-at "finally"))
+    (search-backward-regexp "^if" 0 t)
     )
+  (ignore-errors
+    (previous-line)
+    (while (looking-at "[@a-zA-Z]")
+      (previous-line))
+    (next-line)
+    )
+  (point)
+  )
 
-                    (defun iterm-send-text-brackets (beg end)
-                      "Send buffer text in region from BEG to END to iTerm.
-                    If called interactively without an active region, send text near
-                    point (determined by `iterm-default-thing') instead."
-                      (interactive (iterm-text-bounds))
-                      (let ((str (buffer-substring-no-properties beg end)))
-                        (setq str (enclose-brackets str))
-                        (message str)
-                      (forward-line 1)))
-                    (provide 'iterm)
+(defun new-python-get-end ()
+  (interactive)
+  (ignore-errors
+    (while (looking-at "^[@a-zA-Z0-9#\[\{]")
+      (next-line)))
+  (if (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+      (progn (move-beginning-of-line 1)
+             (when (or (looking-at "elif") (looking-at "else"))
+               (search-forward-regexp "^else" (point-max) t)
+               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+               (left-char 1))
+             (when (or (looking-at "except"))
+               (search-forward-regexp "^except" (point-max) t)
+               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+               (left-char 1))
+             (when (or (looking-at "finally"))
+               (search-forward-regexp "^finally" (point-max) t)
+               (search-forward-regexp "^[@a-zA-Z0-9#\[\{]" (point-max) t)
+               (left-char 1))
+             (point))
+    (point-max))
+  )
+
+(defun new-python-get-text ()
+  (interactive)
+  (ignore-errors
+    (let ((start (new-python-get-start))
+          (end (new-python-get-end)))
+      (when (eq (point-max) end)
+        (goto-char end))
+      (kill-ring-save start end)
+      ))
+  )
