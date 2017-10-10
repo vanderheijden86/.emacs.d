@@ -244,12 +244,12 @@ Always enable =abbrev-mode=:
 ** Configure =helm=
 
 #+BEGIN_SRC emacs-lisp
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t
-      helm-echo-input-in-header-line t)
+  (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t
+        helm-echo-input-in-header-line t)
 #+END_SRC
 
 ** Configure =yafolding=
@@ -258,6 +258,118 @@ Always enable =abbrev-mode=:
   (define-key yafolding-mode-map (kbd "<s-S-return>") 'yafolding-hide-parent-element)
   (define-key yafolding-mode-map (kbd "<s-M-return>") 'yafolding-toggle-all) 
   (define-key yafolding-mode-map (kbd "<s-return>") 'yafolding-toggle-element)
+#+END_SRC
+** Configure =dired=
+
+Do not use _helm_ mode in dired, this causes copy / replace errors. 
+
+#+BEGIN_SRC emacs-lisp
+
+  (defun my-dired-mode-hook ()
+    ;; Let us have a key that puts the dired buffer into interactive renaming mode
+    (helm-mode 0)
+    )
+
+  (add-hook 'dired-mode-hook
+            'my-dired-mode-hook)
+
+
+#+END_SRC
+
+Do not send --dired to ls, this gives error.
+
+#+BEGIN_SRC emacs-lisp
+(setq dired-use-ls-dired nil)
+#+END_SRC
+
+Do not hide dired details. (mode of dired+)
+
+#+BEGIN_SRC emacs-lisp
+(setq diredp-hide-details-initially-flag nil)
+#+END_SRC
+
+Reuse the current dired-buffer, stops opening dozens of windows.
+#+BEGIN_SRC emacs-lisp
+(toggle-diredp-find-file-reuse-dir nil)
+#+END_SRC
+
+
+
+Load up the assorted =dired= extensions.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'dired-x)
+  (require 'dired+)
+  (require 'dired-open)
+#+END_SRC
+
+Open media with the appropriate programs.
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-open-extensions
+        '(("pdf" . "evince")
+          ("mkv" . "vlc")
+          ("mp4" . "vlc")
+          ("avi" . "vlc")))
+#+END_SRC
+
+These are the switches that get passed to =ls= when =dired= gets a list of
+files. We're using:
+
+- =l=: Use the long listing format.
+- =h=: Use human-readable sizes.
+- =v=: Sort numbers naturally.
+- =A=: Almost all. Doesn't include "=.=" or "=..=".
+
+# #+BEGIN_SRC emacs-lisp
+#   (setq-default dired-listing-switches "-lhvA")
+# #+END_SRC
+
+Use "j" and "k" to move around in =dired=.
+
+# #+BEGIN_SRC emacs-lisp
+#   (evil-define-key 'normal dired-mode-map (kbd "j") 'dired-next-line)
+#   (evil-define-key 'normal dired-mode-map (kbd "k") 'dired-previous-line)
+# #+END_SRC
+
+Kill buffers of files/directories that are deleted in =dired=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-clean-up-buffers-too t)
+#+END_SRC
+
+Always copy directories recursively instead of asking every time.
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-recursive-copies 'always)
+#+END_SRC
+
+Ask before recursively /deleting/ a directory, though.
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-recursive-deletes 'top)
+#+END_SRC
+
+** Configure autocompletion (Company vs Autocomplete)
+
+Disable company mode for python.
+#+BEGIN_SRC emacs-lisp
+;;(add-to-list 'company-backends 'company-jedi)
+(setq company-global-modes '(not python-mode not ruby-mode))
+#+END_SRC
+
+Set autocomplete settings:
+#+BEGIN_SRC emacs-lisp
+     (with-eval-after-load "auto-complete"
+       (setq ac-auto-show-menu t)
+       (setq ac-auto-start t)
+       (setq completion-at-point-functions '(auto-complete))
+       (set-face-background 'popup-summary-face "lightgrey")
+       (set-face-foreground 'popup-summary-face "black")
+       (set-face-background 'popup-menu-summary-face "lightgrey")
+       (set-face-underline 'popup-summary-face "lightgrey")
+       (set-face-background 'popup-tip-face "lightgrey")
+  )
 #+END_SRC
 
 ** Use =smex= to handle =M-x= with =ido=
@@ -457,6 +569,8 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 (setq mac-command-modifier 'super)
 (set-keyboard-coding-system nil)
 #+END_SRC
+
+
 
 * publishing and task management with Org-mode
 ** Display preferences
@@ -856,7 +970,7 @@ chars so you can continue typing without having to move point.
 
 
 #+BEGIN_SRC emacs-lisp
-(defvar org-electric-pairs '((?\* . ?\*) (?/ . ?/) (?= . ?=)
+(defvar org-electric-pairs '((?/ . ?/) (?= . ?=)
                              (?\_ . ?\_) (?~ . ?~) (?+ . ?+)) "Electric pairs for org-mode.")
 
 (defun org-add-electric-pairs ()
@@ -867,81 +981,6 @@ chars so you can continue typing without having to move point.
 
 #+END_SRC
 
-* =dired=
-
-Do not send --dired to ls, this gives error.
-
-#+BEGIN_SRC emacs-lisp
-(setq dired-use-ls-dired nil)
-#+END_SRC
-
-Do not hide dired details. (mode of dired+)
-
-#+BEGIN_SRC emacs-lisp
-(setq diredp-hide-details-initially-flag nil)
-#+END_SRC
-
-Reuse the current dired-buffer, stops opening dozens of windows.
-#+BEGIN_SRC emacs-lisp
-(toggle-diredp-find-file-reuse-dir nil)
-#+END_SRC
-
-
-
-Load up the assorted =dired= extensions.
-
-#+BEGIN_SRC emacs-lisp
-  (require 'dired-x)
-  (require 'dired+)
-  (require 'dired-open)
-#+END_SRC
-
-Open media with the appropriate programs.
-
-#+BEGIN_SRC emacs-lisp
-  (setq dired-open-extensions
-        '(("pdf" . "evince")
-          ("mkv" . "vlc")
-          ("mp4" . "vlc")
-          ("avi" . "vlc")))
-#+END_SRC
-
-These are the switches that get passed to =ls= when =dired= gets a list of
-files. We're using:
-
-- =l=: Use the long listing format.
-- =h=: Use human-readable sizes.
-- =v=: Sort numbers naturally.
-- =A=: Almost all. Doesn't include "=.=" or "=..=".
-
-# #+BEGIN_SRC emacs-lisp
-#   (setq-default dired-listing-switches "-lhvA")
-# #+END_SRC
-
-Use "j" and "k" to move around in =dired=.
-
-# #+BEGIN_SRC emacs-lisp
-#   (evil-define-key 'normal dired-mode-map (kbd "j") 'dired-next-line)
-#   (evil-define-key 'normal dired-mode-map (kbd "k") 'dired-previous-line)
-# #+END_SRC
-
-Kill buffers of files/directories that are deleted in =dired=.
-
-#+BEGIN_SRC emacs-lisp
-  (setq dired-clean-up-buffers-too t)
-#+END_SRC
-
-Always copy directories recursively instead of asking every time.
-
-#+BEGIN_SRC emacs-lisp
-  (setq dired-recursive-copies 'always)
-#+END_SRC
-
-Ask before recursively /deleting/ a directory, though.
-
-#+BEGIN_SRC emacs-lisp
-  (setq dired-recursive-deletes 'top)
-#+END_SRC
 
 * Programming Language Tools
 ** GO
@@ -1087,8 +1126,7 @@ Load company backend for go.
 )
 #+END_SRC    
 
-
-** Node-js
+** Javascript
 *** js2-mode
 
 Load js2-mode for javascript files
@@ -1096,6 +1134,17 @@ Load js2-mode for javascript files
 #+BEGIN_SRC emacs-lisp
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+#+END_SRC
+
+*** Setup Hook
+#+BEGIN_SRC emacs-lisp
+  (defun my-js2-mode-hook ()
+    (yafolding-mode)
+    (company-mode-on)
+    (helm-mode)
+    )
+  (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 #+END_SRC
 
@@ -1161,11 +1210,13 @@ Set custom keybindings for inf-ruby.
 ;;  (define-key global-map (kbd "M-,") nil)
 (inf-ruby-minor-mode t)
 (robe-mode t)
-(robe-start)
+; (inf-ruby)
 (local-set-key (kbd "C-<return>") 'ruby-send-line)
-(inf-ruby)
+; (robe-start)
 (auto-complete-mode t)
+(yafolding-mode t)
 )
+
 
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 #+END_SRC
@@ -1186,7 +1237,7 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
               (flycheck-mode +1)
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
               (eldoc-mode +1)
-              (tide-hl-identifier-mode +1)
+              (tide-hl-identifier-mode 0)
               (yafolding-mode)
               ;; company is an optional dependency. You have to
               ;; install it separately via package-install
@@ -1219,34 +1270,15 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 #+END_SRC
 
 
-** Settings for autocompletion (Company vs Autocomplete)
-
-Disable company mode for python.
-#+BEGIN_SRC emacs-lisp
-;;(add-to-list 'company-backends 'company-jedi)
-(setq company-global-modes '(not python-mode not ruby-mode))
-#+END_SRC
-
-Set autocomplete settings:
-#+BEGIN_SRC emacs-lisp
-     (with-eval-after-load "auto-complete"
-       (setq ac-auto-show-menu t)
-       (setq ac-auto-start t)
-       (setq completion-at-point-functions '(auto-complete))
-       (set-face-background 'popup-summary-face "lightgrey")
-       (set-face-foreground 'popup-summary-face "black")
-       (set-face-background 'popup-menu-summary-face "lightgrey")
-       (set-face-underline 'popup-summary-face "lightgrey")
-       (set-face-background 'popup-tip-face "lightgrey")
-  )
-#+END_SRC
-
-
    
 * General Custom Keybindings
 Hit F10 to toggle between =fullscreen= and back.
 
 #+BEGIN_SRC emacs-lisp
+(define-key global-map (kbd "s-c") 'kill-ring-save)
+(define-key global-map (kbd "s-a") 'mark-whole-buffer)
+(define-key global-map (kbd "s-l") 'goto-line)
+(define-key global-map (kbd "M-s-.") 'ffap)
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
