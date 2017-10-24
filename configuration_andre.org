@@ -422,6 +422,10 @@ I want to always move the focus to the just opened temp-buffer (help buffer).
 (setq help-window-select t)
 #+END_SRC
 
+** Enble helm mode by default.
+#+BEGIN_SRC emacs-lisp
+(helm-mode 1)
+#+END_SRC
 
 ** Linting prose
 
@@ -1278,6 +1282,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (define-key global-map (kbd "s-c") 'kill-ring-save)
 (define-key global-map (kbd "s-a") 'mark-whole-buffer)
 (define-key global-map (kbd "s-l") 'goto-line)
+(define-key global-map (kbd "M-f") 'company-files)
 (define-key global-map (kbd "M-s-.") 'ffap)
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
@@ -1305,12 +1310,38 @@ Hit F10 to toggle between =fullscreen= and back.
 * Misc Tools
 ** =magit=
 
-Magit custom settings for References buffer.
+Magit custom settings for References buffer and log buffer.
 
 #+BEGIN_SRC emacs-lisp
 (setq magit-refs-show-commit-count nil)
+(setq magit-log-arguments '("-n256" "--graph" "--decorate" "--color"))
 ;(setq magit-refs-margin nil)
 #+END_SRC
+
+Save window configuration before Ediff and restore afterwards.
+
+#+BEGIN_SRC emacs-lisp
+(defvar my-ediff-last-windows nil)
+
+(defun my-store-pre-ediff-winconfig ()
+  (setq my-ediff-last-windows (current-window-configuration)))
+
+(defun my-restore-pre-ediff-winconfig ()
+  (set-window-configuration my-ediff-last-windows))
+
+(add-hook 'ediff-before-setup-hook #'my-store-pre-ediff-winconfig)
+(add-hook 'ediff-quit-hook #'my-restore-pre-ediff-winconfig)
+#+END_SRC
+
+
+Hook for magit-mode to disable helm.
+#+BEGIN_SRC emacs-lisp
+  (defun my-magit-mode-hook ()
+              (helm-mode 0)
+  )
+  (add-hook 'magit-mode-hook 'my-magit-mode-hook)
+#+END_SRC
+
   
 ** Gitgutter
 
@@ -1411,7 +1442,6 @@ Set company-yasnippet global keybinding.
 # #+END_SRC
 
 ** helm-descbinds
-
 #+BEGIN_SRC emacs-lisp
 (define-key global-map (kbd "C-h b") 'helm-descbinds)
 #+END_SRC
@@ -1419,11 +1449,13 @@ Set company-yasnippet global keybinding.
 ** helm-ag for searching.
 
 #+BEGIN_SRC emacs-lisp 
-(define-key global-map (kbd "M-s h") 'helm-ag)
-
-    (eval-after-load 'helm-ag
-      (custom-set-variables
-       '(helm-follow-mode-persistent t)))
+  (define-key global-map (kbd "M-s h") 'helm-ag)
+  (eval-after-load 'helm-ag
+    (custom-set-variables
+     '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+     '(helm-ag-command-option "--all-text")
+     '(helm-ag-insert-at-point 'symbol)
+     '(helm-follow-mode-persistent t)))
 #+END_SRC
 
 ** helm-imenu for navigating in buffer.

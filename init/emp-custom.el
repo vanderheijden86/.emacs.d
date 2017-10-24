@@ -40,11 +40,14 @@
  '(global-eldoc-mode t)
  '(go-mode-hook (quote (my-go-mode-hook git-gutter-mode flycheck-mode)))
  '(goflymake-debug t)
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-insert-at-point (quote symbol))
  '(helm-follow-mode-persistent t)
  '(helm-mode t)
  '(helm-source-names-using-follow
    (quote
-    ("global-mark-ring" "Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
+    ("Occur" "global-mark-ring" "Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-symbol-colors
    (--map

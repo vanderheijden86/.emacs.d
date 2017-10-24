@@ -135,6 +135,54 @@
       helm-ff-file-name-history-use-recentf t
       helm-echo-input-in-header-line t)
 
+(define-key yafolding-mode-map (kbd "<s-S-return>") 'yafolding-hide-parent-element)
+(define-key yafolding-mode-map (kbd "<s-M-return>") 'yafolding-toggle-all) 
+(define-key yafolding-mode-map (kbd "<s-return>") 'yafolding-toggle-element)
+
+(defun my-dired-mode-hook ()
+  ;; Let us have a key that puts the dired buffer into interactive renaming mode
+  (helm-mode 0)
+  )
+
+(add-hook 'dired-mode-hook
+          'my-dired-mode-hook)
+
+(setq dired-use-ls-dired nil)
+
+(setq diredp-hide-details-initially-flag nil)
+
+(toggle-diredp-find-file-reuse-dir nil)
+
+(require 'dired-x)
+(require 'dired+)
+(require 'dired-open)
+
+(setq dired-open-extensions
+      '(("pdf" . "evince")
+        ("mkv" . "vlc")
+        ("mp4" . "vlc")
+        ("avi" . "vlc")))
+
+(setq dired-clean-up-buffers-too t)
+
+(setq dired-recursive-copies 'always)
+
+(setq dired-recursive-deletes 'top)
+
+;;(add-to-list 'company-backends 'company-jedi)
+(setq company-global-modes '(not python-mode not ruby-mode))
+
+(with-eval-after-load "auto-complete"
+     (setq ac-auto-show-menu t)
+     (setq ac-auto-start t)
+     (setq completion-at-point-functions '(auto-complete))
+     (set-face-background 'popup-summary-face "lightgrey")
+     (set-face-foreground 'popup-summary-face "black")
+     (set-face-background 'popup-menu-summary-face "lightgrey")
+     (set-face-underline 'popup-summary-face "lightgrey")
+     (set-face-background 'popup-tip-face "lightgrey")
+)
+
 (smex-initialize)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
@@ -149,6 +197,8 @@
 (setq-default fill-column 100)
 
 (setq help-window-select t)
+
+(helm-mode 1)
 
 (require 'flycheck)
 
@@ -421,7 +471,7 @@ same directory as the org-buffer and insert a link to this file."
             (LaTeX-math-mode)
             (setq TeX-master t)))
 
-(defvar org-electric-pairs '((?\* . ?\*) (?/ . ?/) (?= . ?=)
+(defvar org-electric-pairs '((?/ . ?/) (?= . ?=)
                              (?\_ . ?\_) (?~ . ?~) (?+ . ?+)) "Electric pairs for org-mode.")
 
 (defun org-add-electric-pairs ()
@@ -429,28 +479,6 @@ same directory as the org-buffer and insert a link to this file."
   (setq-local electric-pair-text-pairs electric-pair-pairs))
 
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
-
-(setq dired-use-ls-dired nil)
-
-(setq diredp-hide-details-initially-flag nil)
-
-(toggle-diredp-find-file-reuse-dir nil)
-
-(require 'dired-x)
-(require 'dired+)
-(require 'dired-open)
-
-(setq dired-open-extensions
-      '(("pdf" . "evince")
-        ("mkv" . "vlc")
-        ("mp4" . "vlc")
-        ("avi" . "vlc")))
-
-(setq dired-clean-up-buffers-too t)
-
-(setq dired-recursive-copies 'always)
-
-(setq dired-recursive-deletes 'top)
 
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
@@ -535,6 +563,13 @@ same directory as the org-buffer and insert a link to this file."
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+(defun my-js2-mode-hook ()
+  (yafolding-mode)
+  (company-mode-on)
+  (helm-mode)
+  )
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
 (with-eval-after-load "nodejs-repl-mode"
   (require 'nodejs-repl-eval)
 )
@@ -564,11 +599,13 @@ same directory as the org-buffer and insert a link to this file."
 ;;  (define-key global-map (kbd "M-,") nil)
 (inf-ruby-minor-mode t)
 (robe-mode t)
-(robe-start)
+; (inf-ruby)
 (local-set-key (kbd "C-<return>") 'ruby-send-line)
-(inf-ruby)
+; (robe-start)
 (auto-complete-mode t)
+(yafolding-mode t)
 )
+
 
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
@@ -580,7 +617,7 @@ same directory as the org-buffer and insert a link to this file."
               (flycheck-mode +1)
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
               (eldoc-mode +1)
-              (tide-hl-identifier-mode +1)
+              (tide-hl-identifier-mode 0)
               (yafolding-mode)
               ;; company is an optional dependency. You have to
               ;; install it separately via package-install
@@ -593,30 +630,21 @@ same directory as the org-buffer and insert a link to this file."
 
 (with-eval-after-load "typescript"
  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
- (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+ (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
  (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
 )
 
 (with-eval-after-load "shell"
  (define-key sh-mode-map (kbd "M-.") 'ffap)
- (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+ (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
  (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
 )
 
-;;(add-to-list 'company-backends 'company-jedi)
-(setq company-global-modes '(not python-mode not ruby-mode))
-
-(with-eval-after-load "auto-complete"
-     (setq ac-auto-show-menu t)
-     (setq ac-auto-start t)
-     (setq completion-at-point-functions '(auto-complete))
-     (set-face-background 'popup-summary-face "lightgrey")
-     (set-face-foreground 'popup-summary-face "black")
-     (set-face-background 'popup-menu-summary-face "lightgrey")
-     (set-face-underline 'popup-summary-face "lightgrey")
-     (set-face-background 'popup-tip-face "lightgrey")
-)
-
+(define-key global-map (kbd "s-c") 'kill-ring-save)
+(define-key global-map (kbd "s-a") 'mark-whole-buffer)
+(define-key global-map (kbd "s-l") 'goto-line)
+(define-key global-map (kbd "M-f") 'company-files)
+(define-key global-map (kbd "M-s-.") 'ffap)
 (define-key global-map (kbd "<f10>") 'maximize-frame-toggle)
 (define-key global-map (kbd "<end>") 'org-end-of-line)
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
@@ -639,7 +667,13 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "s-d") 'iterm-goto-filedir-or-home)
 
 (setq magit-refs-show-commit-count nil)
+(setq magit-log-arguments '("-n256" "--graph" "--decorate" "--color"))
 ;(setq magit-refs-margin nil)
+
+(defun my-magit-mode-hook ()
+            (helm-mode 0)
+)
+(add-hook 'magit-mode-hook 'my-magit-mode-hook)
 
 (global-git-gutter-mode t)
 
@@ -694,10 +728,12 @@ same directory as the org-buffer and insert a link to this file."
 (define-key global-map (kbd "C-h b") 'helm-descbinds)
 
 (define-key global-map (kbd "M-s h") 'helm-ag)
-
-    (eval-after-load 'helm-ag
-      (custom-set-variables
-       '(helm-follow-mode-persistent t)))
+(eval-after-load 'helm-ag
+  (custom-set-variables
+   '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+   '(helm-ag-command-option "--all-text")
+   '(helm-ag-insert-at-point 'symbol)
+   '(helm-follow-mode-persistent t)))
 
 (eval-after-load 'helm-semantic-or-imenu
   (custom-set-variables
