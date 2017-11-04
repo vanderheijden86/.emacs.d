@@ -626,6 +626,9 @@ Show inline images by default when starting org documents.
 Set the maximal width of these org inline images.
 #+BEGIN_SRC emacs-lisp
 (setq org-image-actual-width 600)
+
+
+
 #+END_SRC
 
 ** Task and org-capture management
@@ -697,30 +700,47 @@ Take a =screenshot= into a time stamped unique-named file in the
 same directory as the org-buffer and insert a link to this file.
 
 #+BEGIN_SRC emacs-lisp
-(defun take-org-screenshot ()
-  "Take a screenshot into a time stamped unique-named file in the
-same directory as the org-buffer and insert a link to this file."
-  (interactive)
-  ;(org-display-inline-images)
-  (setq filename
-        (concat
-         (make-temp-name
-          (concat (file-name-nondirectory (buffer-file-name))
-                  "_imgs/"
-                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
-  (unless (file-exists-p (file-name-directory filename))
-    (make-directory (file-name-directory filename)))
-  ; take screenshot
-  (if (eq system-type 'darwin)
-      (call-process "screencapture" nil nil nil "-i" filename))
-  (if (eq system-type 'gnu/linux)
-      (call-process "import" nil nil nil filename))
-  ; insert into file if correctly taken
-  (if (file-exists-p filename)
-    (insert (concat "[[file:" filename "]]"))))
+  (defun take-org-screenshot ()
+    "Take a screenshot into a time stamped unique-named file in the
+  same directory as the org-buffer and insert a link to this file."
+    (interactive)
+                                          ;(org-display-inline-images)
+    (setq filename
+          (concat
+           (make-temp-name
+            (concat (file-name-nondirectory (buffer-file-name))
+                    "_imgs/"
+                    (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+    (unless (file-exists-p (file-name-directory filename))
+      (make-directory (file-name-directory filename)))
+                                          ; take screenshot
+    (if (eq system-type 'darwin)
+        (call-process "screencapture" nil nil nil "-i" filename))
+    (if (eq system-type 'gnu/linux)
+        (call-process "import" nil nil nil filename))
+                                          ; insert into file if correctly taken
+    (if (file-exists-p filename)
+        (insert (concat "[[file:" filename "]]")))
+    )
 
   (define-key global-map "\C-x\p" 'take-org-screenshot)
 #+END_SRC
+
+Function to resize org images, in hundreds of points.
+
+#+BEGIN_SRC emacs-lisp
+  (defun org-set-image-width ()
+    (interactive)
+    (setq width (read-string "Enter org image width: "))
+    (setq width (string-to-int width))
+    (setq width (* width 100))
+    (setq org-image-actual-width width)
+    (message "Set org image width to: %s" width)
+    )
+
+  (with-eval-after-load "org" (define-key org-mode-map (kbd "s-z") 'org-set-image-width))
+#+END_SRC
+
 
 **** Capturing tasks
 
@@ -992,14 +1012,14 @@ chars so you can continue typing without having to move point.
 Enable gorepl-mode in go-mode buffers:
 
 #+BEGIN_SRC emacs-lisp
-;;(add-hook 'go-mode-hook 'gorepl-mode)
-(add-hook 'go-mode-hook 'flycheck-mode)
-;;(add-hook 'go-mode-hook 'flycheck-mode)
-(add-hook 'go-mode-hook 'git-gutter-mode)
-(add-hook 'go-mode-hook 'go-eldoc-setup)
+  ;;(add-hook 'go-mode-hook 'gorepl-mode)
+  (add-hook 'go-mode-hook 'flycheck-mode)
+  ;;(add-hook 'go-mode-hook 'flycheck-mode)
+  (add-hook 'go-mode-hook 'git-gutter-mode)
+  (add-hook 'go-mode-hook 'go-eldoc-setup)
 
-;; (add-hook 'go-mode-hook 'flycheck-gometalinter-setup)
-;;(remove-hook 'go-mode-hook 'flymake-mode)
+  ;; (add-hook 'go-mode-hook 'flycheck-gometalinter-setup)
+  ;;(remove-hook 'go-mode-hook 'flymake-mode)
 #+END_SRC
 
 
@@ -1141,6 +1161,17 @@ Load js2-mode for javascript files
 
 #+END_SRC
 
+*** Refactor and Xref
+Don't work as fine as they are supposed to, removed them.
+*** Autocompletion
+
+#+BEGIN_SRC emacs-lisp 
+  (add-hook 'js2-mode-hook (lambda ()
+                             (tern-mode)
+                             (add-to-list 'company-backends 'company-tern)
+                             (company-mode)))
+                           
+#+END_SRC
 *** Setup Hook
 #+BEGIN_SRC emacs-lisp
   (defun my-js2-mode-hook ()
@@ -1342,7 +1373,6 @@ Hook for magit-mode to disable helm.
   (add-hook 'magit-mode-hook 'my-magit-mode-hook)
 #+END_SRC
 
-  
 ** Gitgutter
 
 #+BEGIN_SRC emacs-lisp
@@ -1443,7 +1473,7 @@ Set company-yasnippet global keybinding.
 
 ** helm-descbinds
 #+BEGIN_SRC emacs-lisp
-(define-key global-map (kbd "C-h b") 'helm-descbinds)
+  (define-key global-map (kbd "C-h b") 'helm-descbinds)
 #+END_SRC
 
 ** helm-ag for searching.

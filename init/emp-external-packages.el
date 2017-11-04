@@ -98,6 +98,9 @@
     jedi
     company-jedi
     robe
+    xref-js2
+    js2-refactor
+    company-tern
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

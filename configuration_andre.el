@@ -1,4 +1,3 @@
-
 (defun hrs/view-buffer-name ()
   "Display the filename of the current buffer."
   (interactive)
@@ -332,7 +331,7 @@
   "Take a screenshot into a time stamped unique-named file in the
 same directory as the org-buffer and insert a link to this file."
   (interactive)
-  ;(org-display-inline-images)
+                                        ;(org-display-inline-images)
   (setq filename
         (concat
          (make-temp-name
@@ -341,16 +340,28 @@ same directory as the org-buffer and insert a link to this file."
                   (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
   (unless (file-exists-p (file-name-directory filename))
     (make-directory (file-name-directory filename)))
-  ; take screenshot
+                                        ; take screenshot
   (if (eq system-type 'darwin)
       (call-process "screencapture" nil nil nil "-i" filename))
   (if (eq system-type 'gnu/linux)
       (call-process "import" nil nil nil filename))
-  ; insert into file if correctly taken
+                                        ; insert into file if correctly taken
   (if (file-exists-p filename)
-    (insert (concat "[[file:" filename "]]"))))
+      (insert (concat "[[file:" filename "]]")))
+  )
 
-  (define-key global-map "\C-x\p" 'take-org-screenshot)
+(define-key global-map "\C-x\p" 'take-org-screenshot)
+
+(defun org-set-image-width ()
+  (interactive)
+  (setq width (read-string "Enter org image width: "))
+  (setq width (string-to-int width))
+  (setq width (* width 100))
+  (setq org-image-actual-width width)
+  (message "Set org image width to: %s" width)
+  )
+
+(with-eval-after-load "org" (define-key org-mode-map (kbd "s-z") 'org-set-image-width))
 
 (setq org-capture-templates
       '(("b" "Blog idea"
@@ -539,7 +550,7 @@ same directory as the org-buffer and insert a link to this file."
 )
 
 
-                     
+
   (add-hook 'python-mode-hook 'my-python-mode-hook)
   ;; (flymake-mode t)
   ;;                   (setq-local flymake-start-syntax-check-on-newline t)
@@ -562,6 +573,11 @@ same directory as the org-buffer and insert a link to this file."
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(add-hook 'js2-mode-hook (lambda ()
+                           (tern-mode)
+                           (add-to-list 'company-backends 'company-tern)
+                           (company-mode)))
 
 (defun my-js2-mode-hook ()
   (yafolding-mode)
@@ -670,6 +686,17 @@ same directory as the org-buffer and insert a link to this file."
 (setq magit-log-arguments '("-n256" "--graph" "--decorate" "--color"))
 ;(setq magit-refs-margin nil)
 
+(defvar my-ediff-last-windows nil)
+
+(defun my-store-pre-ediff-winconfig ()
+  (setq my-ediff-last-windows (current-window-configuration)))
+
+(defun my-restore-pre-ediff-winconfig ()
+  (set-window-configuration my-ediff-last-windows))
+
+(add-hook 'ediff-before-setup-hook #'my-store-pre-ediff-winconfig)
+(add-hook 'ediff-quit-hook #'my-restore-pre-ediff-winconfig)
+
 (defun my-magit-mode-hook ()
             (helm-mode 0)
 )
@@ -759,7 +786,7 @@ same directory as the org-buffer and insert a link to this file."
   (interactive)
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-    "~/"
+	"~/"
       (file-name-directory filename))))
 
 (defun iterm-goto-filedir-or-home ()
