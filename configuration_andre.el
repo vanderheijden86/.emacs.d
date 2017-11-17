@@ -96,6 +96,36 @@
 
 (global-prettify-symbols-mode t)
 
+(defmacro diminish-minor-mode (filename mode &optional abbrev)
+  `(eval-after-load (symbol-name ,filename)
+     '(diminish ,mode ,abbrev)))
+
+(defmacro diminish-major-mode (mode-hook abbrev)
+  `(add-hook ,mode-hook
+             (lambda () (setq mode-name ,abbrev))))
+
+(diminish-minor-mode 'abbrev 'abbrev-mode)
+(diminish-minor-mode 'simple 'auto-fill-function)
+(diminish-minor-mode 'company 'company-mode)
+(diminish-minor-mode 'eldoc 'eldoc-mode)
+(diminish-minor-mode 'flycheck 'flycheck-mode)
+(diminish-minor-mode 'flyspell 'flyspell-mode)
+(diminish-minor-mode 'global-whitespace 'global-whitespace-mode)
+(diminish-minor-mode 'projectile 'projectile-mode)
+(diminish-minor-mode 'ruby-end 'ruby-end-mode)
+(diminish-minor-mode 'subword 'subword-mode)
+(diminish-minor-mode 'undo-tree 'undo-tree-mode)
+(diminish-minor-mode 'yard-mode 'yard-mode)
+(diminish-minor-mode 'yasnippet 'yas-minor-mode)
+(diminish-minor-mode 'wrap-region 'wrap-region-mode)
+
+(diminish-minor-mode 'paredit 'paredit-mode " π")
+
+(diminish-major-mode 'emacs-lisp-mode-hook "el")
+(diminish-major-mode 'haskell-mode-hook "λ=")
+(diminish-major-mode 'lisp-interaction-mode-hook "λ")
+(diminish-major-mode 'python-mode-hook "Py")
+
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 (add-hook 'after-init-hook 'global-company-mode)
@@ -455,7 +485,8 @@ same directory as the org-buffer and insert a link to this file."
    (gnuplot . t)
    (js . t)
    (go . t)
-   (python . t)))
+   (python . t)
+   (typescript . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -571,20 +602,16 @@ same directory as the org-buffer and insert a link to this file."
                (define-key python-mode-map (kbd "s-<return>") 'iterm-send-text-clipboard)
 )
 
-(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(require 'typescript-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
 
 (add-hook 'js2-mode-hook (lambda ()
-                           (tern-mode)
-                           (add-to-list 'company-backends 'company-tern)
-                           (company-mode)))
-
-(defun my-js2-mode-hook ()
-  (yafolding-mode)
-  (company-mode-on)
-  (helm-mode)
-  )
-(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+                             (tern-mode)
+                             (add-to-list 'company-backends 'company-tern)
+                             (company-mode)
+                             (yafolding-mode)
+                             (helm-mode)
+))
 
 (with-eval-after-load "nodejs-repl-mode"
   (require 'nodejs-repl-eval)
@@ -640,21 +667,30 @@ same directory as the org-buffer and insert a link to this file."
               (company-mode-on)
               (helm-mode)
   )
-  (add-hook 'typescript-mode-hook 'my-typescript-mode-hook)
+(add-hook 'typescript-mode-hook 'my-typescript-mode-hook 'my-typescript-keybindings-hook)
 (setq tide-tssserver-executable "~/.nvm/versions/node/v6.10.3/bin/tsserver")
 (setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
 
-(with-eval-after-load "typescript"
- (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
- (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
- (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
-)
+(defun my-typescript-keybindings-hook ()
+  (interactive)
+  (define-key typescript-mode-map (kbd "s-n") 'tide-nav)
+  (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
+  (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+  ;;    (local-set-key (kbd "C-<return>") 'iterm-send-text-clipboard)
+  (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
+  (define-key typescript-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
+  (define-key typescript-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+  (define-key typescript-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
+  (define-key typescript-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)
+  )
 
 (with-eval-after-load "shell"
  (define-key sh-mode-map (kbd "M-.") 'ffap)
  (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
  (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
 )
+
+
 
 (define-key global-map (kbd "s-c") 'kill-ring-save)
 (define-key global-map (kbd "s-a") 'mark-whole-buffer)
@@ -703,6 +739,9 @@ same directory as the org-buffer and insert a link to this file."
 (add-hook 'magit-mode-hook 'my-magit-mode-hook)
 
 (global-git-gutter-mode t)
+
+(custom-set-variables
+ '(flycheck-typescript-tslint-config "~/tslint.json"))
 
 (global-discover-mode)
 

@@ -33,6 +33,9 @@
  '(elpy-syntax-check-command "")
  '(fci-rule-color "#14151E")
  '(fill-column 100)
+ '(flycheck-check-syntax-automatically (quote (save idle-change new-line mode-enabled)))
+ '(flycheck-typescript-tslint-config "~/tslint.json")
+ '(flycheck-typescript-tslint-executable nil)
  '(flymake-no-changes-timeout 0.1)
  '(flymake-start-syntax-check-on-newline nil)
  '(global-company-mode nil)
@@ -44,7 +47,7 @@
  '(helm-ag-command-option "--all-text")
  '(helm-ag-insert-at-point (quote symbol))
  '(helm-follow-mode-persistent t)
- '(helm-mode t)
+ '(helm-mode nil)
  '(helm-source-names-using-follow
    (quote
     ("Occur" "global-mark-ring" "Imenu" "mark-ring" "Search at ~/emp-24.5/.emacs.d/")))
@@ -72,7 +75,9 @@
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(ivy-mode t)
+ '(jdee-server-dir "/Users/avdh/Tools/jdee-server/target")
  '(jedi:tooltip-method (quote (pos-tip popup)))
+ '(js-indent-level 2)
  '(mac-option-modifier nil)
  '(magit-bury-buffer-function (quote magit-restore-window-configuration))
  '(magit-commit-arguments nil)
@@ -117,6 +122,8 @@
  '(set-mark-command-repeat-pop t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(solidity-solc-path "/Users/pascal/projects/solcpy")
+ '(tab-stop-list (quote (0 2)))
+ '(tab-width 2)
  '(tabbar-separator (quote (0.5)))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
