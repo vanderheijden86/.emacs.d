@@ -7,12 +7,16 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(auto-save-interval 5)
  '(available-screen-pixel-bounds nil)
+ '(company-auto-complete t)
+ '(company-auto-complete-chars (quote (32 95 41 46)))
  '(company-backends
    (quote
-    (company-go company-ghc company-bbdb company-nxml company-css company-eclim company-semantic company-clang company-xcode company-cmake company-capf company-files company-abbrev
-                (company-dabbrev-code company-gtags company-etags company-keywords)
-                company-oddmuse company-dabbrev)))
- '(company-idle-delay 0.1)
+    (company-tide company-emacs-eclim company-go company-ghc company-bbdb company-css company-semantic company-clang company-xcode company-cmake company-capf company-files company-abbrev
+                  (company-dabbrev-code company-gtags company-etags company-keywords)
+                  company-oddmuse company-dabbrev company-ghc company-inf-ruby)))
+ '(company-begin-commands (quote (self-insert-command)))
+ '(company-idle-delay 0.3)
+ '(company-minimum-prefix-length 0)
  '(compilation-message-face (quote default))
  '(conf-assignment-space nil)
  '(cua-global-mark-cursor-color "#2aa198")
@@ -111,7 +115,7 @@
  '(org-mobile-directory "~/Dropbox/org-share")
  '(package-selected-packages
    (quote
-    (tern neotree ng2-mode darktooth-theme jedi kotlin-mode python-mode pythonic string-utils vagrant-tramp dired-open go-playmode maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired+ diminish buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+    (ac-emacs-eclim tern neotree ng2-mode darktooth-theme jedi kotlin-mode python-mode pythonic string-utils vagrant-tramp dired-open go-playmode maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired+ diminish buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(python-check-command ".emacs.d/pyflymake.py")

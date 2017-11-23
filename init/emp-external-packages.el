@@ -101,6 +101,7 @@
     xref-js2
     js2-refactor
     company-tern
+    eclim
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

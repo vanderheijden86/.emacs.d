@@ -1,3 +1,4 @@
+
 #+TITLE: Emacs HRS configuration
 
 * Utility functions
@@ -1314,11 +1315,44 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 #+END_SRC
 ** JAVA
 #+BEGIN_SRC emacs-lisp
+(require 'eclim)
+(setq eclimd-autostart t)
 
+(defun my-java-mode-hook ()
+    (eclim-mode t))
+
+(add-hook 'java-mode-hook 'my-java-mode-hook)
 
 #+END_SRC
 
-   
+Company
+
+#+BEGIN_SRC emacs-lisp
+(require 'company)
+(require 'company-emacs-eclim)
+(company-emacs-eclim-setup)
+(global-company-mode t)
+(setq company-emacs-eclim-ignore-case t)
+
+(setq company-auto-complete-chars (quote (32 95 41 46)))
+(setq company-idle-delay 0.3)
+(setq company-minimum-prefix-length 0)
+
+#+END_SRC 
+
+Autocomplete (Use company-mode).
+ # #+BEGIN_SRC emacs-lisp
+ # ;; regular auto-complete initialization
+ # (require 'auto-complete-config)
+ # (ac-config-default)
+
+ # ;; add the emacs-eclim source
+ # (require 'ac-emacs-eclim)
+ # (ac-emacs-eclim-config)
+
+ # #+END_SRC
+
+
 * General Custom Keybindings
 Hit F10 to toggle between =fullscreen= and back.
 
