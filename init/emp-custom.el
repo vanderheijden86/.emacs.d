@@ -16,9 +16,10 @@
                   company-oddmuse company-dabbrev company-ghc company-inf-ruby)))
  '(company-begin-commands (quote (self-insert-command)))
  '(company-idle-delay 0.3)
- '(company-minimum-prefix-length 0)
+ '(company-minimum-prefix-length 3)
  '(compilation-message-face (quote default))
  '(conf-assignment-space nil)
+ '(csv-separators (quote (";" "	")))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
@@ -27,6 +28,10 @@
    (quote
     ("67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a49760e39bd7d7876c94ee4bf483760e064002830a63e24c2842a536c6a52756" "2f0a552a9d14fe8ddaaacdb7b82a0eee1ea1f7f5d0850789915e5b04a1b9669f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "b51c2dda65e8e7e66ab1b06bc10b59e61c153b0cf928f296efab5a7574779fb6" "7a6059160b29bffb886dfaddaa4b351588090bcb74946c30a6782f50288c9892" "9ab634dcc9131f79016c96c4955298409649f6538908c743a8a9d2c6bc8321ef" "614d92e2a3af6a08bfe6ff68a59875f987271415c3bda7bec1216b80f5db741d" "c3d843722b3bf87f037a6d54cdf0042ce4b2150bd24af4e32eb7342f782bdd44" default)))
  '(dired-use-ls-dired nil)
+ '(eclim-print-debug-messages t)
+ '(eclimd-autostart-with-default-workspace t)
+ '(eclimd-default-workspace "~/eclipse-workspace/")
+ '(eclimd-wait-for-process nil)
  '(eldoc-idle-delay 0.1)
  '(eldoc-minor-mode-string "Eldoc")
  '(elpy-company-post-completion-function (quote elpy-company-post-complete-parens))
@@ -115,7 +120,7 @@
  '(org-mobile-directory "~/Dropbox/org-share")
  '(package-selected-packages
    (quote
-    (ac-emacs-eclim tern neotree ng2-mode darktooth-theme jedi kotlin-mode python-mode pythonic string-utils vagrant-tramp dired-open go-playmode maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired+ diminish buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
+    (org-autolist php-mode csv-mode ac-emacs-eclim tern neotree ng2-mode darktooth-theme jedi kotlin-mode python-mode pythonic string-utils vagrant-tramp dired-open go-playmode maxframe helm-ag ample-theme monokai-theme flatland-theme helm-themes multiple-cursors wgrep go-guru go-eldoc indium ac-js2 jquery-doc jq helm-descbinds discover yafolding robe company-inf-ruby inf-ruby ob-go flycheck-gometalinter jq-mode flycheck-pos-tip json-mode markdown-preview-mode go-playground gotest company-ghc flycheck use-package docker-tramp exec-path-from-shell company-go gorepl-mode load-dir zenburn-theme yaml-mode wrap-region websocket undo-tree ubuntu-theme typescript switch-window sphinx-doc solidity-mode solarized-theme smex restclient realgud pytest pycoverage py-autopep8 powerline persp-projectile org-bullets openwith nodejs-repl markdown-mode mark-multiple mark-more-like-this magit kooten-theme key-chord json-reformat js2-mode jedi-direx imenu-anywhere ido-vertical-mode ido-ubiquitous htmlize groovy-mode go-mode git-timemachine git-gutter ghc frame-cmds flymake-solidity flymake-json flymake-jslint flymake-cursor flx-ido expand-region etags-select engine-mode elscreen-persist elpy edit-server dockerfile-mode dired+ diminish buffer-move buffer-extension benchmark-init backup-walker avy autopair ag)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(python-check-command ".emacs.d/pyflymake.py")

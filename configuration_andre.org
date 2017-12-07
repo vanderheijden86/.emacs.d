@@ -1310,22 +1310,54 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
   (with-eval-after-load "shell"
    (define-key sh-mode-map (kbd "M-.") 'ffap)
    (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
-   (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
+   (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
   )
+
 #+END_SRC
 ** JAVA
+*** Settings and Keybindings
 #+BEGIN_SRC emacs-lisp
 (require 'eclim)
 (setq eclimd-autostart t)
+(setq eclim-print-debug-messages t)
+(setq eclimd-default-workspace "~/Documents")
 
 (defun my-java-mode-hook ()
     (eclim-mode t))
 
 (add-hook 'java-mode-hook 'my-java-mode-hook)
+(add-hook 'java-mode-hook 'my-java-keybindings-hook)
 
 #+END_SRC
 
-Company
+Displaying compilation error messages in echo area.
+#+BEGIN_SRC emacs-lisp
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+
+#+END_SRC
+
+*** Keybindings
+
+#+BEGIN_SRC emacs-lisp
+
+  (defun my-java-keybindings-hook ()
+    (interactive)
+    (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
+    (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+    (define-key global-map (kbd "M-.") nil)
+    (define-key global-map (kbd "M-,") nil)
+    (define-key java-mode-map (kbd "M-.") 'eclim-java-find-declaration)
+    (define-key java-mode-map (kbd "M-,") 'pop-tag-mark)
+    )
+
+#+END_SRC
+
+
+*** Company
+
+TODO: Override change made here in [[/Users/avdh/emacs/emp-25.2/.emacs.d/packages/company-emacs-eclim-20170104.743/company-emacs-eclim.el::105][company-emacs-eclim]]
 
 #+BEGIN_SRC emacs-lisp
 (require 'company)
@@ -1340,7 +1372,7 @@ Company
 
 #+END_SRC 
 
-Autocomplete (Use company-mode).
+*** Autocomplete (Use company-mode).
  # #+BEGIN_SRC emacs-lisp
  # ;; regular auto-complete initialization
  # (require 'auto-complete-config)

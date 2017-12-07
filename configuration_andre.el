@@ -668,6 +668,7 @@ same directory as the org-buffer and insert a link to this file."
               (helm-mode)
   )
 (add-hook 'typescript-mode-hook 'my-typescript-mode-hook 'my-typescript-keybindings-hook)
+
 (setq tide-tssserver-executable "~/.nvm/versions/node/v6.10.3/bin/tsserver")
 (setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
 
@@ -687,10 +688,39 @@ same directory as the org-buffer and insert a link to this file."
 (with-eval-after-load "shell"
  (define-key sh-mode-map (kbd "M-.") 'ffap)
  (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
- (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text)
+ (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
 )
 
+(require 'eclim)
+(setq eclimd-autostart t)
+(setq eclim-print-debug-messages t)
+(setq eclimd-default-workspace "~/Documents")
 
+(defun my-java-mode-hook ()
+    (eclim-mode t))
+
+(add-hook 'java-mode-hook 'my-java-mode-hook)
+(add-hook 'java-mode-hook 'my-java-keybindings-hook)
+
+(defun my-java-keybindings-hook ()
+  (interactive)
+  (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
+  (define-key yafolding-mode-map  (kbd "C-<return>") nil)
+  (define-key global-map (kbd "M-.") nil)
+  (define-key global-map (kbd "M-,") nil)
+  (define-key java-mode-map (kbd "M-.") 'eclim-java-find-declaration)
+  (define-key java-mode-map (kbd "M-,") 'pop-tag-mark)
+  )
+
+(require 'company)
+(require 'company-emacs-eclim)
+(company-emacs-eclim-setup)
+(global-company-mode t)
+(setq company-emacs-eclim-ignore-case t)
+
+(setq company-auto-complete-chars (quote (32 95 41 46)))
+(setq company-idle-delay 0.3)
+(setq company-minimum-prefix-length 0)
 
 (define-key global-map (kbd "s-c") 'kill-ring-save)
 (define-key global-map (kbd "s-a") 'mark-whole-buffer)
