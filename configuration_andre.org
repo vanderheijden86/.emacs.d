@@ -1315,7 +1315,7 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 
 #+END_SRC
 ** JAVA
-*** Settings and Keybindings
+*** Eclim Setup
 #+BEGIN_SRC emacs-lisp
 (require 'eclim)
 (setq eclimd-autostart t)
@@ -1354,8 +1354,7 @@ Displaying compilation error messages in echo area.
 
 #+END_SRC
 
-
-*** Company
+*** Company Eclim
 
 TODO: Override change made here in [[/Users/avdh/emacs/emp-25.2/.emacs.d/packages/company-emacs-eclim-20170104.743/company-emacs-eclim.el::105][company-emacs-eclim]]
 
@@ -1371,18 +1370,6 @@ TODO: Override change made here in [[/Users/avdh/emacs/emp-25.2/.emacs.d/package
 (setq company-minimum-prefix-length 0)
 
 #+END_SRC 
-
-*** Autocomplete (Use company-mode).
- # #+BEGIN_SRC emacs-lisp
- # ;; regular auto-complete initialization
- # (require 'auto-complete-config)
- # (ac-config-default)
-
- # ;; add the emacs-eclim source
- # (require 'ac-emacs-eclim)
- # (ac-emacs-eclim-config)
-
- # #+END_SRC
 
 
 * General Custom Keybindings
