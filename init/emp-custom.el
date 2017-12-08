@@ -11,11 +11,11 @@
  '(company-auto-complete-chars (quote (32 95 41 46)))
  '(company-backends
    (quote
-    (company-tide company-emacs-eclim company-go company-ghc company-bbdb company-css company-semantic company-clang company-xcode company-cmake company-capf company-files company-abbrev
-                  (company-dabbrev-code company-gtags company-etags company-keywords)
-                  company-oddmuse company-dabbrev company-ghc company-inf-ruby)))
+    (company-emacs-eclim company-tide company-go company-ghc company-bbdb company-css company-semantic company-clang company-xcode company-cmake company-capf company-files company-abbrev
+                         (company-dabbrev-code company-gtags company-etags company-keywords)
+                         company-oddmuse company-dabbrev company-ghc company-inf-ruby company-ghc)))
  '(company-begin-commands (quote (self-insert-command)))
- '(company-idle-delay 0.3)
+ '(company-idle-delay 0)
  '(company-minimum-prefix-length 3)
  '(compilation-message-face (quote default))
  '(conf-assignment-space nil)

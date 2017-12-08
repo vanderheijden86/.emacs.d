@@ -882,7 +882,8 @@ org-mode overwrites them.
  (define-key org-mode-map [backspace] nil)
  (define-key org-mode-map (kbd "C-'") nil)
  (define-key org-mode-map (kbd "C-,") nil)
- (define-key org-mode-map (kbd "<M-RET>") nil))
+ (define-key org-mode-map (kbd "<M-RET>") 'org-meta-return))
+
 #+END_SRC
 
 ** Exporting
@@ -995,6 +996,8 @@ I'm usually actually in an org document.
               (setq TeX-master t)))
 #+END_SRC
 ** Org electric-pair functions for mark-up
+** 
+** 
 With this in place, all you need to do to wrap a region with mark-up characters is press the corresponding character (*, /, =, _, ~, or +) once.
 
 As an additional benefit, Emacs will automatically insert matching pairs of mark-up characters at
@@ -1013,6 +1016,7 @@ chars so you can continue typing without having to move point.
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
 
 #+END_SRC
+
 
 
 * Programming Language Tools
@@ -1276,6 +1280,7 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
                 ;; company is an optional dependency. You have to
                 ;; install it separately via package-install
                 (company-mode-on)
+                (setq company-backends '(company-tide)) ; Remove unwanted backends from company-backends.
                 (helm-mode)
     )
   (add-hook 'typescript-mode-hook 'my-typescript-mode-hook 'my-typescript-keybindings-hook)
@@ -1316,17 +1321,25 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 #+END_SRC
 ** JAVA
 *** Eclim Setup
+
 #+BEGIN_SRC emacs-lisp
-(require 'eclim)
-(setq eclimd-autostart t)
-(setq eclim-print-debug-messages t)
-(setq eclimd-default-workspace "~/Documents")
+  (require 'eclim)
+  (setq eclimd-autostart t)
+  (setq eclim-print-debug-messages nil)
+  (setq eclimd-default-workspace "~/Documents")
+  (setq eclim-auto-save t)
 
-(defun my-java-mode-hook ()
-    (eclim-mode t))
+  (defun my-java-mode-hook ()
+      (eclim-mode t)
+      (setq company-backends '(company-eclim)) ; Remove unwanted backends from company-backends.
+      (require 'company-emacs-eclim)
+      (company-emacs-eclim-setup)
+      (global-company-mode t)
+      (setq company-emacs-eclim-ignore-case t)
+  )
 
-(add-hook 'java-mode-hook 'my-java-mode-hook)
-(add-hook 'java-mode-hook 'my-java-keybindings-hook)
+  (add-hook 'java-mode-hook 'my-java-mode-hook)
+  (add-hook 'java-mode-hook 'my-java-keybindings-hook)
 
 #+END_SRC
 
@@ -1358,20 +1371,11 @@ Displaying compilation error messages in echo area.
 
 TODO: Override change made here in [[/Users/avdh/emacs/emp-25.2/.emacs.d/packages/company-emacs-eclim-20170104.743/company-emacs-eclim.el::105][company-emacs-eclim]]
 
+** Emacs Lisp
 #+BEGIN_SRC emacs-lisp
-(require 'company)
-(require 'company-emacs-eclim)
-(company-emacs-eclim-setup)
-(global-company-mode t)
-(setq company-emacs-eclim-ignore-case t)
-
-(setq company-auto-complete-chars (quote (32 95 41 46)))
-(setq company-idle-delay 0.3)
-(setq company-minimum-prefix-length 0)
-
-#+END_SRC 
 
 
+#+END_SRC
 * General Custom Keybindings
 Hit F10 to toggle between =fullscreen= and back.
 
@@ -1517,10 +1521,16 @@ Still to be set correctly.
 ** Company
 
 #+BEGIN_SRC emacs-lisp
-    (setq company-tooltip-limit 20)                      ; bigger popup window
-    (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-    (setq company-echo-delay 0)                          ; remove annoying blinking
-    (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+  (setq company-tooltip-limit 20)                      ; bigger popup window
+  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+  (setq company-echo-delay 0)                          ; remove annoying blinking
+  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(setq company-auto-complete-chars (quote (32 95 41 46)))
+(setq company-idle-delay 0.3)
+(setq company-minimum-prefix-length 3)
+
+
 #+END_SRC
 
 Set company-yasnippet global keybinding.

@@ -472,7 +472,7 @@ same directory as the org-buffer and insert a link to this file."
  (define-key org-mode-map [backspace] nil)
  (define-key org-mode-map (kbd "C-'") nil)
  (define-key org-mode-map (kbd "C-,") nil)
- (define-key org-mode-map (kbd "<M-RET>") nil))
+ (define-key org-mode-map (kbd "<M-RET>") 'org-meta-return))
 
 (require 'ox-md)
 (require 'ox-beamer)
@@ -665,6 +665,7 @@ same directory as the org-buffer and insert a link to this file."
               ;; company is an optional dependency. You have to
               ;; install it separately via package-install
               (company-mode-on)
+              (setq company-backends '(company-tide)) ; Remove unwanted backends from company-backends.
               (helm-mode)
   )
 (add-hook 'typescript-mode-hook 'my-typescript-mode-hook 'my-typescript-keybindings-hook)
@@ -695,12 +696,23 @@ same directory as the org-buffer and insert a link to this file."
 (setq eclimd-autostart t)
 (setq eclim-print-debug-messages t)
 (setq eclimd-default-workspace "~/Documents")
+(setq eclim-auto-save t)
 
 (defun my-java-mode-hook ()
-    (eclim-mode t))
+    (eclim-mode t)
+    (setq company-backends '(company-eclim)) ; Remove unwanted backends from company-backends.
+    (require 'company-emacs-eclim)
+    (company-emacs-eclim-setup)
+    (global-company-mode t)
+    (setq company-emacs-eclim-ignore-case t)
+)
 
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 (add-hook 'java-mode-hook 'my-java-keybindings-hook)
+
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
 
 (defun my-java-keybindings-hook ()
   (interactive)
@@ -713,14 +725,8 @@ same directory as the org-buffer and insert a link to this file."
   )
 
 (require 'company)
-(require 'company-emacs-eclim)
-(company-emacs-eclim-setup)
-(global-company-mode t)
-(setq company-emacs-eclim-ignore-case t)
 
-(setq company-auto-complete-chars (quote (32 95 41 46)))
-(setq company-idle-delay 0.3)
-(setq company-minimum-prefix-length 0)
+
 
 (define-key global-map (kbd "s-c") 'kill-ring-save)
 (define-key global-map (kbd "s-a") 'mark-whole-buffer)
@@ -815,9 +821,13 @@ same directory as the org-buffer and insert a link to this file."
 )
 
 (setq company-tooltip-limit 20)                      ; bigger popup window
-(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-(setq company-echo-delay 0)                          ; remove annoying blinking
-(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+  (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+  (setq company-echo-delay 0)                          ; remove annoying blinking
+  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(setq company-auto-complete-chars (quote (32 95 41 46)))
+(setq company-idle-delay 0.3)
+(setq company-minimum-prefix-length 3)
 
 (define-key global-map (kbd "M-e") 'company-yasnippet)
 
