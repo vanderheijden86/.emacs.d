@@ -1324,7 +1324,12 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 *** JDEComp
 Turn on JDEcomp mode so that java classes are decompiled.
 #+BEGIN_SRC emacs-lisp
-(jdecomp-mode 1)
+    (jdecomp-mode 1)
+    (customize-set-variable 'jdecomp-decompiler-paths
+                            '(
+                              (fernflower . "/Applications/IntelliJ IDEA CE.app/Contents/plugins/java-decompiler/lib/java-decompiler.jar")
+                              ))
+  (customize-set-variable 'jdecomp-decompiler-type 'fernflower)
 
 #+END_SRC
 
@@ -1398,6 +1403,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
 (key-chord-define-global "xj" 'helm-mini)
+(define-key global-map (kbd "M-,") 'kill-this-buffer)
 (global-set-key (kbd "<f5>") 'hrs/split-window-below-and-switch)
 (global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
 (global-set-key (kbd "<f7>") 'other-window)
