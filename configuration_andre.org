@@ -588,11 +588,14 @@ Assume that I always want to kill the current buffer when hitting =C-x k=.
 ** Display preferences
 
 I like to see an outline of pretty bullets instead of a list of asterisks.
+I like to see that org-autolist is used to create new bullets when pressing enter.
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (org-bullets-mode t)))
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (org-bullets-mode t)
+                (org-autolist-mode t)))
+
 #+END_SRC
 
 I like seeing a little downward-pointing arrow instead of the usual ellipsis
@@ -996,8 +999,6 @@ I'm usually actually in an org document.
               (setq TeX-master t)))
 #+END_SRC
 ** Org electric-pair functions for mark-up
-** 
-** 
 With this in place, all you need to do to wrap a region with mark-up characters is press the corresponding character (*, /, =, _, ~, or +) once.
 
 As an additional benefit, Emacs will automatically insert matching pairs of mark-up characters at
@@ -1320,6 +1321,13 @@ Hook to add tide setup, eldoc mode and company mode amongst others.
 
 #+END_SRC
 ** JAVA
+*** JDEComp
+Turn on JDEcomp mode so that java classes are decompiled.
+#+BEGIN_SRC emacs-lisp
+(jdecomp-mode 1)
+
+#+END_SRC
+
 *** Eclim Setup
 
 #+BEGIN_SRC emacs-lisp

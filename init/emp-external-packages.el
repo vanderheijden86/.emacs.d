@@ -103,6 +103,7 @@
     company-tern
     eclim
     php-mode
+    org-autolist
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)
