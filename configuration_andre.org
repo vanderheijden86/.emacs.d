@@ -1333,6 +1333,20 @@ Turn on JDEcomp mode so that java classes are decompiled.
 
 #+END_SRC
 
+TODO: Refine this function, it doesn't work immediately, the mode (and keybinding )is only activated later.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'jdecomp-mode-hook
+            (lambda ()
+              (define-key global-map (kbd "M-,") 'kill-this-buffer)
+              ))
+
+#+END_SRC
+
+
+
+
+
 *** Eclim Setup
 
 #+BEGIN_SRC emacs-lisp
@@ -1403,7 +1417,6 @@ Hit F10 to toggle between =fullscreen= and back.
 (define-key global-map (kbd "<home>") 'org-beginning-of-line)
 (define-key global-map (kbd "M-d") nil)
 (key-chord-define-global "xj" 'helm-mini)
-(define-key global-map (kbd "M-,") 'kill-this-buffer)
 (global-set-key (kbd "<f5>") 'hrs/split-window-below-and-switch)
 (global-set-key (kbd "<f6>") 'hrs/split-window-right-and-switch)
 (global-set-key (kbd "<f7>") 'other-window)
