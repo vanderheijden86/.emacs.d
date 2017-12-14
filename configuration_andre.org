@@ -570,10 +570,12 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 
 ** Use ALT as the META key and CMD as Hyper.
 
-#+BEGIN_SRC emacs-lisp
-(setq mac-option-modifier 'meta)
-(setq mac-command-modifier 'super)
-(set-keyboard-coding-system nil)
+In Mac OS Settings I mapped _option_ to _command_, and _command_ to _option_ because of my Windows-based keyboard.
+
+#+BEGIN_SRC emacs-lisp 
+(setq mac-option-modifier 'super)
+  ;; (setq mac-command-modifier 'super)
+  (set-keyboard-coding-system nil)
 #+END_SRC
 
 
@@ -1336,7 +1338,7 @@ Turn on JDEcomp mode so that java classes are decompiled.
 TODO: Refine this function, it doesn't work immediately, the mode (and keybinding )is only activated later.
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'jdecomp-mode-hook
+  (add-hook 'jdecomp-preview-mode-hook
             (lambda ()
               (define-key global-map (kbd "M-,") 'kill-this-buffer)
               ))

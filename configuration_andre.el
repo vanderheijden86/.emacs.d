@@ -302,13 +302,14 @@
 
 (setq mouse-autoselect-window nil)
 
-(setq mac-option-modifier 'meta)
-(setq mac-command-modifier 'super)
+;; (setq mac-option-modifier 'meta)
+;; (setq mac-command-modifier 'super)
 (set-keyboard-coding-system nil)
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (org-bullets-mode t)))
+            (org-bullets-mode t)
+            (org-autolist-mode t)))
 
 (setq org-ellipsis "⤵")
 
@@ -692,9 +693,21 @@ same directory as the org-buffer and insert a link to this file."
  (define-key sh-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
 )
 
+(jdecomp-mode 1)
+  (customize-set-variable 'jdecomp-decompiler-paths
+                          '(
+                            (fernflower . "/Applications/IntelliJ IDEA CE.app/Contents/plugins/java-decompiler/lib/java-decompiler.jar")
+                            ))
+(customize-set-variable 'jdecomp-decompiler-type 'fernflower)
+
+(add-hook 'jdecomp-preview-mode-hook
+          (lambda ()
+            (define-key global-map (kbd "M-,") 'kill-this-buffer)
+            ))
+
 (require 'eclim)
 (setq eclimd-autostart t)
-(setq eclim-print-debug-messages t)
+(setq eclim-print-debug-messages nil)
 (setq eclimd-default-workspace "~/Documents")
 (setq eclim-auto-save t)
 
@@ -723,8 +736,6 @@ same directory as the org-buffer and insert a link to this file."
   (define-key java-mode-map (kbd "M-.") 'eclim-java-find-declaration)
   (define-key java-mode-map (kbd "M-,") 'pop-tag-mark)
   )
-
-(require 'company)
 
 
 
