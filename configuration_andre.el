@@ -1,4 +1,4 @@
-(defun hrs/view-buffer-name ()
+ (defun hrs/view-buffer-name ()
   "Display the filename of the current buffer."
   (interactive)
   (message (buffer-file-name)))
