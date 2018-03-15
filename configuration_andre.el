@@ -1,4 +1,4 @@
- (defun hrs/view-buffer-name ()
+(defun hrs/view-buffer-name ()
   "Display the filename of the current buffer."
   (interactive)
   (message (buffer-file-name)))
@@ -302,9 +302,9 @@
 
 (setq mouse-autoselect-window nil)
 
-;; (setq mac-option-modifier 'meta)
-;; (setq mac-command-modifier 'super)
-(set-keyboard-coding-system nil)
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
+  (set-keyboard-coding-system nil)
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -706,22 +706,25 @@ same directory as the org-buffer and insert a link to this file."
             ))
 
 (require 'eclim)
-(setq eclimd-autostart t)
-(setq eclim-print-debug-messages nil)
-(setq eclimd-default-workspace "~/Documents")
-(setq eclim-auto-save t)
+  (setq eclimd-autostart t)
+  (setq eclim-print-debug-messages nil)
+  (setq eclimd-default-workspace "~/Documents")
+  (setq eclim-auto-save t)
 
-(defun my-java-mode-hook ()
-    (eclim-mode t)
-    (setq company-backends '(company-eclim)) ; Remove unwanted backends from company-backends.
-    (require 'company-emacs-eclim)
-    (company-emacs-eclim-setup)
-    (global-company-mode t)
-    (setq company-emacs-eclim-ignore-case t)
-)
+;; Currently disabled eclim.
 
-(add-hook 'java-mode-hook 'my-java-mode-hook)
-(add-hook 'java-mode-hook 'my-java-keybindings-hook)
+  (defun my-java-mode-hook ()
+  ;;     (eclim-mode t)
+  ;;     (setq company-backends '(company-eclim)) ; Remove unwanted backends from company-backends.
+  ;;     (require 'company-emacs-eclim)
+  ;;     (company-emacs-eclim-setup)
+  ;;     (global-company-mode t)
+  ;;     (setq company-emacs-eclim-ignore-case t)
+  ;; )
+
+  ;; (add-hook
+   'java-mode-hook 'my-java-mode-hook)
+  (add-hook 'java-mode-hook 'my-java-keybindings-hook)
 
 (setq help-at-pt-display-when-idle t)
 (setq help-at-pt-timer-delay 0.1)

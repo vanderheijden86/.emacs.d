@@ -581,13 +581,21 @@ In Mac OS Settings I mapped _option_ to _command_, and _command_ to _option_ bec
 
 
 
-
 ** Always kill current buffer
 
 Assume that I always want to kill the current buffer when hitting =C-x k=.
 
 #
 
+** =Smooth Scrolling= (not a page at a time).
+#+BEGIN_SRC emacs-lisp
+(setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
+
+#+END_SRC
 * publishing and task management with Org-mode
 ** Display preferences
 
@@ -1360,16 +1368,19 @@ TODO: Refine this function, it doesn't work immediately, the mode (and keybindin
   (setq eclimd-default-workspace "~/Documents")
   (setq eclim-auto-save t)
 
-  (defun my-java-mode-hook ()
-      (eclim-mode t)
-      (setq company-backends '(company-eclim)) ; Remove unwanted backends from company-backends.
-      (require 'company-emacs-eclim)
-      (company-emacs-eclim-setup)
-      (global-company-mode t)
-      (setq company-emacs-eclim-ignore-case t)
-  )
+;; Currently disabled eclim.
 
-  (add-hook 'java-mode-hook 'my-java-mode-hook)
+  (defun my-java-mode-hook ()
+  ;;     (eclim-mode t)
+  ;;     (setq company-backends '(company-eclim)) ; Remove unwanted backends from company-backends.
+  ;;     (require 'company-emacs-eclim)
+  ;;     (company-emacs-eclim-setup)
+  ;;     (global-company-mode t)
+  ;;     (setq company-emacs-eclim-ignore-case t)
+  ;; )
+
+  ;; (add-hook
+   'java-mode-hook 'my-java-mode-hook)
   (add-hook 'java-mode-hook 'my-java-keybindings-hook)
 
 #+END_SRC
