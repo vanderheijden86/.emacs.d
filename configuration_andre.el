@@ -306,6 +306,12 @@
 (setq mac-command-modifier 'super)
   (set-keyboard-coding-system nil)
 
+(setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (org-bullets-mode t)
