@@ -189,9 +189,9 @@ I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippe
 enabled.
 
 #+BEGIN_SRC emacs-lisp
-(setq yas-snippet-dirs '(
-"~/emacs/emp-25.2/.emacs.d/snippets/"
-"~/emacs/emp-25.2/.emacs.d/packages/yasnippet-20170624.803/snippets/"
+(setq yas-snippet-dirs '
+(concat user-emacs-directory ".emacs.d/snippets/")
+(concat user-emacs-directory ".emacs.d/packages/yasnippet-20170624.803/snippets/")
 ))
   (yas-global-mode 1)
 #+END_SRC
