@@ -26,7 +26,7 @@
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a49760e39bd7d7876c94ee4bf483760e064002830a63e24c2842a536c6a52756" "2f0a552a9d14fe8ddaaacdb7b82a0eee1ea1f7f5d0850789915e5b04a1b9669f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "b51c2dda65e8e7e66ab1b06bc10b59e61c153b0cf928f296efab5a7574779fb6" "7a6059160b29bffb886dfaddaa4b351588090bcb74946c30a6782f50288c9892" "9ab634dcc9131f79016c96c4955298409649f6538908c743a8a9d2c6bc8321ef" "614d92e2a3af6a08bfe6ff68a59875f987271415c3bda7bec1216b80f5db741d" "c3d843722b3bf87f037a6d54cdf0042ce4b2150bd24af4e32eb7342f782bdd44" default)))
+    ("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a49760e39bd7d7876c94ee4bf483760e064002830a63e24c2842a536c6a52756" "2f0a552a9d14fe8ddaaacdb7b82a0eee1ea1f7f5d0850789915e5b04a1b9669f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "b51c2dda65e8e7e66ab1b06bc10b59e61c153b0cf928f296efab5a7574779fb6" "7a6059160b29bffb886dfaddaa4b351588090bcb74946c30a6782f50288c9892" "9ab634dcc9131f79016c96c4955298409649f6538908c743a8a9d2c6bc8321ef" "614d92e2a3af6a08bfe6ff68a59875f987271415c3bda7bec1216b80f5db741d" "c3d843722b3bf87f037a6d54cdf0042ce4b2150bd24af4e32eb7342f782bdd44" default)))
  '(dired-use-ls-dired nil)
  '(eclim-print-debug-messages t)
  '(eclimd-autostart-with-default-workspace t)
@@ -87,7 +87,6 @@
  '(jdee-server-dir "/Users/avdh/Tools/jdee-server/target")
  '(jedi:tooltip-method (quote (pos-tip popup)))
  '(js-indent-level 2)
- '(mac-option-modifier nil)
  '(magit-bury-buffer-function (quote magit-restore-window-configuration))
  '(magit-commit-arguments nil)
  '(magit-diff-use-overlays nil)
@@ -105,6 +104,7 @@
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(ns-alternate-modifier nil)
  '(org-agenda-files
    (quote
     ("~/Google Drive/Projects/Blockchain/b3i.org" "~/.emacs.d/configuration_andre.org" "~/org/index.org")))

@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "etags-select" "1.13" "Select from multiple tags" 'nil)

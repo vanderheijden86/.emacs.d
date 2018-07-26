@@ -34,7 +34,7 @@
 
 (toggle-truncate-lines 1)
 
-(load-theme 'ample)
+(load-theme 'ample t)
 
 (powerline-reset)
 

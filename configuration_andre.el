@@ -132,10 +132,11 @@
 
 ;  (setq-default indent-tabs-mode nil)
 
-(setq yas-snippet-dirs '(
-"~/emacs/emp-25.2/.emacs.d/snippets/"
-"~/emacs/emp-25.2/.emacs.d/packages/yasnippet-20170624.803/snippets/"
+(setq yas-snippet-dirs ' (
+"~/emacs/.emacs.d/snippets/"
+"~/emacs/.emacs.d/packages/yasnippet-20170624.803/snippets/"
 ))
+
   (yas-global-mode 1)
 
 (setq yas/indent-line nil)
@@ -304,7 +305,7 @@
 
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
-  (set-keyboard-coding-system nil)
+(set-keyboard-coding-system nil)
 
 (setq redisplay-dont-pause t
   scroll-margin 1

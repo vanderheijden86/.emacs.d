@@ -189,11 +189,14 @@ I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippe
 enabled.
 
 #+BEGIN_SRC emacs-lisp
-(setq yas-snippet-dirs '
-(concat user-emacs-directory ".emacs.d/snippets/")
-(concat user-emacs-directory ".emacs.d/packages/yasnippet-20170624.803/snippets/")
+
+(setq yas-snippet-dirs ' (
+"~/emacs/.emacs.d/snippets/"
+"~/emacs/.emacs.d/packages/yasnippet-20170624.803/snippets/"
 ))
+
   (yas-global-mode 1)
+
 #+END_SRC
 
 I /don’t/ want =ido= to automatically indent the snippets it inserts. Sometimes
@@ -573,9 +576,11 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 In Mac OS Settings I mapped _option_ to _command_, and _command_ to _option_ because of my Windows-based keyboard.
 
 #+BEGIN_SRC emacs-lisp 
+
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
-  (set-keyboard-coding-system nil)
+(set-keyboard-coding-system nil)
+
 #+END_SRC
 
 

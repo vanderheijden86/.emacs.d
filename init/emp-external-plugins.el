@@ -19,7 +19,7 @@
 (require 'yasnippet)
 (yas/load-directory (concat emacsd "snippets"))
 (setq yas-snippet-dirs (concat emacsd "snippets"))
-(yas-global-mode t)
+;;(yas-global-mode t)
 
 (require 'multiple-cursors)
 
@@ -277,7 +277,7 @@
        (t . ivy--regex-fuzzy)))
 (setq ivy-initial-inputs-alist nil)
 
-(elscreen-persist-restore)
+;;(elscreen-persist-restore)
 (provide 'emp-external-plugins)
 
 (with-eval-after-load 'company
