@@ -107,6 +107,7 @@
     diminish
     jdecomp
     maxframe
+    kotlin-mode
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)
