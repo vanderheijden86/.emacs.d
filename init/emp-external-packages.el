@@ -108,6 +108,7 @@
     jdecomp
     maxframe
     kotlin-mode
+    helm-tramp
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)

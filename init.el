@@ -105,3 +105,6 @@
 
 (setq org_config (concat emacsd "configuration_andre.org"))
 (org-babel-load-file org_config)
+
+;; Manually load emacs-jedi
+(add-to-list 'load-path "~/emacs/.emacs.d/packages/emacs-jedi")

@@ -575,6 +575,7 @@ same directory as the org-buffer and insert a link to this file."
                            (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
                            )
                      (elpy-mode)
+                     (jedi-mode)
                      (flycheck-mode)
                      (setq elpy-rpc-python-command "python3")
                      (elpy-use-ipython)
@@ -865,6 +866,9 @@ same directory as the org-buffer and insert a link to this file."
 (eval-after-load 'helm-semantic-or-imenu
   (custom-set-variables
    '(helm-follow-mode-persistent t)))
+
+(setq tramp-default-method "ssh")
+(define-key global-map (kbd "C-c s") 'helm-tramp)
 
 (require 'maxframe)
 (add-hook 'window-setup-hook 'maximize-frame t)

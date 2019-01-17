@@ -1136,6 +1136,7 @@ Load company backend for go.
                              (quote (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
                              )
                        (elpy-mode)
+                       (jedi-mode)
                        (flycheck-mode)
                        (setq elpy-rpc-python-command "python3")
                        (elpy-use-ipython)
@@ -1616,6 +1617,12 @@ Set company-yasnippet global keybinding.
     (eval-after-load 'helm-semantic-or-imenu
       (custom-set-variables
        '(helm-follow-mode-persistent t)))
+#+END_SRC
+
+** helm-tramp for connecting via ssh to servers or docker containers.
+#+BEGIN_SRC emacs-lisp 
+	(setq tramp-default-method "ssh")
+	(define-key global-map (kbd "C-c s") 'helm-tramp)
 #+END_SRC
 
 ** Maxframe to maximize emacs frame to just under window width.
