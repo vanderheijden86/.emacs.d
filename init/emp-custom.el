@@ -126,6 +126,9 @@
  '(realgud:pdb-command-name "python2 -m pdb")
  '(recentf-arrange-rules (quote (("Go files (%d)" ".\\.go'"))))
  '(set-mark-command-repeat-pop t)
+ '(show-paren-highlight-openparen t)
+ '(show-paren-mode t)
+ '(show-paren-style (quote parenthesis))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(solidity-solc-path "/Users/pascal/projects/solcpy")
  '(tab-stop-list (quote (0 2)))
@@ -184,5 +187,6 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#14151E" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "nil" :family "Monaco"))))
  '(fringe ((t (:foreground "#14151E"))))
- '(neo-banner-face ((t (:foreground "#528fd1" :weight bold)))))
+ '(neo-banner-face ((t (:foreground "#528fd1" :weight bold))))
+ '(show-paren-match ((t (:background "orange")))))
 

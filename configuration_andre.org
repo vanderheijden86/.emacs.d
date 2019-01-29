@@ -1881,3 +1881,12 @@ buffer or something like that, it cd to the $HOME directory. It then focus the =
   )
 
 #+END_SRC
+** Macros
+#+BEGIN_SRC lisp
+(fset 'enclose-postman-vars
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([201326629 32 123 123 46 42 5 return 34 124 124 left 92 38 return 33] 0 "%d")) arg)))
+
+(fset 'declose-postman-vars
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([201326629 34 11 124 92 124 124 34 left left left left 32 5 return return 33] 0 "%d")) arg)))
+
+#+END_SRC
