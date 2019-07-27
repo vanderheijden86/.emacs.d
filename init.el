@@ -108,3 +108,6 @@
 
 ;; Manually load emacs-jedi
 (add-to-list 'load-path "~/emacs/.emacs.d/packages/emacs-jedi")
+
+;; Default Font
+(set-frame-font "Monaco 13" nil t)

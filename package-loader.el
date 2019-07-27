@@ -3,9 +3,16 @@
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ;;("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")
                          ("elpy" . "https://jorgenschaefer.github.io/packages/")))
+
+
+(setq package-archive-priorities
+      '(("melpa-stable" . 20)
+        ("marmalade" . 0)
+        ("gnu" . 10)
+        ("melpa" . 0)))
 
 
 (setq package-user-dir (concat emacsd "packages"))

@@ -688,8 +688,9 @@ same directory as the org-buffer and insert a link to this file."
   (define-key yafolding-mode-map  (kbd "s-<return>") 'yafolding-toggle-element)
   (define-key yafolding-mode-map  (kbd "C-<return>") nil)
   ;;    (local-set-key (kbd "C-<return>") 'iterm-send-text-clipboard)
-  (define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
-  (define-key typescript-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
+  ;;(define-key typescript-mode-map (kbd "C-<return>") 'iterm-send-text-clipboard)
+  ;;(define-key typescript-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
+  (define-key typescript-mode-map (kbd "C-<return>") 'nodejs-repl-send-last-sexp)
   (define-key typescript-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
   (define-key typescript-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
   (define-key typescript-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)
@@ -869,6 +870,7 @@ same directory as the org-buffer and insert a link to this file."
 
 (setq tramp-default-method "ssh")
 (define-key global-map (kbd "C-c s") 'helm-tramp)
+(setq tramp-histfile-override nil)
 
 (require 'maxframe)
 (add-hook 'window-setup-hook 'maximize-frame t)

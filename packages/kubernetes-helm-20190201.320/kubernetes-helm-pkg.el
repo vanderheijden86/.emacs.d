@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "kubernetes-helm" "20190201.320" "extension for helm, the package manager for kubernetes" '((yaml-mode "0.0.13") (emacs "25.3")) :commit "82586a147bed255094915e7b4a75e29502c33af2" :keywords '("kubernetes" "helm" "k8s" "tools" "processes") :authors '(("Adrien Brochard")) :maintainer '("Adrien Brochard") :url "https://github.com/abrochard/kubernetes-helm")
