@@ -393,7 +393,7 @@ same directory as the org-buffer and insert a link to this file."
 (defun org-set-image-width ()
   (interactive)
   (setq width (read-string "Enter org image width: "))
-  (setq width (string-to-int width))
+  (setq width (string-to-number width))
   (setq width (* width 100))
   (setq org-image-actual-width width)
   (message "Set org image width to: %s" width)
@@ -529,6 +529,10 @@ same directory as the org-buffer and insert a link to this file."
   (setq-local electric-pair-text-pairs electric-pair-pairs))
 
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
+
+(add-hook 'org-mode-hook
+          (lambda () (local-set-key (kbd "C-<up>") 'org-backward-heading-same-level))
+          (lambda () (local-set-key (kbd "C-<down>") 'org-forward-heading-same-level)))
 
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)

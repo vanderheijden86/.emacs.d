@@ -1,4 +1,3 @@
-
 #+TITLE: Emacs HRS configuration
 
 * Utility functions
@@ -760,7 +759,7 @@ Function to resize org images, in hundreds of points.
   (defun org-set-image-width ()
     (interactive)
     (setq width (read-string "Enter org image width: "))
-    (setq width (string-to-int width))
+    (setq width (string-to-number width))
     (setq width (* width 100))
     (setq org-image-actual-width width)
     (message "Set org image width to: %s" width)
@@ -1035,6 +1034,13 @@ chars so you can continue typing without having to move point.
 
 #+END_SRC
 
+** Org navigating paragraphs.
+#+BEGIN_SRC emacs-lisp
+
+(define-key org-mode-map (kbd "C-<down>") 'org-forward-heading-same-level)
+(define-key org-mode-map (kbd "C-<up>") 'org-backward-heading-same-level)
+
+#+END_SRC
 
 
 * Programming Language Tools
