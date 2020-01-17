@@ -530,9 +530,8 @@ same directory as the org-buffer and insert a link to this file."
 
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
 
-(add-hook 'org-mode-hook
-          (lambda () (local-set-key (kbd "C-<up>") 'org-backward-heading-same-level))
-          (lambda () (local-set-key (kbd "C-<down>") 'org-forward-heading-same-level)))
+(define-key org-mode-map (kbd "C-<down>") 'org-forward-heading-same-level)
+(define-key org-mode-map (kbd "C-<up>") 'org-backward-heading-same-level)
 
 ;;(add-hook 'go-mode-hook 'gorepl-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
