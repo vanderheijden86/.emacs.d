@@ -1,0 +1,3 @@
+;; place this in the home folder and make it point to the init file from the emacs settings repo (.emacs.d)
+(setq user-emacs-directory "~/emacs/")
+(load (concat user-emacs-directory ".emacs.d/init.el"))
