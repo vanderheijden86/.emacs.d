@@ -1,9 +1,6 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;; rename this file to .emacs and place it in your home folder.
+;; below make sure that the init.el link points to the init.el from inside this .emacs.d (dotfiles) repo.
 
-;;(package-intialize)
-(setq user-emacs-directory "/Users/andrevanderheijden/emacs/")
+(setq user-emacs-directory "~/")
 (load (concat user-emacs-directory ".emacs.d/init.el"))
 

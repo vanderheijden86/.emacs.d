@@ -307,6 +307,10 @@
 (setq mac-command-modifier 'super)
 (set-keyboard-coding-system nil)
 
+;; Map Alt key to Meta
+
+(setq x-alt-keysym 'meta)
+
 (setq redisplay-dont-pause t
   scroll-margin 1
   scroll-step 1
