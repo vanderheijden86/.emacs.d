@@ -763,16 +763,19 @@ same directory as the org-buffer and insert a link to this file.
 Function to resize org images, in hundreds of points.
 
 #+BEGIN_SRC emacs-lisp
-  (defun org-set-image-width ()
-    (interactive)
-    (setq width (read-string "Enter org image width: "))
-    (setq width (string-to-number width))
-    (setq width (* width 100))
-    (setq org-image-actual-width width)
-    (message "Set org image width to: %s" width)
-    )
+    (defun org-set-image-width ()
+      (interactive)
+      (setq width (read-string "Enter org image width: "))
+      (setq width (string-to-number width))
+      (setq width (* width 100))
+      (setq org-image-actual-width width)
+      (message "Set org image width to: %s" width)
+      )
 
-  (with-eval-after-load "org" (define-key org-mode-map (kbd "s-z") 'org-set-image-width))
+    (global-unset-key (kbd "s-z"))
+    (with-eval-after-load "org" (define-key org-mode-map (kbd "s-z") 'org-set-image-width))
+    (with-eval-after-load "org" (define-key org-mode-map (kbd "M-z") 'org-set-image-width))
+
 #+END_SRC
 
 
@@ -866,6 +869,8 @@ Bind a few handy keys.
   (define-key global-map "\C-ct" 'org-deadline)
 
 (with-eval-after-load "org" (define-key org-mode-map (kbd "s-i") 'org-toggle-inline-images))
+(with-eval-after-load "org" (define-key org-mode-map (kbd "M-i") 'org-toggle-inline-images))
+
 
 #+END_SRC
 
@@ -1465,6 +1470,7 @@ Hit F10 to toggle between =fullscreen= and back.
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'find-file)
 (global-set-key (kbd "C-x M-f") 'helm-find-files)
+(global-set-key (kbd "M-u") 'revert-buffer)
 (global-set-key (kbd "s-u") 'revert-buffer)
 (global-set-key (kbd "s-d") 'iterm-goto-filedir-or-home)
 

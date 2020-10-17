@@ -403,7 +403,9 @@ same directory as the org-buffer and insert a link to this file."
   (message "Set org image width to: %s" width)
   )
 
+(global-unset-key (kbd "s-z"))
 (with-eval-after-load "org" (define-key org-mode-map (kbd "s-z") 'org-set-image-width))
+(with-eval-after-load "org" (define-key org-mode-map (kbd "M-z") 'org-set-image-width))
 
 (setq org-capture-templates
       '(("b" "Blog idea"
@@ -459,6 +461,7 @@ same directory as the org-buffer and insert a link to this file."
   (define-key global-map "\C-ct" 'org-deadline)
 
 (with-eval-after-load "org" (define-key org-mode-map (kbd "s-i") 'org-toggle-inline-images))
+(with-eval-after-load "org" (define-key org-mode-map (kbd "M-i") 'org-toggle-inline-images))
 
 (defun open-index-file ()
   "Open the master org TODO list."
@@ -781,6 +784,7 @@ same directory as the org-buffer and insert a link to this file."
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'find-file)
 (global-set-key (kbd "C-x M-f") 'helm-find-files)
+(global-set-key (kbd "M-u") 'revert-buffer)
 (global-set-key (kbd "s-u") 'revert-buffer)
 (global-set-key (kbd "s-d") 'iterm-goto-filedir-or-home)
 
