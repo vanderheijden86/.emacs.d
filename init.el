@@ -16,6 +16,9 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;; Dont do autocleanup as it messes with tramp mode visited files (like kubectl / docker:)
+(setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
+
 (setq default-directory user-emacs-directory)
 
 (setq emacsd (concat user-emacs-directory ".emacs.d/"))
