@@ -109,6 +109,7 @@
     maxframe
     kotlin-mode
     helm-tramp
+    clojure-mode
     ) "a list of packages to ensure are installed at launch.")
 
 (provide 'emp-external-packages)
