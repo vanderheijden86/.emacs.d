@@ -221,10 +221,11 @@
 
 (require 'flycheck)
 (require 'solidity-mode)
-(require 'flymake-solidity)
+(require 'solidity-flycheck)
 
-(add-hook 'solidity-mode-hook 'flymake-solidity-load)
 (add-hook 'solidity-mode-hook (lambda () (c-set-style "awk")))
+(setq solidity-flycheck-solc-checker-active t)
+
 
 ;; (add-hook 'markdown-mode-hook '(lambda () (flyspell-mode 1)))
 ;; (set-face-attribute 'flyspell-incorrect nil :underline "line")

@@ -50,7 +50,7 @@
     tide
     groovy-mode
     typescript
-    flymake-solidity
+    solidity-flycheck
     go-mode
     gorepl-mode
     company-go
